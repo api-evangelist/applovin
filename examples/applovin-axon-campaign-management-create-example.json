@@ -1,0 +1,47 @@
+{
+  "operation": "createCampaign",
+  "request": {
+    "method": "POST",
+    "url": "https://api.ads.axon.ai/manage/v1/campaign/create",
+    "query": {
+      "account_id": "acct_98765"
+    },
+    "headers": {
+      "Authorization": "Bearer CAMPAIGN_MGMT_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "MatchThree US Q2 UA",
+      "type": "APP",
+      "platform": "IOS",
+      "itunes_id": 1234567890,
+      "start_date": "2026-05-05T00:00:00Z",
+      "end_date": "2026-06-30T00:00:00Z",
+      "bidding_strategy": "TARGET_GOAL_WITH_CPI_BILLING",
+      "budget": {
+        "daily_budget_for_all_countries": "6000"
+      },
+      "goal": {
+        "goal_value_for_all_countries": "0.50",
+        "goal_type": "CPI"
+      },
+      "tracking": {
+        "tracking_method": "ADJUST",
+        "impression_url": "https://view.adjust.com/impression/abc123",
+        "click_url": "https://app.adjust.com/abc123"
+      },
+      "targeting": [
+        {
+          "country_code": "US",
+          "region_codes": ["CA", "NY", "TX"]
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "67890"
+    }
+  }
+}

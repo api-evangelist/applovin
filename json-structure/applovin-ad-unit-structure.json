@@ -1,0 +1,50 @@
+{
+  "$id": "https://github.com/api-evangelist/applovin/json-structure/applovin-ad-unit-structure.json",
+  "title": "AppLovin MAX Ad Unit Structure",
+  "description": "JSON structural reference for a MAX ad unit and its mediation configuration.",
+  "x-source-url": "https://support.axon.ai/en/max/advanced-features/ad-unit-management-api",
+  "structure": {
+    "id": "string",
+    "name": "string",
+    "platform": "enum [ios, android]",
+    "package_name": "string (bundle ID / package name)",
+    "ad_format": "enum [INTER, BANNER, REWARD, MREC, NATIVE]",
+    "template_size": "string (native ads only)",
+    "has_active_experiment": "boolean",
+    "disabled": "boolean",
+    "ad_network_settings": "AdNetworkSetting[]",
+    "disabled_ad_network_settings": "AdNetworkSetting[]",
+    "frequency_capping_settings": "FrequencyCapping[]",
+    "bid_floors": "BidFloor[]",
+    "segments": "Segment[]",
+    "banner_refresh_settings": "object",
+    "mrec_refresh_settings": "object"
+  },
+  "child_structures": {
+    "AdNetworkSetting": {
+      "ad_network": "string",
+      "cpm": "number",
+      "country_targeting_type": "enum [INCLUDE, EXCLUDE]",
+      "countries": "string[]",
+      "ad_network_ad_units": "object[]"
+    },
+    "FrequencyCapping": {
+      "type": "enum [time, session]",
+      "day_limit": "integer",
+      "minute_frequency": "integer",
+      "session_limit": "integer"
+    },
+    "BidFloor": {
+      "country_group_name": "string",
+      "cpm": "number",
+      "countries": "map<countryCode, number>"
+    },
+    "Segment": {
+      "id": "string",
+      "name": "string",
+      "id_type": "string",
+      "device_type": "string",
+      "segment_keys": "string[]"
+    }
+  }
+}

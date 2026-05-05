@@ -1,0 +1,701 @@
+openapi: 3.0.3
+info:
+  title: AppLovin MAX Ad Unit Management API
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  x-last-validated: '2026-05-05'
+  description: |
+    Programmatic management of AppLovin MAX ad units, waterfalls,
+    experiments, and test devices. Authentication uses the `Api-Key` HTTP
+    header. Rate limit: 2,000 requests per hour.
+  contact:
+    name: AppLovin Support
+    url: https://support.axon.ai
+servers:
+  - url: https://o.applovin.com/mediation/v1
+    description: AppLovin MAX mediation management host
+security:
+  - apiKeyHeader: []
+tags:
+  - name: Ad Units
+    description: Ad unit lifecycle and configuration
+  - name: Waterfalls
+    description: Per-segment waterfall management
+  - name: Experiments
+    description: Ad unit A/B experiment management
+  - name: Test Devices
+    description: Test device management
+paths:
+  /ad_units:
+    get:
+      operationId: listAdUnits
+      summary: List Ad Units
+      description: List active ad unit summaries.
+      tags:
+        - Ad Units
+      parameters:
+        - name: fields
+          in: query
+          required: false
+          description: Comma-separated optional fields to include.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Array of ad unit summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdUnitSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ad_unit:
+    post:
+      operationId: createAdUnit
+      summary: Create Ad Unit
+      description: Create a new ad unit for a given app and platform.
+      tags:
+        - Ad Units
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - platform
+                - package_name
+                - ad_format
+              properties:
+                name:
+                  type: string
+                platform:
+                  type: string
+                  enum:
+                    - ios
+                    - android
+                package_name:
+                  type: string
+                  description: Bundle identifier (iOS) or package name (Android).
+                ad_format:
+                  type: string
+                  enum:
+                    - INTER
+                    - BANNER
+                    - REWARD
+                    - MREC
+                    - NATIVE
+                template_size:
+                  type: string
+                  description: Template size; native ads only.
+      responses:
+        '200':
+          description: Created ad unit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdUnit'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ad_unit/{ad_unit_id}:
+    get:
+      operationId: getAdUnit
+      summary: Get Ad Unit
+      description: Retrieve a single ad unit and its requested fields.
+      tags:
+        - Ad Units
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+        - name: fields
+          in: query
+          required: false
+          description: |
+            Comma-delimited list of optional fields. Supported values:
+            `ad_network_settings`, `disabled_ad_network_settings`,
+            `frequency_capping_settings`, `bid_floors`, `segments`,
+            `banner_refresh_settings`, `mrec_refresh_settings`.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ad unit configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdUnit'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateAdUnit
+      summary: Update Ad Unit
+      description: |
+        Apply changes to the ad unit. Only fields included in the request
+        body are updated; omitted fields are left unchanged.
+      tags:
+        - Ad Units
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdUnit'
+      responses:
+        '200':
+          description: Updated ad unit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdUnit'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ad_unit/{ad_unit_id}/{segment_id}:
+    get:
+      operationId: getAdUnitWaterfall
+      summary: Get Ad Unit Waterfall
+      description: Retrieve the waterfall configuration for a segment.
+      tags:
+        - Waterfalls
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+        - $ref: '#/components/parameters/SegmentId'
+      responses:
+        '200':
+          description: Waterfall configuration for the segment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waterfall'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateAdUnitWaterfall
+      summary: Update Ad Unit Waterfall
+      description: Create, edit, promote, or remove a waterfall for a segment.
+      tags:
+        - Waterfalls
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+        - $ref: '#/components/parameters/SegmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Waterfall'
+      responses:
+        '200':
+          description: Updated waterfall.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waterfall'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ad_unit_experiment/{ad_unit_id}:
+    get:
+      operationId: getAdUnitExperiment
+      summary: Get Ad Unit Experiment
+      tags:
+        - Experiments
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+      responses:
+        '200':
+          description: Experiment configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdUnitExperiment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: upsertAdUnitExperiment
+      summary: Upsert Ad Unit Experiment
+      description: |
+        Create, update, promote, or deprecate an ad unit experiment. To
+        create, omit or null the `id` field. To promote or deprecate, set
+        `promote: true` or `deprecate: true`.
+      tags:
+        - Experiments
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdUnitExperiment'
+      responses:
+        '200':
+          description: Created or updated experiment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdUnitExperiment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ad_unit_experiment/{ad_unit_id}/{segment_id}:
+    get:
+      operationId: getAdUnitExperimentWaterfall
+      summary: Get Ad Unit Experiment Waterfall
+      tags:
+        - Experiments
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+        - $ref: '#/components/parameters/SegmentId'
+      responses:
+        '200':
+          description: Experiment waterfall.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waterfall'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateAdUnitExperimentWaterfall
+      summary: Update Ad Unit Experiment Waterfall
+      tags:
+        - Experiments
+      parameters:
+        - $ref: '#/components/parameters/AdUnitId'
+        - $ref: '#/components/parameters/SegmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Waterfall'
+      responses:
+        '200':
+          description: Updated experiment waterfall.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waterfall'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /test_devices:
+    get:
+      operationId: listTestDevices
+      summary: List Test Devices
+      tags:
+        - Test Devices
+      responses:
+        '200':
+          description: All test devices (enabled and disabled).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestDevice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /test_device:
+    post:
+      operationId: createTestDevice
+      summary: Create Test Device
+      tags:
+        - Test Devices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestDevice'
+      responses:
+        '200':
+          description: Created test device.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestDevice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /test_device/{test_device_id}:
+    get:
+      operationId: getTestDevice
+      summary: Get Test Device
+      tags:
+        - Test Devices
+      parameters:
+        - $ref: '#/components/parameters/TestDeviceId'
+      responses:
+        '200':
+          description: Test device configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestDevice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateTestDevice
+      summary: Update Test Device
+      tags:
+        - Test Devices
+      parameters:
+        - $ref: '#/components/parameters/TestDeviceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestDevice'
+      responses:
+        '200':
+          description: Updated test device.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestDevice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Management Key from AppLovin dashboard (Account > General > Keys).
+  parameters:
+    AdUnitId:
+      name: ad_unit_id
+      in: path
+      required: true
+      description: Ad unit identifier.
+      schema:
+        type: string
+    SegmentId:
+      name: segment_id
+      in: path
+      required: true
+      description: Segment identifier scoped under the ad unit.
+      schema:
+        type: string
+    TestDeviceId:
+      name: test_device_id
+      in: path
+      required: true
+      description: Test device identifier.
+      schema:
+        type: string
+  schemas:
+    AdUnit:
+      type: object
+      description: |
+        MAX ad unit configuration. x-schema-source: documentation
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+          enum:
+            - ios
+            - android
+        package_name:
+          type: string
+        ad_format:
+          type: string
+          enum:
+            - INTER
+            - BANNER
+            - REWARD
+            - MREC
+            - NATIVE
+        template_size:
+          type: string
+        has_active_experiment:
+          type: boolean
+        disabled:
+          type: boolean
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        disabled_ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        frequency_capping_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FrequencyCappingSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        banner_refresh_settings:
+          type: object
+          additionalProperties: true
+        mrec_refresh_settings:
+          type: object
+          additionalProperties: true
+    AdUnitSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        ad_format:
+          type: string
+        package_name:
+          type: string
+        disabled:
+          type: boolean
+    AdNetworkSetting:
+      type: object
+      properties:
+        ad_network:
+          type: string
+        ad_network_ad_units:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkAdUnit'
+        cpm:
+          type: number
+        country_targeting_type:
+          type: string
+          enum:
+            - INCLUDE
+            - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+    AdNetworkAdUnit:
+      type: object
+      properties:
+        ad_network_ad_unit_id:
+          type: string
+        country_targeting_type:
+          type: string
+          enum:
+            - INCLUDE
+            - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+        cpm:
+          type: number
+    FrequencyCappingSetting:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - time
+            - session
+        day_limit:
+          type: integer
+        minute_frequency:
+          type: integer
+        session_limit:
+          type: integer
+        country_targeting_type:
+          type: string
+          enum:
+            - INCLUDE
+            - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+    BidFloor:
+      type: object
+      properties:
+        country_group_name:
+          type: string
+        cpm:
+          type: number
+        countries:
+          type: object
+          additionalProperties:
+            type: number
+    Segment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        id_type:
+          type: string
+        device_type:
+          type: string
+        segment_keys:
+          type: array
+          items:
+            type: string
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
+    AdUnitExperiment:
+      type: object
+      properties:
+        id:
+          type: string
+        ad_unit_id:
+          type: string
+        experiment_name:
+          type: string
+        promote:
+          type: boolean
+        deprecate:
+          type: boolean
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+      required:
+        - experiment_name
+    TestDevice:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        device_id:
+          type: string
+          description: IDFA or GAID.
+        disabled:
+          type: boolean
+        network:
+          type: string
+      required:
+        - name
+        - device_id
+        - disabled
+        - network
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+  responses:
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Authenticated but not allowed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

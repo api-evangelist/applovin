@@ -1,0 +1,148 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AppLovin MAX Ad Unit Management"
+  description: "Programmatic management of MAX ad units, waterfalls, experiments, and test devices."
+  tags:
+    - AppLovin
+    - MAX
+    - Mediation
+    - Configuration
+  created: "2026-05-05"
+  modified: "2026-05-05"
+
+binds:
+  - namespace: env
+    keys:
+      APPLOVIN_MANAGEMENT_KEY: APPLOVIN_MANAGEMENT_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: applovin-max-ad-unit-management
+      baseUri: https://o.applovin.com/mediation/v1
+      description: "MAX mediation management API."
+      authentication:
+        type: apikey
+        key: Api-Key
+        value: "{{APPLOVIN_MANAGEMENT_KEY}}"
+        placement: header
+      resources:
+        - name: ad-units
+          path: /ad_units
+          description: "Ad unit collection."
+          operations:
+            - name: list-ad-units
+              method: GET
+              description: "List all ad units."
+              inputParameters:
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Optional fields to include."
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Max rows."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Pagination offset."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: ad-unit
+          path: /ad_unit
+          description: "Single ad unit."
+          operations:
+            - name: create-ad-unit
+              method: POST
+              description: "Create a new ad unit."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  platform: "{{tools.platform}}"
+                  package_name: "{{tools.package_name}}"
+                  ad_format: "{{tools.ad_format}}"
+        - name: ad-unit-detail
+          path: /ad_unit/{ad_unit_id}
+          description: "Single ad unit by ID."
+          operations:
+            - name: get-ad-unit
+              method: GET
+              description: "Get an ad unit by ID."
+              inputParameters:
+                - name: ad_unit_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Ad unit identifier."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated optional fields."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-ad-unit
+              method: POST
+              description: "Update an ad unit (partial update)."
+              inputParameters:
+                - name: ad_unit_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Ad unit identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data: "{{tools.body}}"
+        - name: test-devices
+          path: /test_devices
+          description: "Test devices."
+          operations:
+            - name: list-test-devices
+              method: GET
+              description: "List test devices."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: test-device
+          path: /test_device
+          description: "Single test device."
+          operations:
+            - name: create-test-device
+              method: POST
+              description: "Register a new test device."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  device_id: "{{tools.device_id}}"
+                  disabled: "{{tools.disabled}}"
+                  network: "{{tools.network}}"

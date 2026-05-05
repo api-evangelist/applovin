@@ -1,0 +1,35 @@
+{
+  "operation": "listAdUnits",
+  "request": {
+    "method": "GET",
+    "url": "https://o.applovin.com/mediation/v1/ad_units",
+    "query": {
+      "limit": 25,
+      "offset": 0
+    },
+    "headers": {
+      "Api-Key": "MANAGEMENT_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "id": "au_1001",
+        "name": "Reward iOS",
+        "platform": "ios",
+        "ad_format": "REWARD",
+        "package_name": "com.example.matchthree",
+        "disabled": false
+      },
+      {
+        "id": "au_1002",
+        "name": "Interstitial Android",
+        "platform": "android",
+        "ad_format": "INTER",
+        "package_name": "com.example.matchthree",
+        "disabled": false
+      }
+    ]
+  }
+}

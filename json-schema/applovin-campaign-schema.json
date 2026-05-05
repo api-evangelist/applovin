@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/applovin/json-schema/applovin-campaign-schema.json",
+  "title": "AppLovin Axon Campaign",
+  "description": "Schema for an AppLovin AppDiscovery (Axon) advertising campaign as managed via the Campaign Management API.",
+  "type": "object",
+  "x-schema-source": "documentation",
+  "x-source-url": "https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/",
+  "required": ["name", "type", "platform", "start_date", "bidding_strategy", "budget", "goal", "tracking", "targeting"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Campaign identifier (forbidden on create, required on update)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Campaign name."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["APP"],
+      "description": "Currently APP is the only supported type."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["LIVE", "PAUSED"],
+      "description": "Campaign delivery status."
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["IOS", "ANDROID"]
+    },
+    "package_name": {
+      "type": "string",
+      "description": "Bundle identifier (iOS) or package name (Android)."
+    },
+    "itunes_id": {
+      "type": "integer",
+      "description": "Apple iTunes app identifier."
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bidding_strategy": {
+      "type": "string",
+      "enum": ["TARGET_GOAL_WITH_CPI_BILLING", "AUTO_BIDDING_WITH_CPM_BILLING"]
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "daily_budget_for_all_countries": {"type": "string"},
+        "country_code_to_daily_budget": {
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        }
+      }
+    },
+    "goal": {
+      "type": "object",
+      "required": ["goal_type"],
+      "properties": {
+        "goal_type": {
+          "type": "string",
+          "enum": ["CPI", "CPE", "CPP", "AD_ROAS", "CHK_ROAS", "BLD_ROAS"]
+        },
+        "goal_value_for_all_countries": {"type": "string"},
+        "country_code_to_goal_value": {
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "roas_day_target": {"type": "string"}
+      }
+    },
+    "tracking": {
+      "type": "object",
+      "required": ["tracking_method"],
+      "properties": {
+        "tracking_method": {
+          "type": "string",
+          "enum": ["ADJUST", "APPSFLYER", "APSALAR", "BRANCH", "KOCHAVA", "TENJIN"]
+        },
+        "impression_url": {"type": "string", "format": "uri"},
+        "click_url": {"type": "string", "format": "uri"}
+      }
+    },
+    "targeting": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["country_code"],
+        "properties": {
+          "country_code": {"type": "string"},
+          "region_codes": {"type": "array", "items": {"type": "string"}},
+          "metro_names": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "operation": "createAdUnit",
+  "request": {
+    "method": "POST",
+    "url": "https://o.applovin.com/mediation/v1/ad_unit",
+    "headers": {
+      "Api-Key": "MANAGEMENT_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Reward iOS V2",
+      "platform": "ios",
+      "package_name": "com.example.matchthree",
+      "ad_format": "REWARD"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "au_1003",
+      "name": "Reward iOS V2",
+      "platform": "ios",
+      "package_name": "com.example.matchthree",
+      "ad_format": "REWARD",
+      "has_active_experiment": false,
+      "disabled": false
+    }
+  }
+}

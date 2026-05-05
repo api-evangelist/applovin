@@ -1,0 +1,42 @@
+{
+  "$id": "https://github.com/api-evangelist/applovin/json-structure/applovin-conversion-event-structure.json",
+  "title": "AppLovin Conversion Event Structure",
+  "description": "JSON structural reference for a CAPI server-to-server conversion event.",
+  "x-source-url": "https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/",
+  "structure": {
+    "name": "enum [page_view, generate_lead]",
+    "event_time": "integer (unix epoch ms)",
+    "event_source_url": "uri",
+    "data": "object | null (object only for generate_lead)",
+    "user_data": "UserData",
+    "dedupe_id": "string (optional)"
+  },
+  "child_structures": {
+    "EventData": {
+      "currency": "string (ISO 4217)",
+      "value": "number"
+    },
+    "UserData": {
+      "aleid": "string (optional)",
+      "axwrt": "string (optional)",
+      "alart": "string (optional)",
+      "client_id": "string (optional)",
+      "user_id": "string (optional)",
+      "email": "string (auto SHA-256 hashed)",
+      "phone": "string (auto SHA-256 hashed)",
+      "client_ip_address": "string (required)",
+      "client_user_agent": "string (required)",
+      "esi": "enum [web, app] (required)",
+      "country_code": "string",
+      "zip": "string",
+      "os": "enum [ios, android, desktop_os]",
+      "sid": "string",
+      "ifa": "string (IDFA / GAID)",
+      "idfv": "string"
+    }
+  },
+  "constraints": {
+    "user_identifier": "At least one of aleid, axwrt, alart, client_id, user_id, email, or phone must be supplied.",
+    "batch_size": "Up to 100 events per request."
+  }
+}

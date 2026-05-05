@@ -1,0 +1,73 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AppLovin MAX Revenue Reporting"
+  description: "Aggregated MAX mediation revenue and user-level publisher data."
+  tags:
+    - AppLovin
+    - MAX
+    - Reporting
+    - Monetization
+  created: "2026-05-05"
+  modified: "2026-05-05"
+
+binds:
+  - namespace: env
+    keys:
+      APPLOVIN_REPORT_KEY: APPLOVIN_REPORT_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: applovin-max-revenue-reporting
+      baseUri: https://r.applovin.com
+      description: "AppLovin MAX revenue reporting endpoint."
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{APPLOVIN_REPORT_KEY}}"
+        placement: query
+      resources:
+        - name: revenue-report
+          path: /maxReport
+          description: "Aggregated MAX revenue rows."
+          operations:
+            - name: get-max-revenue-report
+              method: GET
+              description: "Get MAX Revenue Report for a date range."
+              inputParameters:
+                - name: columns
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated list of report columns."
+                - name: start
+                  in: query
+                  type: string
+                  required: true
+                  description: "Start date YYYY-MM-DD."
+                - name: end
+                  in: query
+                  type: string
+                  required: true
+                  description: "End date YYYY-MM-DD (within 45 days of start)."
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response format json or csv."
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum rows."
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Pagination offset."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

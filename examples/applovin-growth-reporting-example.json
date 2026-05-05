@@ -1,0 +1,40 @@
+{
+  "operation": "getGrowthReport",
+  "request": {
+    "method": "GET",
+    "url": "https://r.applovin.com/report",
+    "query": {
+      "api_key": "REPORT_KEY",
+      "start": "2026-04-25",
+      "end": "now",
+      "columns": "day,campaign,country,impressions,clicks,conversions,cost",
+      "format": "json",
+      "report_type": "advertiser",
+      "sort_cost": "DESC",
+      "limit": 50
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "day": "2026-05-04",
+        "campaign": "MatchThree US Q2 UA",
+        "country": "US",
+        "impressions": 184231,
+        "clicks": 6431,
+        "conversions": 412,
+        "cost": "1284.55"
+      },
+      {
+        "day": "2026-05-04",
+        "campaign": "WordConnect DE",
+        "country": "DE",
+        "impressions": 92114,
+        "clicks": 2174,
+        "conversions": 91,
+        "cost": "418.22"
+      }
+    ]
+  }
+}

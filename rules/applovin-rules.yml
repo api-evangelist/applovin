@@ -1,0 +1,275 @@
+extends: [[spectral:oas, all]]
+documentationUrl: https://github.com/api-evangelist/applovin
+
+# Spectral ruleset for AppLovin / Axon REST APIs
+# Derived from OpenAPI specs in openapi/ — enforces patterns
+# observed across MAX, Growth, Axon Campaign Management, and CAPI APIs.
+
+rules:
+  # ---------------- INFO / METADATA ----------------
+  applovin-info-title-prefix:
+    description: API title should start with "AppLovin" to match provider naming.
+    message: 'info.title should start with "AppLovin"'
+    severity: warn
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: '^AppLovin'
+
+  applovin-info-version-required:
+    description: API spec must declare a version.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  applovin-info-description-required:
+    description: API spec must include a non-trivial description.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: length
+      functionOptions:
+        min: 80
+
+  applovin-info-contact-required:
+    description: API spec should include contact info.
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  # ---------------- OPENAPI VERSION ----------------
+  applovin-openapi-version:
+    description: Use OpenAPI 3.0.x.
+    severity: error
+    given: $
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: '^3\.0\.'
+
+  # ---------------- SERVERS ----------------
+  applovin-servers-https:
+    description: All servers must use HTTPS.
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  applovin-servers-applovin-host:
+    description: Server hosts should resolve to applovin.com or axon.ai domains.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: '(applovin\.com|axon\.ai)'
+
+  # ---------------- PATHS ----------------
+  applovin-paths-no-trailing-slash:
+    description: Paths must not have a trailing slash.
+    severity: error
+    given: $.paths
+    then:
+      function: pattern
+      field: '@key'
+      functionOptions:
+        notMatch: '.+/$'
+
+  applovin-paths-snake-case:
+    description: AppLovin paths use snake_case segments (e.g. /ad_unit, /creative_set).
+    severity: warn
+    given: $.paths
+    then:
+      function: pattern
+      field: '@key'
+      functionOptions:
+        match: '^(/[a-z0-9_]+(\{[a-z_]+\})?)+$'
+
+  # ---------------- OPERATIONS ----------------
+  applovin-operation-operationid:
+    description: Every operation must have a camelCase operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+
+  applovin-operation-summary:
+    description: Every operation must have a Title Case summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  applovin-operation-description:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  applovin-operation-tags:
+    description: Every operation must have at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: length
+      functionOptions:
+        min: 1
+
+  applovin-operation-microcks-extension:
+    description: Operations should declare x-microcks-operation for mock dispatch.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ---------------- TAGS ----------------
+  applovin-tags-defined:
+    description: Tags should be declared globally with descriptions.
+    severity: warn
+    given: $.tags
+    then:
+      function: truthy
+
+  applovin-tags-title-case:
+    description: Tag names must be Title Case.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$'
+
+  # ---------------- PARAMETERS ----------------
+  applovin-parameter-description:
+    description: Every parameter must have a description.
+    severity: warn
+    given: $.paths[*][*].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  applovin-parameter-snake-case:
+    description: Parameter names use snake_case.
+    severity: warn
+    given: $.paths[*][*].parameters[?(@.in=='query' || @.in=='path')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  applovin-parameter-schema-type:
+    description: Every parameter must declare a schema with a type.
+    severity: error
+    given: $.paths[*][*].parameters[*].schema
+    then:
+      field: type
+      function: truthy
+
+  # ---------------- RESPONSES ----------------
+  applovin-response-success:
+    description: Every operation must define a 2xx response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: pattern
+      field: '@key'
+      functionOptions:
+        match: '^(2[0-9][0-9])$'
+
+  applovin-response-unauthorized:
+    description: Authenticated operations should declare 401.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '401'
+      function: truthy
+
+  applovin-response-description:
+    description: Every response must have a description.
+    severity: warn
+    given: $.paths[*][*].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  # ---------------- SCHEMAS ----------------
+  applovin-schema-snake-case-property:
+    description: Schema property names must be snake_case.
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      function: pattern
+      field: '@key'
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+
+  applovin-schema-property-type:
+    description: Every schema property must have a type or $ref.
+    severity: error
+    given: $.components.schemas[*].properties[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          oneOf:
+            - required: [type]
+            - required: ['$ref']
+            - required: [oneOf]
+            - required: [allOf]
+            - required: [anyOf]
+
+  # ---------------- SECURITY ----------------
+  applovin-security-defined:
+    description: Security schemes must be defined.
+    severity: error
+    given: $
+    then:
+      field: components.securitySchemes
+      function: truthy
+
+  applovin-security-global:
+    description: Top-level security must be defined.
+    severity: warn
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  # ---------------- HTTP METHOD CONVENTIONS ----------------
+  applovin-get-no-body:
+    description: GET operations must not have a request body.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  applovin-post-body:
+    description: POST operations should have a request body.
+    severity: warn
+    given: $.paths[*].post
+    then:
+      field: requestBody
+      function: truthy

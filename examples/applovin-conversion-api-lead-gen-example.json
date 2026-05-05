@@ -1,0 +1,50 @@
+{
+  "operation": "postConversionEvents",
+  "request": {
+    "method": "POST",
+    "url": "https://b.applovin.com/v1/event",
+    "query": {
+      "pixel_id": "pixel_abc123"
+    },
+    "headers": {
+      "Authorization": "Bearer CAPI_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "events": [
+        {
+          "name": "page_view",
+          "event_time": 1762291200000,
+          "event_source_url": "https://example.com/landing",
+          "data": null,
+          "user_data": {
+            "client_ip_address": "203.0.113.42",
+            "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X)",
+            "axwrt": "axwrt_cookie_value",
+            "esi": "web"
+          }
+        },
+        {
+          "name": "generate_lead",
+          "event_time": 1762291260000,
+          "event_source_url": "https://example.com/quote/submitted",
+          "data": {
+            "currency": "USD",
+            "value": 25
+          },
+          "user_data": {
+            "client_ip_address": "203.0.113.42",
+            "client_user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X)",
+            "email": "user@example.com",
+            "esi": "web"
+          },
+          "dedupe_id": "lead_2026_05_05_001"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": null
+  }
+}

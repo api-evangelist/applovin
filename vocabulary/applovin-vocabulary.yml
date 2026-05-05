@@ -1,0 +1,66 @@
+name: AppLovin Vocabulary
+description: Domain vocabulary for AppLovin's mobile advertising, mediation, user acquisition, and conversion-tracking APIs (MAX, Axon AppDiscovery, CAPI).
+modified: '2026-05-05'
+source:
+  - https://support.axon.ai
+  - https://www.applovin.com
+concepts:
+  - term: Ad Unit
+    definition: A single ad placement of one ad format (banner, interstitial, rewarded, MREC, native) inside a publisher application, configured for MAX mediation.
+  - term: Ad Format
+    definition: The form factor of an ad shown to users. AppLovin MAX supports BANNER, INTER (interstitial), REWARD (rewarded), MREC, and NATIVE formats.
+  - term: Mediation
+    definition: A platform that aggregates multiple ad networks and selects which network serves a given impression, typically via waterfall, bidding, or a hybrid model.
+  - term: Waterfall
+    definition: An ordered list of ad network calls evaluated in sequence per ad request. AppLovin MAX models waterfalls per ad unit and segment.
+  - term: Segment
+    definition: A grouping of users within an ad unit (by country, device type, custom keys, etc.) used to scope a waterfall.
+  - term: In-app Bidding
+    definition: A real-time auction in which all eligible ad networks bid simultaneously for an impression, replacing the traditional waterfall ordering.
+  - term: Bid Floor
+    definition: The minimum CPM threshold that a bid must meet to win an impression in a given country or country group.
+  - term: Frequency Capping
+    definition: A limit on how often a user sees ads (per session, per day, or per minute window).
+  - term: Test Device
+    definition: A registered device (by IDFA / GAID) used to receive test ads and verify mediation behaviour without affecting reporting.
+  - term: Ad Unit Experiment
+    definition: An A/B test on the configuration of an ad unit (network settings, waterfall) that can be promoted to production or deprecated.
+  - term: Campaign
+    definition: A targeted advertising effort on AppLovin AppDiscovery (Axon) defined by platform, app, schedule, budget, goal, tracking, and targeting.
+  - term: Bidding Strategy
+    definition: How a campaign bids and is billed. AppDiscovery supports TARGET_GOAL_WITH_CPI_BILLING and AUTO_BIDDING_WITH_CPM_BILLING.
+  - term: Goal Type
+    definition: The optimization goal of an AppDiscovery campaign. Values include CPI, CPE, CPP, AD_ROAS, CHK_ROAS, BLD_ROAS.
+  - term: ROAS
+    definition: Return on Ad Spend. AppLovin distinguishes ad-revenue ROAS (AD_ROAS), checkout ROAS (CHK_ROAS), and blended ROAS (BLD_ROAS).
+  - term: Creative Set
+    definition: A collection of creative assets (videos, playables, banners, interstitials) associated with a campaign and optionally scoped by language and country.
+  - term: Creative Asset
+    definition: A single piece of creative media — image, HTML5 playable, short or long video — uploaded to AppLovin and used inside creative sets.
+  - term: Tracking Method
+    definition: The Mobile Measurement Partner (MMP) used for attribution. Supported partners include Adjust, AppsFlyer, Apsalar (Singular), Branch, Kochava, and Tenjin.
+  - term: Conversion API (CAPI)
+    definition: A server-to-server API that sends conversion events directly from the advertiser's backend to AppLovin / Axon, complementing or replacing client-side pixel events.
+  - term: Pixel
+    definition: A client-side beacon associated with an Axon Event Key that fires conversion events from a user's browser.
+  - term: Dedupe ID
+    definition: Unique identifier on a CAPI event used to deduplicate against an equivalent pixel-fired event.
+  - term: Report Key
+    definition: Read-only credential issued in the Axon dashboard, used in the api_key query parameter to authenticate against MAX and Growth reporting endpoints.
+  - term: Management Key
+    definition: Read/write credential issued in the AppLovin dashboard, used in the Api-Key header to authenticate against the MAX Ad Unit Management API.
+  - term: Campaign Management API Key
+    definition: Read/write credential used in the Authorization header to authenticate against the Axon Campaign Management API.
+  - term: AppDiscovery (Axon)
+    definition: AppLovin's performance-based user-acquisition platform. Axon is the underlying ML system; AppDiscovery is the customer-facing brand.
+  - term: MAX
+    definition: AppLovin's in-app bidding and mediation platform for publishers.
+tags:
+  - Advertising
+  - Mobile
+  - AdTech
+  - App Monetization
+  - Mediation
+  - User Acquisition
+  - Conversion Tracking
+  - Marketing Technology

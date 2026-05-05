@@ -1,0 +1,71 @@
+{
+  "$id": "https://github.com/api-evangelist/applovin/json-structure/applovin-campaign-structure.json",
+  "title": "AppLovin Campaign Structure",
+  "description": "JSON structural reference for an AppLovin Axon advertising campaign — describes field names, types, and lifecycle constraints across create, update, and read operations.",
+  "x-source-url": "https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/",
+  "structure": {
+    "id": {"type": "integer", "create": "forbidden", "update": "required", "read": "present"},
+    "name": {"type": "string", "create": "required", "update": "optional", "read": "present"},
+    "type": {"type": "string", "values": ["APP"], "create": "required", "update": "required"},
+    "status": {"type": "string", "values": ["LIVE", "PAUSED"], "create": "ignored", "update": "optional"},
+    "platform": {"type": "string", "values": ["IOS", "ANDROID"], "create": "required", "update": "forbidden"},
+    "package_name": {"type": "string", "create": "required (Android)", "update": "optional"},
+    "itunes_id": {"type": "integer", "create": "required (iOS)", "update": "optional"},
+    "start_date": {"type": "string (ISO 8601 UTC)", "create": "required", "update": "forbidden"},
+    "end_date": {"type": "string (ISO 8601 UTC)", "create": "required", "update": "optional"},
+    "bidding_strategy": {
+      "type": "string",
+      "values": ["TARGET_GOAL_WITH_CPI_BILLING", "AUTO_BIDDING_WITH_CPM_BILLING"],
+      "create": "required",
+      "update": "forbidden"
+    },
+    "budget": {
+      "type": "object",
+      "create": "required",
+      "update": "optional",
+      "shape": {
+        "daily_budget_for_all_countries": "string (USD as numeric)",
+        "country_code_to_daily_budget": "map<countryCode, string>"
+      }
+    },
+    "goal": {
+      "type": "object",
+      "create": "required",
+      "update": "optional",
+      "shape": {
+        "goal_type": "enum [CPI, CPE, CPP, AD_ROAS, CHK_ROAS, BLD_ROAS]",
+        "goal_value_for_all_countries": "string",
+        "country_code_to_goal_value": "map<countryCode, string>",
+        "roas_day_target": "string (e.g. DAY7)"
+      },
+      "constraints": {
+        "AD_ROAS": "> 10%",
+        "BLD_ROAS": "> 5%",
+        "CHK_ROAS": "> 1%",
+        "CPE": "< $500",
+        "CPI": "< $200",
+        "CPP": "< $500"
+      }
+    },
+    "tracking": {
+      "type": "object",
+      "create": "required",
+      "update": "optional",
+      "shape": {
+        "tracking_method": "enum [ADJUST, APPSFLYER, APSALAR, BRANCH, KOCHAVA, TENJIN]",
+        "impression_url": "uri",
+        "click_url": "uri"
+      }
+    },
+    "targeting": {
+      "type": "array<object>",
+      "create": "required",
+      "update": "optional",
+      "shape": {
+        "country_code": "string (ISO 3166-1 alpha-2)",
+        "region_codes": "string[]",
+        "metro_names": "string[]"
+      }
+    }
+  }
+}

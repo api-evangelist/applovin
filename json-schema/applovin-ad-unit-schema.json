@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/applovin/json-schema/applovin-ad-unit-schema.json",
+  "title": "AppLovin MAX Ad Unit",
+  "description": "Schema for an AppLovin MAX ad unit managed via the Ad Unit Management API. An ad unit binds a single ad format inside a publisher application to mediation/waterfall configuration.",
+  "type": "object",
+  "x-schema-source": "documentation",
+  "x-source-url": "https://support.axon.ai/en/max/advanced-features/ad-unit-management-api",
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "platform": {"type": "string", "enum": ["ios", "android"]},
+    "package_name": {"type": "string"},
+    "ad_format": {
+      "type": "string",
+      "enum": ["INTER", "BANNER", "REWARD", "MREC", "NATIVE"]
+    },
+    "template_size": {"type": "string"},
+    "has_active_experiment": {"type": "boolean"},
+    "disabled": {"type": "boolean"},
+    "ad_network_settings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/AdNetworkSetting"}
+    },
+    "frequency_capping_settings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string", "enum": ["time", "session"]},
+          "day_limit": {"type": "integer"},
+          "minute_frequency": {"type": "integer"},
+          "session_limit": {"type": "integer"}
+        }
+      }
+    },
+    "bid_floors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "country_group_name": {"type": "string"},
+          "cpm": {"type": "number"},
+          "countries": {
+            "type": "object",
+            "additionalProperties": {"type": "number"}
+          }
+        }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "id_type": {"type": "string"},
+          "device_type": {"type": "string"},
+          "segment_keys": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "AdNetworkSetting": {
+      "type": "object",
+      "properties": {
+        "ad_network": {"type": "string"},
+        "cpm": {"type": "number"},
+        "country_targeting_type": {"type": "string", "enum": ["INCLUDE", "EXCLUDE"]},
+        "countries": {"type": "array", "items": {"type": "string"}},
+        "ad_network_ad_units": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ad_network_ad_unit_id": {"type": "string"},
+              "cpm": {"type": "number"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

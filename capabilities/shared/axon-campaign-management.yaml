@@ -1,0 +1,174 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AppLovin Axon Campaign Management"
+  description: "Manage AppDiscovery / Axon campaigns, creative sets, and creative assets programmatically."
+  tags:
+    - AppLovin
+    - Axon
+    - AppDiscovery
+    - Campaigns
+    - Creatives
+  created: "2026-05-05"
+  modified: "2026-05-05"
+
+binds:
+  - namespace: env
+    keys:
+      APPLOVIN_CAMPAIGN_MGMT_KEY: APPLOVIN_CAMPAIGN_MGMT_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: applovin-axon-campaign-management
+      baseUri: https://api.ads.axon.ai/manage/v1
+      description: "Axon campaign management API."
+      authentication:
+        type: bearer
+        token: "{{APPLOVIN_CAMPAIGN_MGMT_KEY}}"
+      resources:
+        - name: campaigns
+          path: /campaign
+          description: "Campaign endpoints."
+          operations:
+            - name: list-campaigns
+              method: GET
+              description: "List campaigns."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+                - name: ids
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated campaign IDs."
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number."
+                - name: size
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page size (max 100)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-campaign
+              method: POST
+              description: "Create a new campaign."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data: "{{tools.body}}"
+            - name: update-campaign
+              method: POST
+              description: "Update an existing campaign."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data: "{{tools.body}}"
+        - name: creative-sets
+          path: /creative_set
+          description: "Creative set endpoints."
+          operations:
+            - name: list-creative-sets
+              method: GET
+              description: "List creative sets."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-creative-set
+              method: POST
+              description: "Create a creative set."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data: "{{tools.body}}"
+            - name: clone-creative-set
+              method: POST
+              description: "Clone a creative set."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  campaign_id: "{{tools.campaign_id}}"
+                  creative_set_id: "{{tools.creative_set_id}}"
+                  status: "{{tools.status}}"
+        - name: assets
+          path: /asset
+          description: "Creative asset endpoints."
+          operations:
+            - name: list-assets
+              method: GET
+              description: "List uploaded assets."
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Account identifier."
+                - name: resource_type
+                  in: query
+                  type: string
+                  required: false
+                  description: "image, html, or video."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

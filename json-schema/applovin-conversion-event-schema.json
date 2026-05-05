@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/applovin/json-schema/applovin-conversion-event-schema.json",
+  "title": "AppLovin Conversion Event",
+  "description": "Schema for a server-to-server conversion event submitted to the AppLovin Conversion API for Lead Generation.",
+  "type": "object",
+  "x-schema-source": "documentation",
+  "x-source-url": "https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/",
+  "required": ["name", "event_time", "event_source_url", "data", "user_data"],
+  "properties": {
+    "name": {"type": "string", "enum": ["page_view", "generate_lead"]},
+    "event_time": {
+      "type": "integer",
+      "description": "Unix epoch milliseconds when the event occurred."
+    },
+    "event_source_url": {"type": "string", "format": "uri"},
+    "data": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["currency", "value"],
+          "properties": {
+            "currency": {"type": "string"},
+            "value": {"type": "number", "minimum": 0}
+          }
+        }
+      ]
+    },
+    "user_data": {
+      "type": "object",
+      "required": ["client_ip_address", "client_user_agent", "esi"],
+      "properties": {
+        "aleid": {"type": "string"},
+        "axwrt": {"type": "string"},
+        "alart": {"type": "string"},
+        "client_id": {"type": "string"},
+        "user_id": {"type": "string"},
+        "email": {"type": "string"},
+        "phone": {"type": "string"},
+        "client_ip_address": {"type": "string"},
+        "client_user_agent": {"type": "string"},
+        "esi": {"type": "string", "enum": ["web", "app"]},
+        "country_code": {"type": "string"},
+        "zip": {"type": "string"},
+        "os": {"type": "string", "enum": ["ios", "android", "desktop_os"]},
+        "sid": {"type": "string"},
+        "ifa": {"type": "string"},
+        "idfv": {"type": "string"}
+      }
+    },
+    "dedupe_id": {"type": "string"}
+  }
+}

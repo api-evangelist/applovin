@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: AppLovin Growth (Axon / AppDiscovery) Reporting API
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  x-last-validated: '2026-05-05'
+  description: |
+    REST endpoint that returns aggregated campaign performance for AppLovin's
+    Growth / AppDiscovery / Axon advertising platform. Returns publisher or
+    advertiser report rows for a date range (max 45 days) with filtering,
+    sorting, paging, and JSON or CSV output.
+  contact:
+    name: AppLovin Support
+    url: https://support.axon.ai
+servers:
+  - url: https://r.applovin.com
+    description: AppLovin reporting host
+security:
+  - apiKeyQuery: []
+tags:
+  - name: Growth Reporting
+    description: Campaign performance reporting for advertisers and publishers
+paths:
+  /report:
+    get:
+      operationId: getGrowthReport
+      summary: Get Growth Report
+      description: |
+        Retrieve aggregated AppDiscovery / Axon campaign metrics for either
+        the publisher or advertiser perspective. Date ranges are limited to a
+        45-day rolling window. The response payload shape varies with the
+        selected `columns` and `report_type`.
+      tags:
+        - Growth Reporting
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/Start'
+        - $ref: '#/components/parameters/End'
+        - $ref: '#/components/parameters/Format'
+        - $ref: '#/components/parameters/Columns'
+        - $ref: '#/components/parameters/ReportType'
+        - $ref: '#/components/parameters/DayColumn'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Having'
+        - $ref: '#/components/parameters/NotZero'
+      responses:
+        '200':
+          description: Report rows
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GrowthReportRow'
+              example:
+                - day: '2015-04-20'
+                  campaign: My Campaign
+                  impressions: 12345
+                  clicks: 678
+                  conversions: 90
+                  cost: '125.34'
+            text/csv:
+              schema:
+                type: string
+                description: CSV-encoded rows with header row.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Report Key issued by the Axon dashboard.
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key, found under Account > Keys in the Axon dashboard.
+      schema:
+        type: string
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.
+      schema:
+        type: string
+        example: '2015-04-20'
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
+      schema:
+        type: string
+        example: now
+    Format:
+      name: format
+      in: query
+      required: true
+      description: Response format.
+      schema:
+        type: string
+        enum:
+          - json
+          - csv
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
+      schema:
+        type: string
+        example: day,campaign,impressions,clicks,conversions,cost
+    ReportType:
+      name: report_type
+      in: query
+      required: false
+      description: Choose between publisher or advertiser report dimensions.
+      schema:
+        type: string
+        enum:
+          - publisher
+          - advertiser
+        default: publisher
+    DayColumn:
+      name: day_column
+      in: query
+      required: false
+      description: Set to `day` to compute cohort metrics. Defaults to realtime when absent.
+      schema:
+        type: string
+        enum:
+          - day
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination row offset.
+      schema:
+        type: integer
+        minimum: 0
+    Having:
+      name: having
+      in: query
+      required: false
+      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
+      schema:
+        type: string
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude rows where all metrics are zero.
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+  schemas:
+    GrowthReportRow:
+      type: object
+      description: |
+        Single Growth report row. Keys correspond to the requested `columns`;
+        common columns are listed below. x-schema-source: documentation
+      additionalProperties: true
+      properties:
+        day:
+          type: string
+          format: date
+          description: Reporting day in UTC.
+        campaign:
+          type: string
+          description: Campaign display name.
+        campaign_id:
+          type: string
+          description: Unique campaign identifier.
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+        platform:
+          type: string
+          description: iOS or Android.
+        package_name:
+          type: string
+          description: App identifier (bundle ID or package name).
+        impressions:
+          type: integer
+          description: Impression count.
+        clicks:
+          type: integer
+          description: Click count.
+        ctr:
+          type: number
+          description: Click-through rate.
+        conversions:
+          type: integer
+          description: Conversion / install count.
+        cost:
+          type: string
+          description: 'Advertiser spend (publisher-side: revenue) in USD as a numeric string.'
+        revenue:
+          type: string
+          description: Publisher revenue in USD.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+  responses:
+    BadRequest:
+      description: Malformed parameters or out-of-range date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

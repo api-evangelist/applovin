@@ -1,0 +1,38 @@
+{
+  "operation": "getAssetReport",
+  "request": {
+    "method": "GET",
+    "url": "https://r.applovin.com/assetReport",
+    "query": {
+      "api_key": "REPORT_KEY",
+      "range": "yesterday",
+      "columns": "asset_id,asset_name,campaign,impressions,clicks,ctr,cost",
+      "format": "json",
+      "limit": 100,
+      "sort_impressions": "DESC"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "asset_id": "as_2398472",
+        "asset_name": "Playable_MatchThree_v3",
+        "campaign": "MatchThree US Q2 UA",
+        "impressions": 184231,
+        "clicks": 6431,
+        "ctr": 0.0349,
+        "cost": 1284.55
+      },
+      {
+        "asset_id": "as_2398501",
+        "asset_name": "Video_30s_Vertical",
+        "campaign": "MatchThree US Q2 UA",
+        "impressions": 152110,
+        "clicks": 4022,
+        "ctr": 0.0264,
+        "cost": 902.14
+      }
+    ]
+  }
+}

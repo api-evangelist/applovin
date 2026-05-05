@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/applovin/json-schema/applovin-creative-set-schema.json",
+  "title": "AppLovin Creative Set",
+  "description": "Schema for a creative set managed via the AppLovin Axon Campaign Management API. A creative set is a collection of creative assets attached to a campaign.",
+  "type": "object",
+  "x-schema-source": "documentation",
+  "x-source-url": "https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/",
+  "required": ["campaign_id", "type", "assets"],
+  "properties": {
+    "id": {"type": "string"},
+    "campaign_id": {"type": "string"},
+    "name": {"type": "string"},
+    "type": {"type": "string"},
+    "status": {"type": "string", "enum": ["LIVE", "PAUSED"]},
+    "languages": {"type": "array", "items": {"type": "string"}},
+    "countries": {"type": "array", "items": {"type": "string"}},
+    "product_page": {"type": "string"},
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "status": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "type": {
+            "type": "string",
+            "enum": ["HOSTED_HTML", "VID_LONG_P", "VID_SHORT_P", "IMG_BANNER", "IMG_INTER_P"]
+          },
+          "resource_type": {
+            "type": "string",
+            "enum": ["image", "html", "video"]
+          }
+        }
+      }
+    }
+  }
+}

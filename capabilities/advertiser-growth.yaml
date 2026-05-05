@@ -1,0 +1,308 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AppLovin Advertiser Growth"
+  description: "Workflow capability for mobile and web advertisers running AppDiscovery (Axon) campaigns. Combines campaign management, creative management, conversion-event ingestion (CAPI), and growth + asset reporting so a single user-acquisition role can launch, optimize, and measure performance."
+  tags:
+    - AppLovin
+    - Axon
+    - AppDiscovery
+    - User Acquisition
+    - Advertising
+    - Conversion Tracking
+  created: "2026-05-05"
+  modified: "2026-05-05"
+
+binds:
+  - namespace: env
+    keys:
+      APPLOVIN_CAMPAIGN_MGMT_KEY: APPLOVIN_CAMPAIGN_MGMT_KEY
+      APPLOVIN_CAPI_KEY: APPLOVIN_CAPI_KEY
+      APPLOVIN_REPORT_KEY: APPLOVIN_REPORT_KEY
+
+capability:
+  consumes:
+    - import: applovin-axon-campaign-management
+      location: ./shared/axon-campaign-management.yaml
+    - import: applovin-conversion-api-lead-gen
+      location: ./shared/conversion-api-lead-gen.yaml
+    - import: applovin-growth-reporting
+      location: ./shared/growth-reporting.yaml
+    - import: applovin-growth-asset-reporting
+      location: ./shared/growth-asset-reporting.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: advertiser-growth-api
+      description: "Unified REST API for AppLovin advertiser growth workflows."
+      resources:
+        - path: /v1/campaigns
+          name: campaigns
+          description: "AppDiscovery / Axon campaigns."
+          operations:
+            - method: GET
+              name: list-campaigns
+              description: "List campaigns."
+              call: "applovin-axon-campaign-management.list-campaigns"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-campaign
+              description: "Create a new campaign."
+              call: "applovin-axon-campaign-management.create-campaign"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-campaign
+              description: "Update an existing campaign."
+              call: "applovin-axon-campaign-management.update-campaign"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/creative-sets
+          name: creative-sets
+          description: "AppDiscovery creative sets."
+          operations:
+            - method: GET
+              name: list-creative-sets
+              description: "List creative sets."
+              call: "applovin-axon-campaign-management.list-creative-sets"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-creative-set
+              description: "Create a creative set."
+              call: "applovin-axon-campaign-management.create-creative-set"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: clone-creative-set
+              description: "Clone an existing creative set."
+              call: "applovin-axon-campaign-management.clone-creative-set"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/assets
+          name: assets
+          description: "Creative assets."
+          operations:
+            - method: GET
+              name: list-assets
+              description: "List uploaded creative assets."
+              call: "applovin-axon-campaign-management.list-assets"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/conversion-events
+          name: conversion-events
+          description: "Server-to-server conversion events."
+          operations:
+            - method: POST
+              name: post-conversion-events
+              description: "Post a batch of conversion events to CAPI."
+              call: "applovin-conversion-api-lead-gen.post-conversion-events"
+              with:
+                pixel_id: "rest.pixel_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/growth-report
+          name: growth-report
+          description: "Growth campaign report."
+          operations:
+            - method: GET
+              name: get-growth-report
+              description: "Get Growth (advertiser or publisher) report rows."
+              call: "applovin-growth-reporting.get-growth-report"
+              with:
+                start: "rest.start"
+                end: "rest.end"
+                format: "rest.format"
+                columns: "rest.columns"
+                report_type: "rest.report_type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/asset-report
+          name: asset-report
+          description: "Creative-level performance report."
+          operations:
+            - method: GET
+              name: get-asset-report
+              description: "Get asset performance for a symbolic time range."
+              call: "applovin-growth-asset-reporting.get-asset-report"
+              with:
+                range: "rest.range"
+                columns: "rest.columns"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: get-asset-analytics-report
+              description: "Get asset performance for a custom date range."
+              call: "applovin-growth-asset-reporting.get-asset-analytics-report"
+              with:
+                start: "rest.start"
+                end: "rest.end"
+                columns: "rest.columns"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: advertiser-growth-mcp
+      transport: http
+      description: "MCP server for AI-assisted AppDiscovery campaign management and analytics."
+      tools:
+        - name: list-campaigns
+          description: "List AppDiscovery campaigns."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-axon-campaign-management.list-campaigns"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-campaign
+          description: "Create a new AppDiscovery campaign."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "applovin-axon-campaign-management.create-campaign"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-campaign
+          description: "Update an AppDiscovery campaign."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "applovin-axon-campaign-management.update-campaign"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-creative-sets
+          description: "List creative sets."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-axon-campaign-management.list-creative-sets"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-creative-set
+          description: "Create a creative set."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "applovin-axon-campaign-management.create-creative-set"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: clone-creative-set
+          description: "Clone a creative set."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "applovin-axon-campaign-management.clone-creative-set"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-assets
+          description: "List creative assets."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-axon-campaign-management.list-assets"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: post-conversion-events
+          description: "Post server-to-server conversion events to CAPI."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "applovin-conversion-api-lead-gen.post-conversion-events"
+          with:
+            pixel_id: "tools.pixel_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-growth-report
+          description: "Get AppDiscovery growth report."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-growth-reporting.get-growth-report"
+          with:
+            start: "tools.start"
+            end: "tools.end"
+            format: "tools.format"
+            columns: "tools.columns"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-asset-report
+          description: "Get creative-level asset report by symbolic range."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-growth-asset-reporting.get-asset-report"
+          with:
+            range: "tools.range"
+            columns: "tools.columns"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-asset-analytics-report
+          description: "Get creative-level asset report by custom date range."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-growth-asset-reporting.get-asset-analytics-report"
+          with:
+            start: "tools.start"
+            end: "tools.end"
+            columns: "tools.columns"
+          outputParameters:
+            - type: object
+              mapping: "$."

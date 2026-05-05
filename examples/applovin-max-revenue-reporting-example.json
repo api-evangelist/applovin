@@ -1,0 +1,52 @@
+{
+  "operation": "getMaxRevenueReport",
+  "request": {
+    "method": "GET",
+    "url": "https://r.applovin.com/maxReport",
+    "query": {
+      "api_key": "Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX",
+      "columns": "day,application,ad_format,country,impressions,ecpm,revenue",
+      "start": "2026-04-25",
+      "end": "2026-05-04",
+      "format": "json",
+      "sort_revenue": "DESC",
+      "limit": 100
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "code": 200,
+      "count": 3,
+      "results": [
+        {
+          "day": "2026-05-04",
+          "application": "Match Three Saga",
+          "ad_format": "REWARD",
+          "country": "US",
+          "impressions": "12345",
+          "ecpm": "23.41",
+          "revenue": "289.16"
+        },
+        {
+          "day": "2026-05-04",
+          "application": "Match Three Saga",
+          "ad_format": "INTER",
+          "country": "US",
+          "impressions": "8721",
+          "ecpm": "11.87",
+          "revenue": "103.51"
+        },
+        {
+          "day": "2026-05-04",
+          "application": "Word Connect Pro",
+          "ad_format": "BANNER",
+          "country": "DE",
+          "impressions": "32014",
+          "ecpm": "0.92",
+          "revenue": "29.45"
+        }
+      ]
+    }
+  }
+}

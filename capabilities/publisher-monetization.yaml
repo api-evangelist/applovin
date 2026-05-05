@@ -1,0 +1,188 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AppLovin Publisher Monetization"
+  description: "Workflow capability for mobile app publishers monetizing with AppLovin MAX. Combines MAX ad unit management with MAX revenue reporting so a single mediation/ops role can configure waterfalls, run experiments, manage test devices, and pull revenue analytics."
+  tags:
+    - AppLovin
+    - MAX
+    - Mediation
+    - Monetization
+    - Publisher
+  created: "2026-05-05"
+  modified: "2026-05-05"
+
+binds:
+  - namespace: env
+    keys:
+      APPLOVIN_MANAGEMENT_KEY: APPLOVIN_MANAGEMENT_KEY
+      APPLOVIN_REPORT_KEY: APPLOVIN_REPORT_KEY
+
+capability:
+  consumes:
+    - import: applovin-max-ad-unit-management
+      location: ./shared/max-ad-unit-management.yaml
+    - import: applovin-max-revenue-reporting
+      location: ./shared/max-revenue-reporting.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: publisher-monetization-api
+      description: "Unified REST API for AppLovin publisher monetization workflows."
+      resources:
+        - path: /v1/ad-units
+          name: ad-units
+          description: "MAX ad units."
+          operations:
+            - method: GET
+              name: list-ad-units
+              description: "List ad units."
+              call: "applovin-max-ad-unit-management.list-ad-units"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-ad-unit
+              description: "Create an ad unit."
+              call: "applovin-max-ad-unit-management.create-ad-unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ad-units/{ad_unit_id}
+          name: ad-unit
+          description: "Single MAX ad unit."
+          operations:
+            - method: GET
+              name: get-ad-unit
+              description: "Get a single ad unit by ID."
+              call: "applovin-max-ad-unit-management.get-ad-unit"
+              with:
+                ad_unit_id: "rest.ad_unit_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: update-ad-unit
+              description: "Update an ad unit."
+              call: "applovin-max-ad-unit-management.update-ad-unit"
+              with:
+                ad_unit_id: "rest.ad_unit_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/test-devices
+          name: test-devices
+          description: "MAX test devices."
+          operations:
+            - method: GET
+              name: list-test-devices
+              description: "List test devices."
+              call: "applovin-max-ad-unit-management.list-test-devices"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-test-device
+              description: "Register a test device."
+              call: "applovin-max-ad-unit-management.create-test-device"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/revenue-report
+          name: revenue-report
+          description: "MAX revenue analytics."
+          operations:
+            - method: GET
+              name: get-revenue-report
+              description: "Get aggregated MAX revenue rows."
+              call: "applovin-max-revenue-reporting.get-max-revenue-report"
+              with:
+                columns: "rest.columns"
+                start: "rest.start"
+                end: "rest.end"
+                format: "rest.format"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: publisher-monetization-mcp
+      transport: http
+      description: "MCP server for AI-assisted MAX mediation and revenue analytics."
+      tools:
+        - name: list-ad-units
+          description: "List MAX ad units."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-max-ad-unit-management.list-ad-units"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-ad-unit
+          description: "Get a MAX ad unit by ID."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-max-ad-unit-management.get-ad-unit"
+          with:
+            ad_unit_id: "tools.ad_unit_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-ad-unit
+          description: "Create a new MAX ad unit."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "applovin-max-ad-unit-management.create-ad-unit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-ad-unit
+          description: "Update a MAX ad unit (partial)."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "applovin-max-ad-unit-management.update-ad-unit"
+          with:
+            ad_unit_id: "tools.ad_unit_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-test-devices
+          description: "List MAX test devices."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-max-ad-unit-management.list-test-devices"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-test-device
+          description: "Register a new MAX test device."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "applovin-max-ad-unit-management.create-test-device"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-revenue-report
+          description: "Get MAX revenue report rows."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "applovin-max-revenue-reporting.get-max-revenue-report"
+          with:
+            columns: "tools.columns"
+            start: "tools.start"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
