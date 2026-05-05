@@ -1,0 +1,49 @@
+---
+aid: applovin
+url: https://github.com/api-evangelist/applovin
+name: AppLovin
+type: Index
+image: https://www.applovin.com/favicon.ico
+tags:
+  - Advertising
+  - Mobile
+  - AdTech
+  - App Monetization
+  - Marketing
+description: AppLovin is a marketing platform that helps businesses reach, monetize, and grow their global audiences through mobile advertising, mediation, and analytics. The company operates platforms including AppDiscovery for performance-based user acquisition, MAX for in-app bidding mediation, Adjust for mobile measurement, and Wurl for connected TV. AppLovin provides SDKs and APIs that allow app developers and advertisers to integrate ad serving, monetization, and reporting capabilities into their applications.
+created: '2026-05-04'
+modified: '2026-05-04'
+specificationVersion: '0.19'
+apis:
+  - aid: applovin-max
+    name: AppLovin MAX
+    description: AppLovin MAX is an in-app bidding and mediation platform that enables app publishers to monetize their applications by integrating ad networks and managing ad waterfalls. The MAX SDK provides integration libraries for iOS, Android, Unity, and other platforms.
+    humanURL: https://support.axon.ai/en/max/getting-started
+    properties:
+      - type: Documentation
+        url: https://support.axon.ai/en/max/getting-started
+      - type: SDK
+        url: https://support.axon.ai/en/max/getting-started
+  - aid: applovin-growth-axon
+    name: AppLovin Growth (Axon / AppDiscovery)
+    description: The AppLovin Growth platform (Axon / AppDiscovery) is a self-serve advertising platform that enables businesses to run performance-based user acquisition campaigns at scale. Documentation covers campaign setup, targeting, creatives, and reporting integrations.
+    humanURL: https://support.axon.ai/en/growth/getting-started
+    properties:
+      - type: Documentation
+        url: https://support.axon.ai/en/growth/getting-started
+common:
+  - type: Website
+    url: https://www.applovin.com
+  - type: Documentation
+    url: https://support.axon.ai
+  - type: Support
+    url: https://support.axon.ai
+  - type: Blog
+    url: https://www.applovin.com/blog/
+  - type: TermsOfService
+    url: https://www.applovin.com/legal/
+  - type: PrivacyPolicy
+    url: https://www.applovin.com/privacy/
+maintainers:
+  - FN: API Evangelist
+    url: https://apievangelist.com
