@@ -1,0 +1,169 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin Axon Campaign Management API — Campaigns
+  description: 'AppLovin Axon Campaign Management API — Campaigns. 3 operations. Lead operation: Create Campaign. Self-contained
+    Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Campaigns
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: axon-campaign-management-campaigns
+    baseUri: https://api.ads.axon.ai/manage/v1
+    description: AppLovin Axon Campaign Management API — Campaigns business capability. Self-contained, no shared references.
+    resources:
+    - name: campaign-create
+      path: /campaign/create
+      operations:
+      - name: createcampaign
+        method: POST
+        description: Create Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: campaign-list
+      path: /campaign/list
+      operations:
+      - name: listcampaigns
+        method: GET
+        description: List Campaigns
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ids
+          in: query
+          type: string
+          description: Comma-separated campaign IDs (max 100).
+        - name: hashed_ids
+          in: query
+          type: string
+          description: Comma-separated external (hashed) campaign IDs (max 100).
+    - name: campaign-update
+      path: /campaign/update
+      operations:
+      - name: updatecampaign
+        method: POST
+        description: Update Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.APPLOVIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: axon-campaign-management-campaigns-rest
+    port: 8080
+    description: REST adapter for AppLovin Axon Campaign Management API — Campaigns. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/campaign/create
+      name: campaign-create
+      description: REST surface for campaign-create.
+      operations:
+      - method: POST
+        name: createcampaign
+        description: Create Campaign
+        call: axon-campaign-management-campaigns.createcampaign
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/list
+      name: campaign-list
+      description: REST surface for campaign-list.
+      operations:
+      - method: GET
+        name: listcampaigns
+        description: List Campaigns
+        call: axon-campaign-management-campaigns.listcampaigns
+        with:
+          ids: rest.ids
+          hashed_ids: rest.hashed_ids
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/update
+      name: campaign-update
+      description: REST surface for campaign-update.
+      operations:
+      - method: POST
+        name: updatecampaign
+        description: Update Campaign
+        call: axon-campaign-management-campaigns.updatecampaign
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: axon-campaign-management-campaigns-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin Axon Campaign Management API — Campaigns. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: create-campaign
+      description: Create Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: axon-campaign-management-campaigns.createcampaign
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-campaigns
+      description: List Campaigns
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: axon-campaign-management-campaigns.listcampaigns
+      with:
+        ids: tools.ids
+        hashed_ids: tools.hashed_ids
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-campaign
+      description: Update Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: axon-campaign-management-campaigns.updatecampaign
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

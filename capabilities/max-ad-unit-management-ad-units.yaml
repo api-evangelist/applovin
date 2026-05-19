@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin MAX Ad Unit Management API — Ad Units
+  description: 'AppLovin MAX Ad Unit Management API — Ad Units. 4 operations. Lead operation: Create Ad Unit. Self-contained
+    Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Ad Units
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: max-ad-unit-management-ad-units
+    baseUri: https://o.applovin.com/mediation/v1
+    description: AppLovin MAX Ad Unit Management API — Ad Units business capability. Self-contained, no shared references.
+    resources:
+    - name: ad_unit
+      path: /ad_unit
+      operations:
+      - name: createadunit
+        method: POST
+        description: Create Ad Unit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ad_unit-ad_unit_id
+      path: /ad_unit/{ad_unit_id}
+      operations:
+      - name: getadunit
+        method: GET
+        description: Get Ad Unit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fields
+          in: query
+          type: string
+          description: 'Comma-delimited list of optional fields. Supported values:'
+      - name: updateadunit
+        method: POST
+        description: Update Ad Unit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ad_units
+      path: /ad_units
+      operations:
+      - name: listadunits
+        method: GET
+        description: List Ad Units
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated optional fields to include.
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    authentication:
+      type: apikey
+      key: Api-Key
+      value: '{{env.APPLOVIN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: max-ad-unit-management-ad-units-rest
+    port: 8080
+    description: REST adapter for AppLovin MAX Ad Unit Management API — Ad Units. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ad-unit
+      name: ad-unit
+      description: REST surface for ad_unit.
+      operations:
+      - method: POST
+        name: createadunit
+        description: Create Ad Unit
+        call: max-ad-unit-management-ad-units.createadunit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ad-unit/{ad-unit-id}
+      name: ad-unit-ad-unit-id
+      description: REST surface for ad_unit-ad_unit_id.
+      operations:
+      - method: GET
+        name: getadunit
+        description: Get Ad Unit
+        call: max-ad-unit-management-ad-units.getadunit
+        with:
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateadunit
+        description: Update Ad Unit
+        call: max-ad-unit-management-ad-units.updateadunit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ad-units
+      name: ad-units
+      description: REST surface for ad_units.
+      operations:
+      - method: GET
+        name: listadunits
+        description: List Ad Units
+        call: max-ad-unit-management-ad-units.listadunits
+        with:
+          fields: rest.fields
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: max-ad-unit-management-ad-units-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin MAX Ad Unit Management API — Ad Units. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-ad-unit
+      description: Create Ad Unit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: max-ad-unit-management-ad-units.createadunit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ad-unit
+      description: Get Ad Unit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: max-ad-unit-management-ad-units.getadunit
+      with:
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ad-unit
+      description: Update Ad Unit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: max-ad-unit-management-ad-units.updateadunit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-ad-units
+      description: List Ad Units
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: max-ad-unit-management-ad-units.listadunits
+      with:
+        fields: tools.fields
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin MAX Revenue Reporting API — Revenue Reporting
+  description: 'AppLovin MAX Revenue Reporting API — Revenue Reporting. 1 operations. Lead operation: Get MAX Revenue Report.
+    Self-contained Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Revenue Reporting
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: max-revenue-reporting-revenue-reporting
+    baseUri: https://r.applovin.com
+    description: AppLovin MAX Revenue Reporting API — Revenue Reporting business capability. Self-contained, no shared references.
+    resources:
+    - name: maxReport
+      path: /maxReport
+      operations:
+      - name: getmaxrevenuereport
+        method: GET
+        description: Get MAX Revenue Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.APPLOVIN_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: max-revenue-reporting-revenue-reporting-rest
+    port: 8080
+    description: REST adapter for AppLovin MAX Revenue Reporting API — Revenue Reporting. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/maxreport
+      name: maxreport
+      description: REST surface for maxReport.
+      operations:
+      - method: GET
+        name: getmaxrevenuereport
+        description: Get MAX Revenue Report
+        call: max-revenue-reporting-revenue-reporting.getmaxrevenuereport
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: max-revenue-reporting-revenue-reporting-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin MAX Revenue Reporting API — Revenue Reporting. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-max-revenue-report
+      description: Get MAX Revenue Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: max-revenue-reporting-revenue-reporting.getmaxrevenuereport
+      outputParameters:
+      - type: object
+        mapping: $.

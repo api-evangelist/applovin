@@ -1,0 +1,174 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin MAX Ad Unit Management API — Experiments
+  description: 'AppLovin MAX Ad Unit Management API — Experiments. 4 operations. Lead operation: Get Ad Unit Experiment. Self-contained
+    Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Experiments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: max-ad-unit-management-experiments
+    baseUri: https://o.applovin.com/mediation/v1
+    description: AppLovin MAX Ad Unit Management API — Experiments business capability. Self-contained, no shared references.
+    resources:
+    - name: ad_unit_experiment-ad_unit_id
+      path: /ad_unit_experiment/{ad_unit_id}
+      operations:
+      - name: getadunitexperiment
+        method: GET
+        description: Get Ad Unit Experiment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: upsertadunitexperiment
+        method: POST
+        description: Upsert Ad Unit Experiment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ad_unit_experiment-ad_unit_id-segment_id
+      path: /ad_unit_experiment/{ad_unit_id}/{segment_id}
+      operations:
+      - name: getadunitexperimentwaterfall
+        method: GET
+        description: Get Ad Unit Experiment Waterfall
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateadunitexperimentwaterfall
+        method: POST
+        description: Update Ad Unit Experiment Waterfall
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Api-Key
+      value: '{{env.APPLOVIN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: max-ad-unit-management-experiments-rest
+    port: 8080
+    description: REST adapter for AppLovin MAX Ad Unit Management API — Experiments. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ad-unit-experiment/{ad-unit-id}
+      name: ad-unit-experiment-ad-unit-id
+      description: REST surface for ad_unit_experiment-ad_unit_id.
+      operations:
+      - method: GET
+        name: getadunitexperiment
+        description: Get Ad Unit Experiment
+        call: max-ad-unit-management-experiments.getadunitexperiment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: upsertadunitexperiment
+        description: Upsert Ad Unit Experiment
+        call: max-ad-unit-management-experiments.upsertadunitexperiment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ad-unit-experiment/{ad-unit-id}/{segment-id}
+      name: ad-unit-experiment-ad-unit-id-segment-id
+      description: REST surface for ad_unit_experiment-ad_unit_id-segment_id.
+      operations:
+      - method: GET
+        name: getadunitexperimentwaterfall
+        description: Get Ad Unit Experiment Waterfall
+        call: max-ad-unit-management-experiments.getadunitexperimentwaterfall
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateadunitexperimentwaterfall
+        description: Update Ad Unit Experiment Waterfall
+        call: max-ad-unit-management-experiments.updateadunitexperimentwaterfall
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: max-ad-unit-management-experiments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin MAX Ad Unit Management API — Experiments. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-ad-unit-experiment
+      description: Get Ad Unit Experiment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: max-ad-unit-management-experiments.getadunitexperiment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upsert-ad-unit-experiment
+      description: Upsert Ad Unit Experiment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: max-ad-unit-management-experiments.upsertadunitexperiment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ad-unit-experiment-waterfall
+      description: Get Ad Unit Experiment Waterfall
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: max-ad-unit-management-experiments.getadunitexperimentwaterfall
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ad-unit-experiment-waterfall
+      description: Update Ad Unit Experiment Waterfall
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: max-ad-unit-management-experiments.updateadunitexperimentwaterfall
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

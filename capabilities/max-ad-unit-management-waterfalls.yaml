@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin MAX Ad Unit Management API — Waterfalls
+  description: 'AppLovin MAX Ad Unit Management API — Waterfalls. 2 operations. Lead operation: Get Ad Unit Waterfall. Self-contained
+    Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Waterfalls
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: max-ad-unit-management-waterfalls
+    baseUri: https://o.applovin.com/mediation/v1
+    description: AppLovin MAX Ad Unit Management API — Waterfalls business capability. Self-contained, no shared references.
+    resources:
+    - name: ad_unit-ad_unit_id-segment_id
+      path: /ad_unit/{ad_unit_id}/{segment_id}
+      operations:
+      - name: getadunitwaterfall
+        method: GET
+        description: Get Ad Unit Waterfall
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateadunitwaterfall
+        method: POST
+        description: Update Ad Unit Waterfall
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Api-Key
+      value: '{{env.APPLOVIN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: max-ad-unit-management-waterfalls-rest
+    port: 8080
+    description: REST adapter for AppLovin MAX Ad Unit Management API — Waterfalls. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ad-unit/{ad-unit-id}/{segment-id}
+      name: ad-unit-ad-unit-id-segment-id
+      description: REST surface for ad_unit-ad_unit_id-segment_id.
+      operations:
+      - method: GET
+        name: getadunitwaterfall
+        description: Get Ad Unit Waterfall
+        call: max-ad-unit-management-waterfalls.getadunitwaterfall
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateadunitwaterfall
+        description: Update Ad Unit Waterfall
+        call: max-ad-unit-management-waterfalls.updateadunitwaterfall
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: max-ad-unit-management-waterfalls-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin MAX Ad Unit Management API — Waterfalls. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-ad-unit-waterfall
+      description: Get Ad Unit Waterfall
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: max-ad-unit-management-waterfalls.getadunitwaterfall
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ad-unit-waterfall
+      description: Update Ad Unit Waterfall
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: max-ad-unit-management-waterfalls.updateadunitwaterfall
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

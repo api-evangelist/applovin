@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin Conversion API for Lead Generation — Conversion Events
+  description: 'AppLovin Conversion API for Lead Generation — Conversion Events. 1 operations. Lead operation: Post Conversion
+    Events. Self-contained Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Conversion Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: conversion-api-lead-gen-conversion-events
+    baseUri: https://b.applovin.com
+    description: AppLovin Conversion API for Lead Generation — Conversion Events business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: v1-event
+      path: /v1/event
+      operations:
+      - name: postconversionevents
+        method: POST
+        description: Post Conversion Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pixel_id
+          in: query
+          type: string
+          description: Axon Event Key for the destination pixel.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.APPLOVIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: conversion-api-lead-gen-conversion-events-rest
+    port: 8080
+    description: REST adapter for AppLovin Conversion API for Lead Generation — Conversion Events. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/event
+      name: v1-event
+      description: REST surface for v1-event.
+      operations:
+      - method: POST
+        name: postconversionevents
+        description: Post Conversion Events
+        call: conversion-api-lead-gen-conversion-events.postconversionevents
+        with:
+          pixel_id: rest.pixel_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: conversion-api-lead-gen-conversion-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin Conversion API for Lead Generation — Conversion Events. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: post-conversion-events
+      description: Post Conversion Events
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: conversion-api-lead-gen-conversion-events.postconversionevents
+      with:
+        pixel_id: tools.pixel_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

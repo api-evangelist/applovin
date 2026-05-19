@@ -1,0 +1,167 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin Axon Campaign Management API — Assets
+  description: 'AppLovin Axon Campaign Management API — Assets. 3 operations. Lead operation: List Assets. Self-contained
+    Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Assets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: axon-campaign-management-assets
+    baseUri: https://api.ads.axon.ai/manage/v1
+    description: AppLovin Axon Campaign Management API — Assets business capability. Self-contained, no shared references.
+    resources:
+    - name: asset-list
+      path: /asset/list
+      operations:
+      - name: listassets
+        method: GET
+        description: List Assets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ids
+          in: query
+          type: string
+        - name: resource_type
+          in: query
+          type: string
+    - name: asset-upload
+      path: /asset/upload
+      operations:
+      - name: uploadassets
+        method: POST
+        description: Upload Assets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: asset-upload_result
+      path: /asset/upload_result
+      operations:
+      - name: getassetuploadresult
+        method: GET
+        description: Get Asset Upload Result
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upload_id
+          in: query
+          type: string
+          description: Identifier returned by `/asset/upload`.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.APPLOVIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: axon-campaign-management-assets-rest
+    port: 8080
+    description: REST adapter for AppLovin Axon Campaign Management API — Assets. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/asset/list
+      name: asset-list
+      description: REST surface for asset-list.
+      operations:
+      - method: GET
+        name: listassets
+        description: List Assets
+        call: axon-campaign-management-assets.listassets
+        with:
+          ids: rest.ids
+          resource_type: rest.resource_type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/upload
+      name: asset-upload
+      description: REST surface for asset-upload.
+      operations:
+      - method: POST
+        name: uploadassets
+        description: Upload Assets
+        call: axon-campaign-management-assets.uploadassets
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/upload-result
+      name: asset-upload-result
+      description: REST surface for asset-upload_result.
+      operations:
+      - method: GET
+        name: getassetuploadresult
+        description: Get Asset Upload Result
+        call: axon-campaign-management-assets.getassetuploadresult
+        with:
+          upload_id: rest.upload_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: axon-campaign-management-assets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin Axon Campaign Management API — Assets. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-assets
+      description: List Assets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: axon-campaign-management-assets.listassets
+      with:
+        ids: tools.ids
+        resource_type: tools.resource_type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-assets
+      description: Upload Assets
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: axon-campaign-management-assets.uploadassets
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-asset-upload-result
+      description: Get Asset Upload Result
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: axon-campaign-management-assets.getassetuploadresult
+      with:
+        upload_id: tools.upload_id
+      outputParameters:
+      - type: object
+        mapping: $.

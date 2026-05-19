@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AppLovin Growth Asset Reporting API — Asset Reporting
+  description: 'AppLovin Growth Asset Reporting API — Asset Reporting. 2 operations. Lead operation: Get Asset Report by Date
+    Range. Self-contained Naftiko capability covering one Applovin business surface.'
+  tags:
+  - Applovin
+  - Asset Reporting
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLOVIN_API_KEY: APPLOVIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: growth-asset-reporting-asset-reporting
+    baseUri: https://r.applovin.com
+    description: AppLovin Growth Asset Reporting API — Asset Reporting business capability. Self-contained, no shared references.
+    resources:
+    - name: assetAnalyticsReport
+      path: /assetAnalyticsReport
+      operations:
+      - name: getassetanalyticsreport
+        method: GET
+        description: Get Asset Report by Date Range
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: assetReport
+      path: /assetReport
+      operations:
+      - name: getassetreport
+        method: GET
+        description: Get Asset Report by Range
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: range
+          in: query
+          type: string
+          description: Symbolic time range.
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.APPLOVIN_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: growth-asset-reporting-asset-reporting-rest
+    port: 8080
+    description: REST adapter for AppLovin Growth Asset Reporting API — Asset Reporting. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/assetanalyticsreport
+      name: assetanalyticsreport
+      description: REST surface for assetAnalyticsReport.
+      operations:
+      - method: GET
+        name: getassetanalyticsreport
+        description: Get Asset Report by Date Range
+        call: growth-asset-reporting-asset-reporting.getassetanalyticsreport
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/assetreport
+      name: assetreport
+      description: REST surface for assetReport.
+      operations:
+      - method: GET
+        name: getassetreport
+        description: Get Asset Report by Range
+        call: growth-asset-reporting-asset-reporting.getassetreport
+        with:
+          range: rest.range
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: growth-asset-reporting-asset-reporting-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AppLovin Growth Asset Reporting API — Asset Reporting. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-asset-report-date-range
+      description: Get Asset Report by Date Range
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: growth-asset-reporting-asset-reporting.getassetanalyticsreport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-asset-report-range
+      description: Get Asset Report by Range
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: growth-asset-reporting-asset-reporting.getassetreport
+      with:
+        range: tools.range
+      outputParameters:
+      - type: object
+        mapping: $.
