@@ -36,7 +36,7 @@ apis:
     url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
   - type: OpenAPI
     url: openapi/applovin-max-revenue-reporting.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/max-revenue-reporting-revenue-reporting.yaml
   tags:
   - Reporting
@@ -57,13 +57,13 @@ apis:
     url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
   - type: OpenAPI
     url: openapi/applovin-max-ad-unit-management.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/max-ad-unit-management-ad-units.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/max-ad-unit-management-experiments.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/max-ad-unit-management-test-devices.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/max-ad-unit-management-waterfalls.yaml
   tags:
   - Mediation
@@ -85,7 +85,7 @@ apis:
     url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
   - type: OpenAPI
     url: openapi/applovin-growth-reporting.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/growth-reporting-growth-reporting.yaml
   tags:
   - Reporting
@@ -105,7 +105,7 @@ apis:
     url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
   - type: OpenAPI
     url: openapi/applovin-growth-asset-reporting.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/growth-asset-reporting-asset-reporting.yaml
   tags:
   - Reporting
@@ -128,11 +128,11 @@ apis:
     url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
   - type: OpenAPI
     url: openapi/applovin-axon-campaign-management.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/axon-campaign-management-assets.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/axon-campaign-management-campaigns.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/axon-campaign-management-creative-sets.yaml
   tags:
   - Campaigns
@@ -154,7 +154,7 @@ apis:
     url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
   - type: OpenAPI
     url: openapi/applovin-conversion-api-lead-gen.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/conversion-api-lead-gen-conversion-events.yaml
   tags:
   - Conversion Tracking
@@ -180,43 +180,43 @@ common:
   url: https://www.applovin.com/privacy/
 - type: GitHubOrganization
   url: https://github.com/AppLovin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-SDK-Android
   title: MAX Android SDK
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-SDK-iOS
   title: MAX iOS SDK
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Swift-Package
   title: MAX Swift Package
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Unity-Plugin
   title: MAX Unity Plugin
-- type: SDK
+- type: SDKs
   url: https://www.npmjs.com/package/react-native-applovin-max
   title: MAX React Native Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Flutter
   title: MAX Flutter Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Cordova
   title: MAX Cordova Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Unreal
   title: MAX Unreal Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Defold
   title: MAX Defold Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Godot
   title: MAX Godot Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-AIR
   title: MAX Adobe AIR Plugin
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Ad-Review-SDK-Android
   title: MAX Ad Review Android SDK
-- type: SDK
+- type: SDKs
   url: https://github.com/AppLovin/AppLovin-MAX-Ad-Review-SDK-iOS
   title: MAX Ad Review iOS SDK
 - type: CodeExamples
