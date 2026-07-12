@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.applovin.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 30 07:59:18 2026 GMT
+  hsts: false
+- host: support.axon.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 28 07:48:25 2026 GMT
+  hsts: false
+- host: r.applovin.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 18 23:32:17 2026 GMT
+  hsts: null
+domains:
+- domain: applovin.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: axon.ai
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

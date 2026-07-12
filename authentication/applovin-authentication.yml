@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/applovin-axon-campaign-management.yaml, openapi/applovin-conversion-api-lead-gen.yaml,
+  openapi/applovin-growth-asset-reporting.yaml, openapi/applovin-growth-reporting.yaml, openapi/applovin-max-ad-unit-management.yaml,
+  openapi/applovin-max-revenue-reporting.yaml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Campaign Management API key passed in the `Authorization` header.
+  sources:
+  - openapi/applovin-axon-campaign-management.yaml
+  - openapi/applovin-conversion-api-lead-gen.yaml
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  sources:
+  - openapi/applovin-growth-asset-reporting.yaml
+  - openapi/applovin-growth-reporting.yaml
+  - openapi/applovin-max-revenue-reporting.yaml
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: Api-Key
+  description: Management Key from AppLovin dashboard (Account > General > Keys).
+  sources:
+  - openapi/applovin-max-ad-unit-management.yaml

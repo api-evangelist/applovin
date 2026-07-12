@@ -162,6 +162,10 @@ apis:
   - Lead Generation
   - Attribution
 common:
+- type: DomainSecurity
+  url: security/applovin-domain-security.yml
+- type: Authentication
+  url: authentication/applovin-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/applovin
 - type: Website
