@@ -162,6 +162,8 @@ apis:
   - Lead Generation
   - Attribution
 common:
+- type: AgenticAccess
+  url: agentic-access/applovin-agentic-access.yml
 - type: DomainSecurity
   url: security/applovin-domain-security.yml
 - type: Authentication
