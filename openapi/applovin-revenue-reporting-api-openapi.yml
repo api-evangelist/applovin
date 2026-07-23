@@ -1,47 +1,57 @@
 openapi: 3.0.3
 info:
-  title: AppLovin MAX Revenue Reporting API
+  title: AppLovin Axon Campaign Management Ad Units Revenue Reporting API
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
   x-last-validated: '2026-05-05'
-  description: |
-    REST endpoint that returns aggregated MAX mediation revenue and user-level
-    publisher data. Authenticate with your Report Key, request a list of
-    columns, and constrain the result with a date range (max 45-day window).
-    Supports JSON and CSV output, plus filter / sort / pagination.
+  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+
+    (Axon) campaigns, creative sets, and creative assets. All endpoints
+
+    require an `Authorization` header with the Campaign Management API key
+
+    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
+
+    seconds (HTTP 429 on overflow).
+
+    '
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
 servers:
-  - url: https://r.applovin.com
-    description: AppLovin reporting host
+- url: https://api.ads.axon.ai/manage/v1
+  description: Axon campaign management API
 security:
-  - apiKeyQuery: []
+- bearerAuth: []
 tags:
-  - name: Revenue Reporting
-    description: Mediation revenue and user-level reporting
+- name: Revenue Reporting
+  description: Mediation revenue and user-level reporting
 paths:
   /maxReport:
     get:
       operationId: getMaxRevenueReport
       summary: Get MAX Revenue Report
-      description: |
-        Retrieve aggregated MAX revenue and user-level metrics for a publisher
+      description: 'Retrieve aggregated MAX revenue and user-level metrics for a publisher
+
         account. Specify the columns you want returned plus a date range
+
         (start, end) within a rolling 45-day window. Optional filters, sort,
+
         limit, and offset support customised reporting and pagination.
+
+        '
       tags:
-        - Revenue Reporting
+      - Revenue Reporting
       parameters:
-        - $ref: '#/components/parameters/ApiKey'
-        - $ref: '#/components/parameters/Columns'
-        - $ref: '#/components/parameters/Start'
-        - $ref: '#/components/parameters/End'
-        - $ref: '#/components/parameters/Format'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/NotZero'
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/Columns'
+      - $ref: '#/components/parameters/Start'
+      - $ref: '#/components/parameters/End'
+      - $ref: '#/components/parameters/Format'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/NotZero'
       responses:
         '200':
           description: Report results
@@ -53,14 +63,14 @@ paths:
                 code: 200
                 count: 2
                 results:
-                  - day: '2019-03-25'
-                    hour: '00:00'
-                    application: My Test App
-                    impressions: '987654'
-                  - day: '2019-03-26'
-                    hour: '00:00'
-                    application: My Test App
-                    impressions: '876543'
+                - day: '2019-03-25'
+                  hour: 00:00
+                  application: My Test App
+                  impressions: '987654'
+                - day: '2019-03-26'
+                  hour: 00:00
+                  application: My Test App
+                  impressions: '876543'
             text/csv:
               schema:
                 type: string
@@ -73,21 +83,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKeyQuery:
-      type: apiKey
-      in: query
-      name: api_key
-      description: Report Key issued by the AppLovin / Axon dashboard.
   parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key (issued under Account > Keys in the Axon dashboard).
-      schema:
-        type: string
-        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
     Columns:
       name: columns
       in: query
@@ -96,15 +92,6 @@ components:
       schema:
         type: string
         example: day,application,ad_format,country,impressions,ecpm,revenue
-    Start:
-      name: start
-      in: query
-      required: true
-      description: Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end.
-      schema:
-        type: string
-        format: date
-        example: '2019-03-25'
     End:
       name: end
       in: query
@@ -122,17 +109,9 @@ components:
       schema:
         type: string
         enum:
-          - json
-          - csv
+        - json
+        - csv
         default: json
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum rows to return.
-      schema:
-        type: integer
-        minimum: 1
     Offset:
       name: offset
       in: query
@@ -141,6 +120,22 @@ components:
       schema:
         type: integer
         minimum: 0
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key (issued under Account > Keys in the Axon dashboard).
+      schema:
+        type: string
+        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
     NotZero:
       name: not_zero
       in: query
@@ -149,14 +144,25 @@ components:
       schema:
         type: integer
         enum:
-          - 0
-          - 1
+        - 0
+        - 1
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end.
+      schema:
+        type: string
+        format: date
+        example: '2019-03-25'
   schemas:
     RevenueReportResponse:
       type: object
-      description: |
-        Top-level wrapper around revenue report results.
+      description: 'Top-level wrapper around revenue report results.
+
         x-schema-source: documentation
+
+        '
       properties:
         code:
           type: integer
@@ -172,14 +178,16 @@ components:
           items:
             $ref: '#/components/schemas/RevenueReportRow'
       required:
-        - code
-        - count
-        - results
+      - code
+      - count
+      - results
     RevenueReportRow:
       type: object
-      description: |
-        A single report row. The exact set of keys depends on the requested
+      description: 'A single report row. The exact set of keys depends on the requested
+
         `columns` parameter. Common columns are listed below.
+
+        '
       additionalProperties: true
       properties:
         day:
@@ -229,17 +237,8 @@ components:
           type: string
           description: Human-readable error description.
       required:
-        - code
+      - code
   responses:
-    BadRequest:
-      description: Malformed or invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: 400
-            message: Invalid date range
     Unauthorized:
       description: Missing or invalid api_key.
       content:
@@ -249,3 +248,17 @@ components:
           example:
             code: 401
             message: Unauthorized
+    BadRequest:
+      description: Malformed or invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Invalid date range
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Campaign Management API key passed in the `Authorization` header.

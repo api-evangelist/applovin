@@ -1,53 +1,61 @@
 openapi: 3.0.3
 info:
-  title: AppLovin Growth Asset Reporting API
+  title: AppLovin Axon Campaign Management Ad Units Asset Reporting API
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
   x-last-validated: '2026-05-05'
-  description: |
-    REST endpoints that return creative-level performance metrics for
-    AppLovin AppDiscovery / Axon campaigns. `assetReport` accepts symbolic
-    ranges (yesterday, last_7d, last_month) while `assetAnalyticsReport`
-    accepts arbitrary date ranges within a 45-day window.
+  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+
+    (Axon) campaigns, creative sets, and creative assets. All endpoints
+
+    require an `Authorization` header with the Campaign Management API key
+
+    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
+
+    seconds (HTTP 429 on overflow).
+
+    '
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
 servers:
-  - url: https://r.applovin.com
-    description: AppLovin reporting host
+- url: https://api.ads.axon.ai/manage/v1
+  description: Axon campaign management API
 security:
-  - apiKeyQuery: []
+- bearerAuth: []
 tags:
-  - name: Asset Reporting
-    description: Creative-level performance reporting
+- name: Asset Reporting
+  description: Creative-level performance reporting
 paths:
   /assetReport:
     get:
       operationId: getAssetReport
       summary: Get Asset Report by Range
-      description: |
-        Returns asset-level metrics (impressions, clicks, CTR, cost) for a
+      description: 'Returns asset-level metrics (impressions, clicks, CTR, cost) for a
+
         symbolic time range such as `yesterday`, `last_7d`, or `last_month`.
+
+        '
       tags:
-        - Asset Reporting
+      - Asset Reporting
       parameters:
-        - $ref: '#/components/parameters/ApiKey'
-        - name: range
-          in: query
-          required: true
-          description: Symbolic time range.
-          schema:
-            type: string
-            enum:
-              - yesterday
-              - last_7d
-              - last_month
-        - $ref: '#/components/parameters/Columns'
-        - $ref: '#/components/parameters/Format'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/NotZero'
+      - $ref: '#/components/parameters/ApiKey'
+      - name: range
+        in: query
+        required: true
+        description: Symbolic time range.
+        schema:
+          type: string
+          enum:
+          - yesterday
+          - last_7d
+          - last_month
+      - $ref: '#/components/parameters/Columns'
+      - $ref: '#/components/parameters/Format'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/NotZero'
       responses:
         '200':
           description: Asset report rows
@@ -71,20 +79,22 @@ paths:
     get:
       operationId: getAssetAnalyticsReport
       summary: Get Asset Report by Date Range
-      description: |
-        Returns asset-level metrics for an arbitrary YYYY-MM-DD date range
+      description: 'Returns asset-level metrics for an arbitrary YYYY-MM-DD date range
+
         bounded by a 45-day window.
+
+        '
       tags:
-        - Asset Reporting
+      - Asset Reporting
       parameters:
-        - $ref: '#/components/parameters/ApiKey'
-        - $ref: '#/components/parameters/Start'
-        - $ref: '#/components/parameters/End'
-        - $ref: '#/components/parameters/Columns'
-        - $ref: '#/components/parameters/Format'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/NotZero'
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/Start'
+      - $ref: '#/components/parameters/End'
+      - $ref: '#/components/parameters/Columns'
+      - $ref: '#/components/parameters/Format'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/NotZero'
       responses:
         '200':
           description: Asset report rows
@@ -105,12 +115,34 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKeyQuery:
-      type: apiKey
-      in: query
-      name: api_key
   parameters:
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of asset report columns.
+      schema:
+        type: string
+        example: asset_id,asset_name,impressions,clicks,cost
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date YYYY-MM-DD.
+      schema:
+        type: string
+        format: date
+    Format:
+      name: format
+      in: query
+      required: false
+      description: Response format. Defaults to JSON.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
     ApiKey:
       name: api_key
       in: query
@@ -126,33 +158,6 @@ components:
       schema:
         type: string
         format: date
-    End:
-      name: end
-      in: query
-      required: true
-      description: Inclusive end date YYYY-MM-DD.
-      schema:
-        type: string
-        format: date
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of asset report columns.
-      schema:
-        type: string
-        example: asset_id,asset_name,impressions,clicks,cost
-    Format:
-      name: format
-      in: query
-      required: false
-      description: Response format. Defaults to JSON.
-      schema:
-        type: string
-        enum:
-          - json
-          - csv
-        default: json
     Limit:
       name: limit
       in: query
@@ -160,13 +165,6 @@ components:
       schema:
         type: integer
         minimum: 1
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
     NotZero:
       name: not_zero
       in: query
@@ -175,13 +173,34 @@ components:
       schema:
         type: integer
         enum:
-          - 0
-          - 1
+        - 0
+        - 1
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     AssetReportRow:
       type: object
-      description: |
-        Creative-level report row. x-schema-source: documentation
+      description: 'Creative-level report row. x-schema-source: documentation
+
+        '
       additionalProperties: true
       properties:
         asset_id:
@@ -229,17 +248,9 @@ components:
         message:
           type: string
       required:
-        - code
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+      - code
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Campaign Management API key passed in the `Authorization` header.

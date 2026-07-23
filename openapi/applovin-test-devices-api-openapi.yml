@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: AppLovin Axon Campaign Management Ad Units Test Devices API
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-last-validated: '2026-05-05'
+  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+
+    (Axon) campaigns, creative sets, and creative assets. All endpoints
+
+    require an `Authorization` header with the Campaign Management API key
+
+    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
+
+    seconds (HTTP 429 on overflow).
+
+    '
+  contact:
+    name: AppLovin Support
+    url: https://support.axon.ai
+servers:
+- url: https://api.ads.axon.ai/manage/v1
+  description: Axon campaign management API
+security:
+- bearerAuth: []
+tags:
+- name: Test Devices
+  description: Test device management
+paths:
+  /test_devices:
+    get:
+      operationId: listTestDevices
+      summary: List Test Devices
+      tags:
+      - Test Devices
+      responses:
+        '200':
+          description: All test devices (enabled and disabled).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestDevice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /test_device:
+    post:
+      operationId: createTestDevice
+      summary: Create Test Device
+      tags:
+      - Test Devices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestDevice'
+      responses:
+        '200':
+          description: Created test device.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestDevice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /test_device/{test_device_id}:
+    get:
+      operationId: getTestDevice
+      summary: Get Test Device
+      tags:
+      - Test Devices
+      parameters:
+      - $ref: '#/components/parameters/TestDeviceId'
+      responses:
+        '200':
+          description: Test device configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestDevice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateTestDevice
+      summary: Update Test Device
+      tags:
+      - Test Devices
+      parameters:
+      - $ref: '#/components/parameters/TestDeviceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestDevice'
+      responses:
+        '200':
+          description: Updated test device.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestDevice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    TestDeviceId:
+      name: test_device_id
+      in: path
+      required: true
+      description: Test device identifier.
+      schema:
+        type: string
+  schemas:
+    TestDevice:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        device_id:
+          type: string
+          description: IDFA or GAID.
+        disabled:
+          type: boolean
+        network:
+          type: string
+      required:
+      - name
+      - device_id
+      - disabled
+      - network
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Campaign Management API key passed in the `Authorization` header.
