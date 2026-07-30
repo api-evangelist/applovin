@@ -2,6 +2,19 @@ aid: applovin
 url: https://github.com/api-evangelist/applovin
 name: AppLovin
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.applovin.com/favicon.ico
 tags:
 - Advertising
@@ -21,42 +34,22 @@ created: '2026-05-04'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: applovin-max-revenue-reporting
-  name: AppLovin MAX Revenue Reporting API
-  description: The MAX Revenue Reporting API returns aggregated MAX mediation revenue and user-level publisher data. Publishers
-    query the API with a Report Key, a date range (up to a 45-day window), and a list of columns to return (day, hour, application,
-    ad format, country, network, impressions, eCPM, revenue, etc.). The API supports filtering, sorting, and pagination, and
-    returns results as either JSON or CSV. The endpoint is commonly integrated with mobile measurement partners (MMPs) and
-    BI pipelines for monetization analytics.
+- aid: applovin:applovin-ad-units-api
+  name: AppLovin Ad Units API
+  description: Ad unit lifecycle and configuration
   humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
   baseURL: https://r.applovin.com/maxReport
-  version: v1
+  tags:
+  - Ad Units
   properties:
+  - type: OpenAPI
+    url: openapi/applovin-ad-units-api-openapi.yml
   - type: Documentation
     url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: OpenAPI
-    url: openapi/applovin-max-revenue-reporting.yaml
   - type: X-NaftikoCapability
     url: capabilities/max-revenue-reporting-revenue-reporting.yaml
-  tags:
-  - Reporting
-  - Mediation
-  - Monetization
-  - Analytics
-- aid: applovin-max-ad-unit-management
-  name: AppLovin MAX Ad Unit Management API
-  description: The MAX Ad Unit Management API allows publishers to programmatically manage their MAX mediation configuration.
-    It supports creating, listing, viewing, and editing ad units across iOS and Android apps; configuring ad network settings,
-    frequency capping, bid floors, and segment-based waterfalls; running A/B experiments on waterfalls; and managing test
-    devices. Authentication uses an Api-Key header containing a Management Key. Rate limit is 2,000 requests per hour.
-  humanURL: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  baseURL: https://o.applovin.com/mediation/v1
-  version: v1
-  properties:
   - type: Documentation
     url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: OpenAPI
-    url: openapi/applovin-max-ad-unit-management.yaml
   - type: X-NaftikoCapability
     url: capabilities/max-ad-unit-management-ad-units.yaml
   - type: X-NaftikoCapability
@@ -65,103 +58,469 @@ apis:
     url: capabilities/max-ad-unit-management-test-devices.yaml
   - type: X-NaftikoCapability
     url: capabilities/max-ad-unit-management-waterfalls.yaml
-  tags:
-  - Mediation
-  - Ad Units
-  - Waterfalls
-  - Experiments
-  - Configuration
-- aid: applovin-growth-reporting
-  name: AppLovin Growth (Axon / AppDiscovery) Reporting API
-  description: The Growth Reporting API exposes campaign-level performance data for AppLovin's AppDiscovery / Axon advertising
-    platform. Advertisers and publishers retrieve aggregated metrics (impressions, clicks, conversions, installs, cost, revenue)
-    by campaign, country, day, and other dimensions, scoped by either advertiser or publisher report types. The API supports
-    JSON and CSV output, filtering, sorting, paging, and a 45-day rolling window.
-  humanURL: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  baseURL: https://r.applovin.com/report
-  version: v1
-  properties:
   - type: Documentation
     url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: OpenAPI
-    url: openapi/applovin-growth-reporting.yaml
   - type: X-NaftikoCapability
     url: capabilities/growth-reporting-growth-reporting.yaml
-  tags:
-  - Reporting
-  - User Acquisition
-  - Advertising
-  - Analytics
-- aid: applovin-growth-asset-reporting
-  name: AppLovin Growth Asset Reporting API
-  description: The Growth Asset Reporting API provides creative-level performance data for AppLovin AppDiscovery campaigns.
-    It returns metrics (impressions, clicks, CTR, cost) broken down by creative asset, creative set, and campaign, supporting
-    both fixed time-range queries (yesterday, last_7d, last_month) and arbitrary date-range queries within a 45-day window.
-  humanURL: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  baseURL: https://r.applovin.com/assetReport
-  version: v1
-  properties:
   - type: Documentation
     url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: OpenAPI
-    url: openapi/applovin-growth-asset-reporting.yaml
   - type: X-NaftikoCapability
     url: capabilities/growth-asset-reporting-asset-reporting.yaml
-  tags:
-  - Reporting
-  - Creatives
-  - User Acquisition
-  - Advertising
-- aid: applovin-axon-campaign-management
-  name: AppLovin Axon Campaign Management API
-  description: The Axon Campaign Management API enables advertisers to programmatically create, update, list, and manage AppLovin
-    AppDiscovery (Axon) campaigns, creative sets, and creative assets. It supports campaign budgeting, goal optimization (CPI,
-    CPE, CPP, ROAS variants), country/region/metro targeting, attribution tracking integration with major MMPs (Adjust, AppsFlyer,
-    Apsalar, Branch, Kochava, Tenjin), creative set lifecycle (create, update, clone), and asset upload (HTML5 playables,
-    images, videos). Authentication uses an Authorization header with the Campaign Management API key. Rate limit is 1,000
-    requests per 60 seconds.
-  humanURL: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  baseURL: https://api.ads.axon.ai/manage/v1
-  version: v1
-  properties:
   - type: Documentation
     url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: OpenAPI
-    url: openapi/applovin-axon-campaign-management.yaml
   - type: X-NaftikoCapability
     url: capabilities/axon-campaign-management-assets.yaml
   - type: X-NaftikoCapability
     url: capabilities/axon-campaign-management-campaigns.yaml
   - type: X-NaftikoCapability
     url: capabilities/axon-campaign-management-creative-sets.yaml
-  tags:
-  - Campaigns
-  - Creatives
-  - User Acquisition
-  - Advertising
-  - Asset Management
-- aid: applovin-conversion-api-lead-gen
-  name: AppLovin Conversion API for Lead Generation
-  description: The AppLovin Conversion API (CAPI) for Lead Generation lets advertisers send server-to-server conversion events
-    (page_view, generate_lead) directly to AppLovin / Axon for attribution and optimization. Events include user identifiers
-    (axwrt cookie, aleid, email, phone, IP, user agent) which AppLovin auto-hashes where required. Up to 100 events can be
-    batched per request, and events are deduplicated against pixel-fired client-side events using a dedupe_id.
-  humanURL: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
-  baseURL: https://b.applovin.com
-  version: v1
-  properties:
   - type: Documentation
     url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
-  - type: OpenAPI
-    url: openapi/applovin-conversion-api-lead-gen.yaml
   - type: X-NaftikoCapability
     url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-asset-reporting-api
+  name: AppLovin Asset Reporting API
+  description: Creative-level performance reporting
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
   tags:
-  - Conversion Tracking
-  - Server-to-Server
-  - Lead Generation
-  - Attribution
+  - Asset Reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-asset-reporting-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-assets-api
+  name: AppLovin Assets API
+  description: Creative asset upload and listing
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-assets-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-campaigns-api
+  name: AppLovin Campaigns API
+  description: Campaign create / update / list operations
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-conversion-events-api
+  name: AppLovin Conversion Events API
+  description: Server-to-server conversion event ingestion
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Conversion Events
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-conversion-events-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-creative-sets-api
+  name: AppLovin Creative Sets API
+  description: Creative set lifecycle operations
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Creative Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-creative-sets-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-experiments-api
+  name: AppLovin Experiments API
+  description: Ad unit A/B experiment management
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Experiments
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-experiments-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-growth-reporting-api
+  name: AppLovin Growth Reporting API
+  description: Campaign performance reporting for advertisers and publishers
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Growth Reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-growth-reporting-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-revenue-reporting-api
+  name: AppLovin Revenue Reporting API
+  description: Mediation revenue and user-level reporting
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Revenue Reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-revenue-reporting-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-test-devices-api
+  name: AppLovin Test Devices API
+  description: Test device management
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Test Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-test-devices-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
+- aid: applovin:applovin-waterfalls-api
+  name: AppLovin Waterfalls API
+  description: Per-segment waterfall management
+  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com/maxReport
+  tags:
+  - Waterfalls
+  properties:
+  - type: OpenAPI
+    url: openapi/applovin-waterfalls-api-openapi.yml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-revenue-reporting-revenue-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-ad-units.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-experiments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-test-devices.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/max-ad-unit-management-waterfalls.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-reporting-growth-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: X-NaftikoCapability
+    url: capabilities/growth-asset-reporting-asset-reporting.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-assets.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-campaigns.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/axon-campaign-management-creative-sets.yaml
+  - type: Documentation
+    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+  - type: X-NaftikoCapability
+    url: capabilities/conversion-api-lead-gen-conversion-events.yaml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/applovin/overview
 - type: AgenticAccess
   url: agentic-access/applovin-agentic-access.yml
 - type: DomainSecurity
