@@ -1,0 +1,945 @@
+{
+  "info": {
+    "_postman_id": "3adfc8a6-98e6-4b8e-96b4-a65d9e484f2d",
+    "name": "AppLovin Axon Campaign Management Ad Units Campaigns API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:41.000Z",
+    "updatedAt": "2026-07-28T01:03:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3adfc8a6-98e6-4b8e-96b4-a65d9e484f2d"
+  },
+  "item": [
+    {
+      "name": "campaign",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "List Campaigns",
+              "id": "25d906f5-3112-42c7-ab9f-6abfd3a9dfa8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated campaign IDs (max 100).",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated external (hashed) campaign IDs (max 100).",
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "List campaigns for the authenticated account, optionally filtered by ID lists."
+              },
+              "response": [
+                {
+                  "id": "ab07b66d-cc61-4366-a3a5-bec5b97e38dc",
+                  "name": "Array of Campaign objects.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated campaign IDs (max 100).",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated external (hashed) campaign IDs (max 100).",
+                          "key": "hashed_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"type\": \"APP\",\n    \"platform\": \"IOS\",\n    \"start_date\": \"<dateTime>\",\n    \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n    \"budget\": {\n      \"daily_budget_for_all_countries\": \"<string>\",\n      \"country_code_to_daily_budget\": {\n        \"aute_ae\": \"<string>\",\n        \"cillum_d\": \"<string>\",\n        \"velit31\": \"<string>\"\n      }\n    },\n    \"goal\": {\n      \"goal_type\": \"BLD_ROAS\",\n      \"goal_value_for_all_countries\": \"<string>\",\n      \"country_code_to_goal_value\": {\n        \"dolore\": \"<string>\",\n        \"nostrud339\": \"<string>\",\n        \"fugiat_\": \"<string>\"\n      },\n      \"roas_day_target\": \"<string>\"\n    },\n    \"tracking\": {\n      \"tracking_method\": \"ADJUST\",\n      \"impression_url\": \"<uri>\",\n      \"click_url\": \"<uri>\"\n    },\n    \"targeting\": [\n      {\n        \"country_code\": \"<string>\",\n        \"region_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"metro_names\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"country_code\": \"<string>\",\n        \"region_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"metro_names\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"id\": \"<long>\",\n    \"status\": \"PAUSED\",\n    \"package_name\": \"<string>\",\n    \"itunes_id\": \"<long>\",\n    \"end_date\": \"<dateTime>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"type\": \"APP\",\n    \"platform\": \"ANDROID\",\n    \"start_date\": \"<dateTime>\",\n    \"bidding_strategy\": \"TARGET_GOAL_WITH_CPI_BILLING\",\n    \"budget\": {\n      \"daily_budget_for_all_countries\": \"<string>\",\n      \"country_code_to_daily_budget\": {\n        \"sunt_b\": \"<string>\"\n      }\n    },\n    \"goal\": {\n      \"goal_type\": \"AD_ROAS\",\n      \"goal_value_for_all_countries\": \"<string>\",\n      \"country_code_to_goal_value\": {\n        \"labore9_\": \"<string>\",\n        \"velit615\": \"<string>\"\n      },\n      \"roas_day_target\": \"<string>\"\n    },\n    \"tracking\": {\n      \"tracking_method\": \"ADJUST\",\n      \"impression_url\": \"<uri>\",\n      \"click_url\": \"<uri>\"\n    },\n    \"targeting\": [\n      {\n        \"country_code\": \"<string>\",\n        \"region_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"metro_names\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"country_code\": \"<string>\",\n        \"region_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"metro_names\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"id\": \"<long>\",\n    \"status\": \"LIVE\",\n    \"package_name\": \"<string>\",\n    \"itunes_id\": \"<long>\",\n    \"end_date\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-ab07b66d-cc61-4366-a3a5-bec5b97e38dc"
+                },
+                {
+                  "id": "aeb20e50-0525-4f93-9df1-b5d50c1b4afc",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated campaign IDs (max 100).",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated external (hashed) campaign IDs (max 100).",
+                          "key": "hashed_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-aeb20e50-0525-4f93-9df1-b5d50c1b4afc"
+                },
+                {
+                  "id": "3c586180-ea2b-4af1-a891-ce81d6922ef7",
+                  "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated campaign IDs (max 100).",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated external (hashed) campaign IDs (max 100).",
+                          "key": "hashed_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-3c586180-ea2b-4af1-a891-ce81d6922ef7"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:41.000Z",
+              "updatedAt": "2026-07-28T01:03:41.000Z",
+              "uid": "35240-25d906f5-3112-42c7-ab9f-6abfd3a9dfa8"
+            }
+          ],
+          "id": "eb25e3c8-bb41-4e0a-90f6-44f7b9660c39",
+          "createdAt": "2026-07-28T01:03:41.000Z",
+          "updatedAt": "2026-07-28T01:03:41.000Z",
+          "uid": "35240-eb25e3c8-bb41-4e0a-90f6-44f7b9660c39"
+        },
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "Create Campaign",
+              "id": "f42e1686-a072-4d02-a1ed-2eb27e75db86",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/create?account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "create"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Create a new AppDiscovery / Axon campaign. The `id` field is\nforbidden on create. The `bidding_strategy` field is required and\ncannot be updated after creation.\n"
+              },
+              "response": [
+                {
+                  "id": "a4e87dee-164c-4cfd-bda8-009fe334088d",
+                  "name": "Newly created campaign reference.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-a4e87dee-164c-4cfd-bda8-009fe334088d"
+                },
+                {
+                  "id": "9cd62390-1114-4f04-8665-ef37bdad2278",
+                  "name": "Validation or input error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-9cd62390-1114-4f04-8665-ef37bdad2278"
+                },
+                {
+                  "id": "8f078a37-41b2-4107-b456-4b3dee1f5d29",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-8f078a37-41b2-4107-b456-4b3dee1f5d29"
+                },
+                {
+                  "id": "9bd4dd29-da50-4ffb-8553-28c47f2ba35f",
+                  "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-9bd4dd29-da50-4ffb-8553-28c47f2ba35f"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:41.000Z",
+              "updatedAt": "2026-07-28T01:03:41.000Z",
+              "uid": "35240-f42e1686-a072-4d02-a1ed-2eb27e75db86"
+            }
+          ],
+          "id": "2d0087ce-e0ee-4790-91e4-abe6708b76a3",
+          "createdAt": "2026-07-28T01:03:41.000Z",
+          "updatedAt": "2026-07-28T01:03:41.000Z",
+          "uid": "35240-2d0087ce-e0ee-4790-91e4-abe6708b76a3"
+        },
+        {
+          "name": "update",
+          "item": [
+            {
+              "name": "Update Campaign",
+              "id": "0b412197-6957-486f-af7e-ec6d871e9986",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/update?account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "update"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Update an existing campaign. `id`, `type`, and `campaign_id` are required."
+              },
+              "response": [
+                {
+                  "id": "ba3f2f11-07bc-40eb-b2bc-d2ba4bdbabe7",
+                  "name": "Updated campaign reference.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-ba3f2f11-07bc-40eb-b2bc-d2ba4bdbabe7"
+                },
+                {
+                  "id": "858172d8-1b6d-42b0-8f42-a641cb520d81",
+                  "name": "Validation or input error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-858172d8-1b6d-42b0-8f42-a641cb520d81"
+                },
+                {
+                  "id": "aba84f38-dfa0-4093-9318-3d9f3bbaf2a7",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-aba84f38-dfa0-4093-9318-3d9f3bbaf2a7"
+                },
+                {
+                  "id": "c0a10901-9601-4720-8faf-5aa68806b456",
+                  "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"APP\",\n  \"platform\": \"ANDROID\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"Ut_522\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"BLD_ROAS\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"reprehenderit_61f\": \"<string>\",\n      \"in_0c3\": \"<string>\",\n      \"eiusmod_50\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"APPSFLYER\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"PAUSED\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:41.000Z",
+                  "updatedAt": "2026-07-28T01:03:41.000Z",
+                  "uid": "35240-c0a10901-9601-4720-8faf-5aa68806b456"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:41.000Z",
+              "updatedAt": "2026-07-28T01:03:41.000Z",
+              "uid": "35240-0b412197-6957-486f-af7e-ec6d871e9986"
+            }
+          ],
+          "id": "9ab5f586-7c86-4468-92a7-2a5464db98c5",
+          "createdAt": "2026-07-28T01:03:41.000Z",
+          "updatedAt": "2026-07-28T01:03:41.000Z",
+          "uid": "35240-9ab5f586-7c86-4468-92a7-2a5464db98c5"
+        }
+      ],
+      "id": "bb539f9e-bb7a-4d63-b9c0-b3d30b4e683a",
+      "createdAt": "2026-07-28T01:03:41.000Z",
+      "updatedAt": "2026-07-28T01:03:41.000Z",
+      "uid": "35240-bb539f9e-bb7a-4d63-b9c0-b3d30b4e683a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

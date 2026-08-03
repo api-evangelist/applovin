@@ -1,0 +1,757 @@
+{
+  "info": {
+    "_postman_id": "0d17bbe6-1776-49bd-bc50-237463c987ee",
+    "name": "AppLovin Axon Campaign Management Ad Units Test Devices API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:51.000Z",
+    "updatedAt": "2026-07-28T01:03:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0d17bbe6-1776-49bd-bc50-237463c987ee"
+  },
+  "item": [
+    {
+      "name": "test_devices",
+      "item": [
+        {
+          "name": "List Test Devices",
+          "id": "676566d5-c08d-4a8d-8866-4af1fcc97b34",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/test_devices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "test_devices"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4278e722-3042-4fd7-b74b-6ed0905f4154",
+              "name": "All test devices (enabled and disabled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/test_devices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_devices"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"network\": \"<string>\",\n    \"id\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"network\": \"<string>\",\n    \"id\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-4278e722-3042-4fd7-b74b-6ed0905f4154"
+            },
+            {
+              "id": "f46848fc-d1d1-41d0-959b-6169a0ec191f",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/test_devices",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_devices"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-f46848fc-d1d1-41d0-959b-6169a0ec191f"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:51.000Z",
+          "updatedAt": "2026-07-28T01:03:51.000Z",
+          "uid": "35240-676566d5-c08d-4a8d-8866-4af1fcc97b34"
+        }
+      ],
+      "id": "e018a705-6f62-4f8e-9a44-59cf29b96ef1",
+      "createdAt": "2026-07-28T01:03:51.000Z",
+      "updatedAt": "2026-07-28T01:03:51.000Z",
+      "uid": "35240-e018a705-6f62-4f8e-9a44-59cf29b96ef1"
+    },
+    {
+      "name": "test_device",
+      "item": [
+        {
+          "name": "{test_device_id}",
+          "item": [
+            {
+              "name": "Get Test Device",
+              "id": "f5e81006-3c24-4546-8626-c27b3735b01f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/test_device/:test_device_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_device",
+                    ":test_device_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bf3a28bd-bc75-4d7c-bb53-46fb33d2bfb9",
+                      "key": "test_device_id",
+                      "value": "<string>",
+                      "description": "(Required) Test device identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "819e3e92-e504-4b53-9718-222bc36a239c",
+                  "name": "Test device configuration.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/test_device/:test_device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "test_device",
+                        ":test_device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "test_device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:51.000Z",
+                  "updatedAt": "2026-07-28T01:03:51.000Z",
+                  "uid": "35240-819e3e92-e504-4b53-9718-222bc36a239c"
+                },
+                {
+                  "id": "389034d9-c488-413b-a116-b5441438c96d",
+                  "name": "Missing or invalid Api-Key header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/test_device/:test_device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "test_device",
+                        ":test_device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "test_device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:51.000Z",
+                  "updatedAt": "2026-07-28T01:03:51.000Z",
+                  "uid": "35240-389034d9-c488-413b-a116-b5441438c96d"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-f5e81006-3c24-4546-8626-c27b3735b01f"
+            },
+            {
+              "name": "Update Test Device",
+              "id": "5b2ebf2c-9728-43ba-a524-62918c8273f4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/test_device/:test_device_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_device",
+                    ":test_device_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "93d2e31c-a7fe-4945-8161-5183fbbb1bd1",
+                      "key": "test_device_id",
+                      "value": "<string>",
+                      "description": "(Required) Test device identifier."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "78f16c63-e739-4028-b21a-48a00b1b9239",
+                  "name": "Updated test device.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/test_device/:test_device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "test_device",
+                        ":test_device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "test_device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:51.000Z",
+                  "updatedAt": "2026-07-28T01:03:51.000Z",
+                  "uid": "35240-78f16c63-e739-4028-b21a-48a00b1b9239"
+                },
+                {
+                  "id": "d0128236-da67-4743-aea4-1c005c6677fe",
+                  "name": "Validation error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/test_device/:test_device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "test_device",
+                        ":test_device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "test_device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:51.000Z",
+                  "updatedAt": "2026-07-28T01:03:51.000Z",
+                  "uid": "35240-d0128236-da67-4743-aea4-1c005c6677fe"
+                },
+                {
+                  "id": "cac68e8b-416c-46d4-be4e-915097f33c71",
+                  "name": "Missing or invalid Api-Key header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/test_device/:test_device_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "test_device",
+                        ":test_device_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "test_device_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:51.000Z",
+                  "updatedAt": "2026-07-28T01:03:51.000Z",
+                  "uid": "35240-cac68e8b-416c-46d4-be4e-915097f33c71"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-5b2ebf2c-9728-43ba-a524-62918c8273f4"
+            }
+          ],
+          "id": "3f7dbdc7-0ce1-4f66-aacf-1aca57f1401d",
+          "createdAt": "2026-07-28T01:03:51.000Z",
+          "updatedAt": "2026-07-28T01:03:51.000Z",
+          "uid": "35240-3f7dbdc7-0ce1-4f66-aacf-1aca57f1401d"
+        },
+        {
+          "name": "Create Test Device",
+          "id": "2ea1172a-fdf9-4bde-8879-f4d9c5eaed01",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/test_device",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "test_device"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ffda192e-be53-4f64-8651-9bdc9d0f31a5",
+              "name": "Created test device.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/test_device",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_device"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-ffda192e-be53-4f64-8651-9bdc9d0f31a5"
+            },
+            {
+              "id": "d2a1bb21-3ffc-4429-ae79-bf96ec5b3975",
+              "name": "Validation error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/test_device",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_device"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-d2a1bb21-3ffc-4429-ae79-bf96ec5b3975"
+            },
+            {
+              "id": "216dbd18-3f8d-4e40-a222-0605cfb29a58",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"network\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/test_device",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "test_device"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:51.000Z",
+              "updatedAt": "2026-07-28T01:03:51.000Z",
+              "uid": "35240-216dbd18-3f8d-4e40-a222-0605cfb29a58"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:51.000Z",
+          "updatedAt": "2026-07-28T01:03:51.000Z",
+          "uid": "35240-2ea1172a-fdf9-4bde-8879-f4d9c5eaed01"
+        }
+      ],
+      "id": "a4b61908-6eee-4fc6-bf7c-db05ce95b55a",
+      "createdAt": "2026-07-28T01:03:51.000Z",
+      "updatedAt": "2026-07-28T01:03:51.000Z",
+      "uid": "35240-a4b61908-6eee-4fc6-bf7c-db05ce95b55a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

@@ -1,0 +1,656 @@
+{
+  "info": {
+    "_postman_id": "735336fe-dfdb-4938-b55f-4127281641e3",
+    "name": "AppLovin Axon Campaign Management Ad Units Assets API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:40.000Z",
+    "updatedAt": "2026-07-28T01:03:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-735336fe-dfdb-4938-b55f-4127281641e3"
+  },
+  "item": [
+    {
+      "name": "asset",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "List Assets",
+              "id": "327ce6ff-7dba-470b-8e07-75854bbafdb6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/asset/list?account_id=<string>&ids=<string>&resource_type=html&page=1&size=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "asset",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "html"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "List creative assets in the account."
+              },
+              "response": [
+                {
+                  "id": "79cf740c-87c3-4343-999c-5bf2336b9351",
+                  "name": "Array of Asset objects.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/list?account_id=<string>&ids=<string>&resource_type=html&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "resource_type",
+                          "value": "html"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"resource_type\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"resource_type\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-79cf740c-87c3-4343-999c-5bf2336b9351"
+                },
+                {
+                  "id": "d84a8c3f-86b8-4e2d-b7bd-fd2d3cb59b0b",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/list?account_id=<string>&ids=<string>&resource_type=html&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "resource_type",
+                          "value": "html"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-d84a8c3f-86b8-4e2d-b7bd-fd2d3cb59b0b"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:40.000Z",
+              "updatedAt": "2026-07-28T01:03:40.000Z",
+              "uid": "35240-327ce6ff-7dba-470b-8e07-75854bbafdb6"
+            }
+          ],
+          "id": "6c27e493-4fd1-4557-90d8-80573ff5fbbc",
+          "createdAt": "2026-07-28T01:03:40.000Z",
+          "updatedAt": "2026-07-28T01:03:40.000Z",
+          "uid": "35240-6c27e493-4fd1-4557-90d8-80573ff5fbbc"
+        },
+        {
+          "name": "upload",
+          "item": [
+            {
+              "name": "Upload Assets",
+              "id": "c54f51e8-6959-4adf-b326-4ffcd24b5ca1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "files",
+                      "value": "<binary>,<binary>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/asset/upload?account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "asset",
+                    "upload"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Upload up to 40 creative asset files (10 GB total / 1 GB per file).\nSupported MIME types: text/html, image/gif, image/jpeg, image/png,\nvideo/mp4, video/quicktime.\n"
+              },
+              "response": [
+                {
+                  "id": "5c23dcda-4184-42a3-b7e4-7fd35137d9cd",
+                  "name": "Upload accepted.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/upload?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "upload"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"upload_id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-5c23dcda-4184-42a3-b7e4-7fd35137d9cd"
+                },
+                {
+                  "id": "ffbaee44-a490-4da8-bb27-776957362499",
+                  "name": "Validation or input error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/upload?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "upload"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-ffbaee44-a490-4da8-bb27-776957362499"
+                },
+                {
+                  "id": "2ddbc5e7-94d9-44f1-b14f-ddb37db341cb",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/upload?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "upload"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-2ddbc5e7-94d9-44f1-b14f-ddb37db341cb"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:40.000Z",
+              "updatedAt": "2026-07-28T01:03:40.000Z",
+              "uid": "35240-c54f51e8-6959-4adf-b326-4ffcd24b5ca1"
+            }
+          ],
+          "id": "3c430f1f-ac8f-4cdc-a446-2d08c0185400",
+          "createdAt": "2026-07-28T01:03:40.000Z",
+          "updatedAt": "2026-07-28T01:03:40.000Z",
+          "uid": "35240-3c430f1f-ac8f-4cdc-a446-2d08c0185400"
+        },
+        {
+          "name": "upload_result",
+          "item": [
+            {
+              "name": "Get Asset Upload Result",
+              "id": "4f9a1885-059c-4f2f-9bd3-2c389b7ddb71",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/asset/upload_result?account_id=<string>&upload_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "asset",
+                    "upload_result"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Identifier returned by `/asset/upload`.",
+                      "key": "upload_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Poll the status of an asynchronous asset upload."
+              },
+              "response": [
+                {
+                  "id": "7907cef2-68b7-4a46-8714-7b4a9da7660e",
+                  "name": "Upload status with per-file results.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/upload_result?account_id=<string>&upload_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "upload_result"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Identifier returned by `/asset/upload`.",
+                          "key": "upload_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"upload_status\": \"FAILED\",\n  \"summary\": {\n    \"total\": \"<integer>\",\n    \"success\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"pending\": \"<integer>\"\n  },\n  \"details\": [\n    {\n      \"file_name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"asset_id\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"file_name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"asset_id\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-7907cef2-68b7-4a46-8714-7b4a9da7660e"
+                },
+                {
+                  "id": "011491f9-dab6-4860-8233-548611c78593",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/asset/upload_result?account_id=<string>&upload_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "asset",
+                        "upload_result"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Identifier returned by `/asset/upload`.",
+                          "key": "upload_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:40.000Z",
+                  "updatedAt": "2026-07-28T01:03:40.000Z",
+                  "uid": "35240-011491f9-dab6-4860-8233-548611c78593"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:40.000Z",
+              "updatedAt": "2026-07-28T01:03:40.000Z",
+              "uid": "35240-4f9a1885-059c-4f2f-9bd3-2c389b7ddb71"
+            }
+          ],
+          "id": "48e57b90-601e-4957-9284-f634dc3064e1",
+          "createdAt": "2026-07-28T01:03:40.000Z",
+          "updatedAt": "2026-07-28T01:03:40.000Z",
+          "uid": "35240-48e57b90-601e-4957-9284-f634dc3064e1"
+        }
+      ],
+      "id": "610bd370-6bd3-41cf-8d8d-ef3fecd9e454",
+      "createdAt": "2026-07-28T01:03:40.000Z",
+      "updatedAt": "2026-07-28T01:03:40.000Z",
+      "uid": "35240-610bd370-6bd3-41cf-8d8d-ef3fecd9e454"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

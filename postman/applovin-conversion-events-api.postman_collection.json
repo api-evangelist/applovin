@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "30a2232d-6f88-47c4-b65d-65595e314d16",
+    "name": "AppLovin Axon Campaign Management Ad Units Conversion Events API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:42.000Z",
+    "updatedAt": "2026-07-28T01:03:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-30a2232d-6f88-47c4-b65d-65595e314d16"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "event",
+          "item": [
+            {
+              "name": "Post Conversion Events",
+              "id": "36ef68fe-1d6f-41ce-8ae6-3bf086fbdaff",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"android\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    },\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"desktop_os\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/event?pixel_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "event"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Axon Event Key for the destination pixel.",
+                      "key": "pixel_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Submit a batch of up to 100 server-side conversion events\n(`page_view`, `generate_lead`) for ingestion against your Axon Pixel.\nAt least one user identifier is required per event in `user_data`.\n"
+              },
+              "response": [
+                {
+                  "id": "4bdc0da8-618c-459d-8515-7034223a9e0d",
+                  "name": "All events processed successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"events\": [\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"android\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    },\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"desktop_os\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/event?pixel_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "event"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Axon Event Key for the destination pixel.",
+                          "key": "pixel_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:03:42.000Z",
+                  "updatedAt": "2026-07-28T01:03:42.000Z",
+                  "uid": "35240-4bdc0da8-618c-459d-8515-7034223a9e0d"
+                },
+                {
+                  "id": "3afeec72-8a7d-42da-b8df-88c9173dd617",
+                  "name": "Request error; entire batch dropped.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"events\": [\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"android\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    },\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"desktop_os\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/event?pixel_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "event"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Axon Event Key for the destination pixel.",
+                          "key": "pixel_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:03:42.000Z",
+                  "updatedAt": "2026-07-28T01:03:42.000Z",
+                  "uid": "35240-3afeec72-8a7d-42da-b8df-88c9173dd617"
+                },
+                {
+                  "id": "4e1ba486-f1a1-4511-bfef-2f1b97ae2c65",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"events\": [\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"android\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    },\n    {\n      \"name\": \"page_view\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"app\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"desktop_os\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/event?pixel_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "event"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Axon Event Key for the destination pixel.",
+                          "key": "pixel_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:03:42.000Z",
+                  "updatedAt": "2026-07-28T01:03:42.000Z",
+                  "uid": "35240-4e1ba486-f1a1-4511-bfef-2f1b97ae2c65"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:42.000Z",
+              "updatedAt": "2026-07-28T01:03:42.000Z",
+              "uid": "35240-36ef68fe-1d6f-41ce-8ae6-3bf086fbdaff"
+            }
+          ],
+          "id": "0a9fcfcf-e733-4a7f-968b-6a6a6f2a2f77",
+          "createdAt": "2026-07-28T01:03:42.000Z",
+          "updatedAt": "2026-07-28T01:03:42.000Z",
+          "uid": "35240-0a9fcfcf-e733-4a7f-968b-6a6a6f2a2f77"
+        }
+      ],
+      "id": "4b63c98a-042e-4a53-9fa1-123b8e626d34",
+      "createdAt": "2026-07-28T01:03:42.000Z",
+      "updatedAt": "2026-07-28T01:03:42.000Z",
+      "uid": "35240-4b63c98a-042e-4a53-9fa1-123b8e626d34"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

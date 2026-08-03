@@ -1,0 +1,750 @@
+openapi: 3.0.3
+info:
+  title: AppLovin Axon Campaign Management API
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-last-validated: '2026-05-05'
+  description: |
+    REST endpoints used to programmatically manage AppLovin AppDiscovery
+    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    require an `Authorization` header with the Campaign Management API key
+    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
+    seconds (HTTP 429 on overflow).
+  contact:
+    name: AppLovin Support
+    url: https://support.axon.ai
+servers:
+  - url: https://api.ads.axon.ai/manage/v1
+    description: Axon campaign management API
+security:
+  - bearerAuth: []
+tags:
+  - name: Campaigns
+    description: Campaign create / update / list operations
+  - name: Creative Sets
+    description: Creative set lifecycle operations
+  - name: Assets
+    description: Creative asset upload and listing
+paths:
+  /campaign/list:
+    get:
+      operationId: listCampaigns
+      summary: List Campaigns
+      description: List campaigns for the authenticated account, optionally filtered by ID lists.
+      tags:
+        - Campaigns
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: ids
+          in: query
+          required: false
+          description: Comma-separated campaign IDs (max 100).
+          schema:
+            type: string
+        - name: hashed_ids
+          in: query
+          required: false
+          description: Comma-separated external (hashed) campaign IDs (max 100).
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Array of Campaign objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Campaign'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /campaign/create:
+    post:
+      operationId: createCampaign
+      summary: Create Campaign
+      description: |
+        Create a new AppDiscovery / Axon campaign. The `id` field is
+        forbidden on create. The `bidding_strategy` field is required and
+        cannot be updated after creation.
+      tags:
+        - Campaigns
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+      responses:
+        '200':
+          description: Newly created campaign reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignRef'
+              example:
+                id: '12345'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /campaign/update:
+    post:
+      operationId: updateCampaign
+      summary: Update Campaign
+      description: Update an existing campaign. `id`, `type`, and `campaign_id` are required.
+      tags:
+        - Campaigns
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+      responses:
+        '200':
+          description: Updated campaign reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /creative_set/list:
+    get:
+      operationId: listCreativeSets
+      summary: List Creative Sets
+      description: List creative sets, optionally filtered by IDs.
+      tags:
+        - Creative Sets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: ids
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated creative set IDs.
+        - name: hashed_ids
+          in: query
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Array of CreativeSet objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreativeSet'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /creative_set/list_by_campaign_id:
+    get:
+      operationId: listCreativeSetsByCampaignId
+      summary: List Creative Sets By Campaign ID
+      description: List creative sets grouped by campaign ID.
+      tags:
+        - Creative Sets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: ids
+          in: query
+          required: true
+          description: Comma-separated campaign IDs.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Creative sets grouped by campaign.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreativeSetsByCampaign'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /creative_set/create:
+    post:
+      operationId: createCreativeSet
+      summary: Create Creative Set
+      description: Create a new creative set under a campaign.
+      tags:
+        - Creative Sets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreativeSet'
+      responses:
+        '200':
+          description: Created creative set reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreativeSetRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /creative_set/update:
+    post:
+      operationId: updateCreativeSet
+      summary: Update Creative Set
+      description: Update an existing creative set.
+      tags:
+        - Creative Sets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreativeSet'
+      responses:
+        '200':
+          description: Updated creative set reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreativeSetRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /creative_set/clone:
+    post:
+      operationId: cloneCreativeSet
+      summary: Clone Creative Set
+      description: Clone an existing creative set into the same campaign.
+      tags:
+        - Creative Sets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - campaign_id
+                - creative_set_id
+              properties:
+                campaign_id:
+                  type: string
+                creative_set_id:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                    - LIVE
+                    - PAUSED
+              example:
+                campaign_id: '12345'
+                creative_set_id: '39823'
+                status: LIVE
+      responses:
+        '200':
+          description: Cloned creative set reference.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreativeSetRef'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /asset/list:
+    get:
+      operationId: listAssets
+      summary: List Assets
+      description: List creative assets in the account.
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: ids
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: resource_type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - image
+              - html
+              - video
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Array of Asset objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Asset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /asset/upload:
+    post:
+      operationId: uploadAssets
+      summary: Upload Assets
+      description: |
+        Upload up to 40 creative asset files (10 GB total / 1 GB per file).
+        Supported MIME types: text/html, image/gif, image/jpeg, image/png,
+        video/mp4, video/quicktime.
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - files
+      responses:
+        '200':
+          description: Upload accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  upload_id:
+                    type: string
+                example:
+                  upload_id: c7a3db4226b24bd8bb0b38c46654aa54
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /asset/upload_result:
+    get:
+      operationId: getAssetUploadResult
+      summary: Get Asset Upload Result
+      description: Poll the status of an asynchronous asset upload.
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: upload_id
+          in: query
+          required: true
+          description: Identifier returned by `/asset/upload`.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Upload status with per-file results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetUploadResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Campaign Management API key passed in the `Authorization` header.
+  parameters:
+    AccountId:
+      name: account_id
+      in: query
+      required: true
+      description: Account identifier issued by AppLovin / Axon.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  schemas:
+    Campaign:
+      type: object
+      description: |
+        Axon campaign object. x-schema-source: documentation
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Campaign identifier (forbidden on create, required on update).
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - APP
+        status:
+          type: string
+          enum:
+            - LIVE
+            - PAUSED
+        platform:
+          type: string
+          enum:
+            - IOS
+            - ANDROID
+        package_name:
+          type: string
+        itunes_id:
+          type: integer
+          format: int64
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        bidding_strategy:
+          type: string
+          enum:
+            - TARGET_GOAL_WITH_CPI_BILLING
+            - AUTO_BIDDING_WITH_CPM_BILLING
+        budget:
+          $ref: '#/components/schemas/Budget'
+        goal:
+          $ref: '#/components/schemas/Goal'
+        tracking:
+          $ref: '#/components/schemas/Tracking'
+        targeting:
+          type: array
+          items:
+            $ref: '#/components/schemas/Targeting'
+      required:
+        - name
+        - type
+        - platform
+        - start_date
+        - bidding_strategy
+        - budget
+        - goal
+        - tracking
+        - targeting
+    Budget:
+      type: object
+      description: Daily budget. Use either `daily_budget_for_all_countries` or `country_code_to_daily_budget`.
+      properties:
+        daily_budget_for_all_countries:
+          type: string
+          description: Daily budget in USD as a numeric string applied to all targeted countries.
+          example: '6000'
+        country_code_to_daily_budget:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            US: '5000'
+            CA: '1000'
+    Goal:
+      type: object
+      properties:
+        goal_value_for_all_countries:
+          type: string
+        country_code_to_goal_value:
+          type: object
+          additionalProperties:
+            type: string
+        goal_type:
+          type: string
+          enum:
+            - CPI
+            - CPE
+            - CPP
+            - AD_ROAS
+            - CHK_ROAS
+            - BLD_ROAS
+        roas_day_target:
+          type: string
+          description: ROAS day window such as DAY1, DAY7, DAY14.
+      required:
+        - goal_type
+    Tracking:
+      type: object
+      properties:
+        tracking_method:
+          type: string
+          enum:
+            - ADJUST
+            - APPSFLYER
+            - APSALAR
+            - BRANCH
+            - KOCHAVA
+            - TENJIN
+        impression_url:
+          type: string
+          format: uri
+        click_url:
+          type: string
+          format: uri
+      required:
+        - tracking_method
+    Targeting:
+      type: object
+      properties:
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+        region_codes:
+          type: array
+          items:
+            type: string
+        metro_names:
+          type: array
+          items:
+            type: string
+      required:
+        - country_code
+    CampaignRef:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+    CreativeSet:
+      type: object
+      properties:
+        id:
+          type: string
+        campaign_id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+          enum:
+            - LIVE
+            - PAUSED
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreativeSetAsset'
+        languages:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            type: string
+        product_page:
+          type: string
+      required:
+        - campaign_id
+        - type
+        - assets
+    CreativeSetAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+            - HOSTED_HTML
+            - VID_LONG_P
+            - VID_SHORT_P
+            - IMG_BANNER
+            - IMG_INTER_P
+        resource_type:
+          type: string
+          enum:
+            - image
+            - html
+            - video
+    CreativeSetRef:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+    CreativeSetsByCampaign:
+      type: object
+      properties:
+        campaign_count:
+          type: integer
+        creative_set_count:
+          type: integer
+        campaigns:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/CreativeSet'
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+        resource_type:
+          type: string
+    AssetUploadResult:
+      type: object
+      properties:
+        upload_status:
+          type: string
+          enum:
+            - PENDING
+            - FINISHED
+            - FAILED
+        summary:
+          type: object
+          properties:
+            total:
+              type: integer
+            success:
+              type: integer
+            failed:
+              type: integer
+            pending:
+              type: integer
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetUploadDetail'
+    AssetUploadDetail:
+      type: object
+      properties:
+        file_name:
+          type: string
+        status:
+          type: string
+        asset_id:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+  responses:
+    BadRequest:
+      description: Validation or input error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (1,000 requests per 60 seconds).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

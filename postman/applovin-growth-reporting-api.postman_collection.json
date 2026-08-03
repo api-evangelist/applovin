@@ -1,0 +1,424 @@
+{
+  "info": {
+    "_postman_id": "b0c88702-b338-4961-994b-51d4ce26c4a3",
+    "name": "AppLovin Axon Campaign Management Ad Units Growth Reporting API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:45.000Z",
+    "updatedAt": "2026-07-28T01:03:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b0c88702-b338-4961-994b-51d4ce26c4a3"
+  },
+  "item": [
+    {
+      "name": "report",
+      "item": [
+        {
+          "name": "Get Growth Report",
+          "id": "8dca852c-20b8-4d44-b9b2-c7b5a86f2480",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/report?api_key=<string>&start=<string>&end=<string>&format=csv&columns=<string>&report_type=publisher&day_column=day&limit=<integer>&offset=<integer>&having=<string>&not_zero=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "report"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Report Key, found under Account > Keys in the Axon dashboard.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.",
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.",
+                  "key": "end",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Response format.",
+                  "key": "format",
+                  "value": "csv"
+                },
+                {
+                  "description": "(Required) Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.",
+                  "key": "columns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Choose between publisher or advertiser report dimensions.",
+                  "key": "report_type",
+                  "value": "publisher"
+                },
+                {
+                  "description": "Set to `day` to compute cohort metrics. Defaults to realtime when absent.",
+                  "key": "day_column",
+                  "value": "day"
+                },
+                {
+                  "description": "Maximum rows to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination row offset.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "URL-encoded numeric filtering (e.g. `impressions > 0`).",
+                  "key": "having",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Set to 1 to exclude rows where all metrics are zero.",
+                  "key": "not_zero",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Retrieve aggregated AppDiscovery / Axon campaign metrics for either\nthe publisher or advertiser perspective. Date ranges are limited to a\n45-day rolling window. The response payload shape varies with the\nselected `columns` and `report_type`.\n"
+          },
+          "response": [
+            {
+              "id": "2ed0e792-b478-41ec-a7af-ef93eb48a76b",
+              "name": "Report rows",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/report?api_key=<string>&start=<string>&end=<string>&format=csv&columns=<string>&report_type=publisher&day_column=day&limit=<integer>&offset=<integer>&having=<string>&not_zero=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "report"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key, found under Account > Keys in the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Response format.",
+                      "key": "format",
+                      "value": "csv"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Choose between publisher or advertiser report dimensions.",
+                      "key": "report_type",
+                      "value": "publisher"
+                    },
+                    {
+                      "description": "Set to `day` to compute cohort metrics. Defaults to realtime when absent.",
+                      "key": "day_column",
+                      "value": "day"
+                    },
+                    {
+                      "description": "Maximum rows to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination row offset.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "URL-encoded numeric filtering (e.g. `impressions > 0`).",
+                      "key": "having",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude rows where all metrics are zero.",
+                      "key": "not_zero",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"day\": \"<date>\",\n    \"campaign\": \"<string>\",\n    \"campaign_id\": \"<string>\",\n    \"country\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"package_name\": \"<string>\",\n    \"impressions\": \"<integer>\",\n    \"clicks\": \"<integer>\",\n    \"ctr\": \"<number>\",\n    \"conversions\": \"<integer>\",\n    \"cost\": \"<string>\",\n    \"revenue\": \"<string>\"\n  },\n  {\n    \"day\": \"<date>\",\n    \"campaign\": \"<string>\",\n    \"campaign_id\": \"<string>\",\n    \"country\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"package_name\": \"<string>\",\n    \"impressions\": \"<integer>\",\n    \"clicks\": \"<integer>\",\n    \"ctr\": \"<number>\",\n    \"conversions\": \"<integer>\",\n    \"cost\": \"<string>\",\n    \"revenue\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:03:45.000Z",
+              "updatedAt": "2026-07-28T01:03:45.000Z",
+              "uid": "35240-2ed0e792-b478-41ec-a7af-ef93eb48a76b"
+            },
+            {
+              "id": "25f1b751-9da8-48d6-b98b-b75f6d1fa7c9",
+              "name": "Malformed parameters or out-of-range date.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/report?api_key=<string>&start=<string>&end=<string>&format=csv&columns=<string>&report_type=publisher&day_column=day&limit=<integer>&offset=<integer>&having=<string>&not_zero=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "report"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key, found under Account > Keys in the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Response format.",
+                      "key": "format",
+                      "value": "csv"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Choose between publisher or advertiser report dimensions.",
+                      "key": "report_type",
+                      "value": "publisher"
+                    },
+                    {
+                      "description": "Set to `day` to compute cohort metrics. Defaults to realtime when absent.",
+                      "key": "day_column",
+                      "value": "day"
+                    },
+                    {
+                      "description": "Maximum rows to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination row offset.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "URL-encoded numeric filtering (e.g. `impressions > 0`).",
+                      "key": "having",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude rows where all metrics are zero.",
+                      "key": "not_zero",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:45.000Z",
+              "updatedAt": "2026-07-28T01:03:45.000Z",
+              "uid": "35240-25f1b751-9da8-48d6-b98b-b75f6d1fa7c9"
+            },
+            {
+              "id": "eee998a6-264e-4c77-a176-c293be299874",
+              "name": "Missing or invalid api_key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/report?api_key=<string>&start=<string>&end=<string>&format=csv&columns=<string>&report_type=publisher&day_column=day&limit=<integer>&offset=<integer>&having=<string>&not_zero=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "report"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key, found under Account > Keys in the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.",
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.",
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Response format.",
+                      "key": "format",
+                      "value": "csv"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Choose between publisher or advertiser report dimensions.",
+                      "key": "report_type",
+                      "value": "publisher"
+                    },
+                    {
+                      "description": "Set to `day` to compute cohort metrics. Defaults to realtime when absent.",
+                      "key": "day_column",
+                      "value": "day"
+                    },
+                    {
+                      "description": "Maximum rows to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination row offset.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "URL-encoded numeric filtering (e.g. `impressions > 0`).",
+                      "key": "having",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude rows where all metrics are zero.",
+                      "key": "not_zero",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:45.000Z",
+              "updatedAt": "2026-07-28T01:03:45.000Z",
+              "uid": "35240-eee998a6-264e-4c77-a176-c293be299874"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:45.000Z",
+          "updatedAt": "2026-07-28T01:03:45.000Z",
+          "uid": "35240-8dca852c-20b8-4d44-b9b2-c7b5a86f2480"
+        }
+      ],
+      "id": "af4697fc-29a7-496c-b6dd-ef56ebabdb47",
+      "createdAt": "2026-07-28T01:03:45.000Z",
+      "updatedAt": "2026-07-28T01:03:45.000Z",
+      "uid": "35240-af4697fc-29a7-496c-b6dd-ef56ebabdb47"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

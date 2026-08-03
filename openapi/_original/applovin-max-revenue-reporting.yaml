@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+  title: AppLovin MAX Revenue Reporting API
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
+  x-last-validated: '2026-05-05'
+  description: |
+    REST endpoint that returns aggregated MAX mediation revenue and user-level
+    publisher data. Authenticate with your Report Key, request a list of
+    columns, and constrain the result with a date range (max 45-day window).
+    Supports JSON and CSV output, plus filter / sort / pagination.
+  contact:
+    name: AppLovin Support
+    url: https://support.axon.ai
+servers:
+  - url: https://r.applovin.com
+    description: AppLovin reporting host
+security:
+  - apiKeyQuery: []
+tags:
+  - name: Revenue Reporting
+    description: Mediation revenue and user-level reporting
+paths:
+  /maxReport:
+    get:
+      operationId: getMaxRevenueReport
+      summary: Get MAX Revenue Report
+      description: |
+        Retrieve aggregated MAX revenue and user-level metrics for a publisher
+        account. Specify the columns you want returned plus a date range
+        (start, end) within a rolling 45-day window. Optional filters, sort,
+        limit, and offset support customised reporting and pagination.
+      tags:
+        - Revenue Reporting
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/Columns'
+        - $ref: '#/components/parameters/Start'
+        - $ref: '#/components/parameters/End'
+        - $ref: '#/components/parameters/Format'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/NotZero'
+      responses:
+        '200':
+          description: Report results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevenueReportResponse'
+              example:
+                code: 200
+                count: 2
+                results:
+                  - day: '2019-03-25'
+                    hour: '00:00'
+                    application: My Test App
+                    impressions: '987654'
+                  - day: '2019-03-26'
+                    hour: '00:00'
+                    application: My Test App
+                    impressions: '876543'
+            text/csv:
+              schema:
+                type: string
+                description: CSV-encoded report rows with header row
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Report Key issued by the AppLovin / Axon dashboard.
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key (issued under Account > Keys in the Axon dashboard).
+      schema:
+        type: string
+        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of report columns to return.
+      schema:
+        type: string
+        example: day,application,ad_format,country,impressions,ecpm,revenue
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end.
+      schema:
+        type: string
+        format: date
+        example: '2019-03-25'
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start.
+      schema:
+        type: string
+        format: date
+        example: '2019-03-29'
+    Format:
+      name: format
+      in: query
+      required: false
+      description: Response format. Defaults to JSON.
+      schema:
+        type: string
+        enum:
+          - json
+          - csv
+        default: json
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of rows to skip for pagination.
+      schema:
+        type: integer
+        minimum: 0
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude rows where all metrics are zero.
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+  schemas:
+    RevenueReportResponse:
+      type: object
+      description: |
+        Top-level wrapper around revenue report results.
+        x-schema-source: documentation
+      properties:
+        code:
+          type: integer
+          description: HTTP status code echoed in the body (200 indicates success).
+          example: 200
+        count:
+          type: integer
+          description: Number of rows in `results`.
+          example: 2
+        results:
+          type: array
+          description: Result rows whose keys are the requested columns.
+          items:
+            $ref: '#/components/schemas/RevenueReportRow'
+      required:
+        - code
+        - count
+        - results
+    RevenueReportRow:
+      type: object
+      description: |
+        A single report row. The exact set of keys depends on the requested
+        `columns` parameter. Common columns are listed below.
+      additionalProperties: true
+      properties:
+        day:
+          type: string
+          format: date
+          description: Reporting day in YYYY-MM-DD.
+        hour:
+          type: string
+          description: Reporting hour bucket in HH:00 format (UTC).
+        application:
+          type: string
+          description: Display name of the publisher application.
+        package_name:
+          type: string
+          description: Bundle identifier (iOS) or package name (Android).
+        ad_format:
+          type: string
+          description: Ad format (BANNER, INTER, REWARD, MREC, NATIVE).
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+        network:
+          type: string
+          description: Mediated ad network name.
+        impressions:
+          type: string
+          description: Impression count as a string.
+        clicks:
+          type: string
+          description: Click count as a string.
+        ctr:
+          type: string
+          description: Click-through rate.
+        ecpm:
+          type: string
+          description: Effective CPM in USD.
+        revenue:
+          type: string
+          description: Revenue in USD.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error description.
+      required:
+        - code
+  responses:
+    BadRequest:
+      description: Malformed or invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Invalid date range
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Unauthorized

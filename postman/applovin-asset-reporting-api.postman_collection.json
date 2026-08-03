@@ -1,0 +1,662 @@
+{
+  "info": {
+    "_postman_id": "be6ca894-f9a2-4821-81f7-b7e170c1a9d7",
+    "name": "AppLovin Axon Campaign Management Ad Units Asset Reporting API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:39.000Z",
+    "updatedAt": "2026-07-28T01:03:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-be6ca894-f9a2-4821-81f7-b7e170c1a9d7"
+  },
+  "item": [
+    {
+      "name": "assetReport",
+      "item": [
+        {
+          "name": "Get Asset Report by Range",
+          "id": "4af5710a-c064-435e-990b-715e36f5fa32",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/assetReport?api_key=<string>&range=last_7d&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assetReport"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Report Key from the Axon dashboard.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Symbolic time range.",
+                  "key": "range",
+                  "value": "last_7d"
+                },
+                {
+                  "description": "(Required) Comma-separated list of asset report columns.",
+                  "key": "columns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Response format. Defaults to JSON.",
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Set to 1 to exclude all-zero rows.",
+                  "key": "not_zero",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Returns asset-level metrics (impressions, clicks, CTR, cost) for a\nsymbolic time range such as `yesterday`, `last_7d`, or `last_month`.\n"
+          },
+          "response": [
+            {
+              "id": "5ae68bf5-ca79-40f0-b02b-a4b40cca584d",
+              "name": "Asset report rows",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assetReport?api_key=<string>&range=last_7d&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assetReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key from the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Symbolic time range.",
+                      "key": "range",
+                      "value": "last_7d"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of asset report columns.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude all-zero rows.",
+                      "key": "not_zero",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"asset_id\": \"<string>\",\n    \"asset_name\": \"<string>\",\n    \"asset_url\": \"<uri>\",\n    \"campaign\": \"<string>\",\n    \"campaign_id\": \"<string>\",\n    \"campaign_package_name\": \"<string>\",\n    \"creative_set\": \"<string>\",\n    \"creative_set_id\": \"<string>\",\n    \"impressions\": \"<integer>\",\n    \"clicks\": \"<integer>\",\n    \"ctr\": \"<number>\",\n    \"cost\": \"<number>\"\n  },\n  {\n    \"asset_id\": \"<string>\",\n    \"asset_name\": \"<string>\",\n    \"asset_url\": \"<uri>\",\n    \"campaign\": \"<string>\",\n    \"campaign_id\": \"<string>\",\n    \"campaign_package_name\": \"<string>\",\n    \"creative_set\": \"<string>\",\n    \"creative_set_id\": \"<string>\",\n    \"impressions\": \"<integer>\",\n    \"clicks\": \"<integer>\",\n    \"ctr\": \"<number>\",\n    \"cost\": \"<number>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:03:39.000Z",
+              "updatedAt": "2026-07-28T01:03:39.000Z",
+              "uid": "35240-5ae68bf5-ca79-40f0-b02b-a4b40cca584d"
+            },
+            {
+              "id": "d73c446b-1b01-4fba-b03a-25a7c83867df",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assetReport?api_key=<string>&range=last_7d&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assetReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key from the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Symbolic time range.",
+                      "key": "range",
+                      "value": "last_7d"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of asset report columns.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude all-zero rows.",
+                      "key": "not_zero",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:39.000Z",
+              "updatedAt": "2026-07-28T01:03:39.000Z",
+              "uid": "35240-d73c446b-1b01-4fba-b03a-25a7c83867df"
+            },
+            {
+              "id": "c0b15e21-9b55-4ea9-ac24-11ee28d20f12",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assetReport?api_key=<string>&range=last_7d&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assetReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key from the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Symbolic time range.",
+                      "key": "range",
+                      "value": "last_7d"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of asset report columns.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude all-zero rows.",
+                      "key": "not_zero",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:39.000Z",
+              "updatedAt": "2026-07-28T01:03:39.000Z",
+              "uid": "35240-c0b15e21-9b55-4ea9-ac24-11ee28d20f12"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:39.000Z",
+          "updatedAt": "2026-07-28T01:03:39.000Z",
+          "uid": "35240-4af5710a-c064-435e-990b-715e36f5fa32"
+        }
+      ],
+      "id": "fff5d517-dbeb-4d25-ae45-002c068e2caa",
+      "createdAt": "2026-07-28T01:03:39.000Z",
+      "updatedAt": "2026-07-28T01:03:39.000Z",
+      "uid": "35240-fff5d517-dbeb-4d25-ae45-002c068e2caa"
+    },
+    {
+      "name": "assetAnalyticsReport",
+      "item": [
+        {
+          "name": "Get Asset Report by Date Range",
+          "id": "9abf998a-7496-4a5c-8759-811ab3965fca",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/assetAnalyticsReport?api_key=<string>&start=<date>&end=<date>&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assetAnalyticsReport"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Report Key from the Axon dashboard.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Inclusive start date YYYY-MM-DD (45-day window with end).",
+                  "key": "start",
+                  "value": "<date>"
+                },
+                {
+                  "description": "(Required) Inclusive end date YYYY-MM-DD.",
+                  "key": "end",
+                  "value": "<date>"
+                },
+                {
+                  "description": "(Required) Comma-separated list of asset report columns.",
+                  "key": "columns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Response format. Defaults to JSON.",
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Set to 1 to exclude all-zero rows.",
+                  "key": "not_zero",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Returns asset-level metrics for an arbitrary YYYY-MM-DD date range\nbounded by a 45-day window.\n"
+          },
+          "response": [
+            {
+              "id": "a38952cd-51e5-4305-9bc7-ca56e0ddd15d",
+              "name": "Asset report rows",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assetAnalyticsReport?api_key=<string>&start=<date>&end=<date>&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assetAnalyticsReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key from the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive start date YYYY-MM-DD (45-day window with end).",
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) Inclusive end date YYYY-MM-DD.",
+                      "key": "end",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of asset report columns.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude all-zero rows.",
+                      "key": "not_zero",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"asset_id\": \"<string>\",\n    \"asset_name\": \"<string>\",\n    \"asset_url\": \"<uri>\",\n    \"campaign\": \"<string>\",\n    \"campaign_id\": \"<string>\",\n    \"campaign_package_name\": \"<string>\",\n    \"creative_set\": \"<string>\",\n    \"creative_set_id\": \"<string>\",\n    \"impressions\": \"<integer>\",\n    \"clicks\": \"<integer>\",\n    \"ctr\": \"<number>\",\n    \"cost\": \"<number>\"\n  },\n  {\n    \"asset_id\": \"<string>\",\n    \"asset_name\": \"<string>\",\n    \"asset_url\": \"<uri>\",\n    \"campaign\": \"<string>\",\n    \"campaign_id\": \"<string>\",\n    \"campaign_package_name\": \"<string>\",\n    \"creative_set\": \"<string>\",\n    \"creative_set_id\": \"<string>\",\n    \"impressions\": \"<integer>\",\n    \"clicks\": \"<integer>\",\n    \"ctr\": \"<number>\",\n    \"cost\": \"<number>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:03:39.000Z",
+              "updatedAt": "2026-07-28T01:03:39.000Z",
+              "uid": "35240-a38952cd-51e5-4305-9bc7-ca56e0ddd15d"
+            },
+            {
+              "id": "96ab20c3-18b4-4558-b484-b7cfbdfcb502",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assetAnalyticsReport?api_key=<string>&start=<date>&end=<date>&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assetAnalyticsReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key from the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive start date YYYY-MM-DD (45-day window with end).",
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) Inclusive end date YYYY-MM-DD.",
+                      "key": "end",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of asset report columns.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude all-zero rows.",
+                      "key": "not_zero",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:39.000Z",
+              "updatedAt": "2026-07-28T01:03:39.000Z",
+              "uid": "35240-96ab20c3-18b4-4558-b484-b7cfbdfcb502"
+            },
+            {
+              "id": "1d2b0beb-d429-4cda-ba77-22f14bd828fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assetAnalyticsReport?api_key=<string>&start=<date>&end=<date>&columns=<string>&format=json&limit=<integer>&offset=<integer>&not_zero=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assetAnalyticsReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Report Key from the Axon dashboard.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Inclusive start date YYYY-MM-DD (45-day window with end).",
+                      "key": "start",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) Inclusive end date YYYY-MM-DD.",
+                      "key": "end",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of asset report columns.",
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Set to 1 to exclude all-zero rows.",
+                      "key": "not_zero",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:39.000Z",
+              "updatedAt": "2026-07-28T01:03:39.000Z",
+              "uid": "35240-1d2b0beb-d429-4cda-ba77-22f14bd828fe"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:39.000Z",
+          "updatedAt": "2026-07-28T01:03:39.000Z",
+          "uid": "35240-9abf998a-7496-4a5c-8759-811ab3965fca"
+        }
+      ],
+      "id": "7cf2aa5b-c1b0-4dd8-a20d-e3690f2b2974",
+      "createdAt": "2026-07-28T01:03:39.000Z",
+      "updatedAt": "2026-07-28T01:03:39.000Z",
+      "uid": "35240-7cf2aa5b-c1b0-4dd8-a20d-e3690f2b2974"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

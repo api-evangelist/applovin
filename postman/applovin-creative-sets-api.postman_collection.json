@@ -1,0 +1,1317 @@
+{
+  "info": {
+    "_postman_id": "d7a3b33b-3ddc-4e0d-b153-1a4b5cf8048f",
+    "name": "AppLovin Axon Campaign Management Ad Units Creative Sets API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:43.000Z",
+    "updatedAt": "2026-07-28T01:03:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d7a3b33b-3ddc-4e0d-b153-1a4b5cf8048f"
+  },
+  "item": [
+    {
+      "name": "creative_set",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "List Creative Sets",
+              "id": "33d4f677-c9c6-492d-8214-535390ebd430",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/creative_set/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "creative_set",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated creative set IDs.",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "List creative sets, optionally filtered by IDs."
+              },
+              "response": [
+                {
+                  "id": "139c967d-8e3e-48b3-ac54-6997f4a1ee2b",
+                  "name": "Array of CreativeSet objects.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated creative set IDs.",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "hashed_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"campaign_id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"assets\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"type\": \"VID_SHORT_P\",\n        \"resource_type\": \"html\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"type\": \"IMG_INTER_P\",\n        \"resource_type\": \"video\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"PAUSED\",\n    \"languages\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"countries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"product_page\": \"<string>\"\n  },\n  {\n    \"campaign_id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"assets\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"type\": \"VID_SHORT_P\",\n        \"resource_type\": \"image\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"type\": \"IMG_INTER_P\",\n        \"resource_type\": \"video\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"status\": \"PAUSED\",\n    \"languages\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"countries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"product_page\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-139c967d-8e3e-48b3-ac54-6997f4a1ee2b"
+                },
+                {
+                  "id": "72c6c163-d9c2-4f21-9434-b76c09f2bd97",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated creative set IDs.",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "hashed_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-72c6c163-d9c2-4f21-9434-b76c09f2bd97"
+                },
+                {
+                  "id": "f01bc2bd-20d0-4857-974d-82aa4a028374",
+                  "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/list?account_id=<string>&ids=<string>&hashed_ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated creative set IDs.",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "hashed_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-f01bc2bd-20d0-4857-974d-82aa4a028374"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:43.000Z",
+              "updatedAt": "2026-07-28T01:03:43.000Z",
+              "uid": "35240-33d4f677-c9c6-492d-8214-535390ebd430"
+            }
+          ],
+          "id": "2ad06af5-b2e4-488d-ac69-f0c8c7bd4758",
+          "createdAt": "2026-07-28T01:03:43.000Z",
+          "updatedAt": "2026-07-28T01:03:43.000Z",
+          "uid": "35240-2ad06af5-b2e4-488d-ac69-f0c8c7bd4758"
+        },
+        {
+          "name": "list_by_campaign_id",
+          "item": [
+            {
+              "name": "List Creative Sets By Campaign ID",
+              "id": "9536f816-26e8-40f6-9760-75fb43632acf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/creative_set/list_by_campaign_id?account_id=<string>&ids=<string>&page=1&size=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "creative_set",
+                    "list_by_campaign_id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated campaign IDs.",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "List creative sets grouped by campaign ID."
+              },
+              "response": [
+                {
+                  "id": "d0637adb-ac7f-4bda-99f7-386381caed5f",
+                  "name": "Creative sets grouped by campaign.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/list_by_campaign_id?account_id=<string>&ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "list_by_campaign_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated campaign IDs.",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"campaign_count\": \"<integer>\",\n  \"creative_set_count\": \"<integer>\",\n  \"campaigns\": {\n    \"adipisicingecd\": [\n      {\n        \"campaign_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"assets\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"status\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"type\": \"VID_LONG_P\",\n            \"resource_type\": \"video\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"status\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"type\": \"IMG_BANNER\",\n            \"resource_type\": \"image\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"countries\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"product_page\": \"<string>\"\n      },\n      {\n        \"campaign_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"assets\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"status\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"type\": \"VID_LONG_P\",\n            \"resource_type\": \"image\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"status\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"type\": \"IMG_INTER_P\",\n            \"resource_type\": \"html\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"LIVE\",\n        \"languages\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"countries\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"product_page\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-d0637adb-ac7f-4bda-99f7-386381caed5f"
+                },
+                {
+                  "id": "a2296ede-4154-40d8-8128-052de8faaee0",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/list_by_campaign_id?account_id=<string>&ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "list_by_campaign_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated campaign IDs.",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-a2296ede-4154-40d8-8128-052de8faaee0"
+                },
+                {
+                  "id": "b92915a8-86cd-4467-985c-3bc5fb555fb3",
+                  "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/list_by_campaign_id?account_id=<string>&ids=<string>&page=1&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "list_by_campaign_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated campaign IDs.",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-b92915a8-86cd-4467-985c-3bc5fb555fb3"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:43.000Z",
+              "updatedAt": "2026-07-28T01:03:43.000Z",
+              "uid": "35240-9536f816-26e8-40f6-9760-75fb43632acf"
+            }
+          ],
+          "id": "376f9279-1980-4164-a6c0-0c0f7a30500d",
+          "createdAt": "2026-07-28T01:03:43.000Z",
+          "updatedAt": "2026-07-28T01:03:43.000Z",
+          "uid": "35240-376f9279-1980-4164-a6c0-0c0f7a30500d"
+        },
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "Create Creative Set",
+              "id": "886db73d-6aab-4ac2-ba03-da7b5a8a6209",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/creative_set/create?account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "creative_set",
+                    "create"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Create a new creative set under a campaign."
+              },
+              "response": [
+                {
+                  "id": "22806ef1-8e3a-4e58-b462-a294b26a52d8",
+                  "name": "Created creative set reference.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-22806ef1-8e3a-4e58-b462-a294b26a52d8"
+                },
+                {
+                  "id": "a35b4be5-2b80-4692-a262-6a63beaa5fc7",
+                  "name": "Validation or input error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-a35b4be5-2b80-4692-a262-6a63beaa5fc7"
+                },
+                {
+                  "id": "9f580a21-b7bc-4e60-b000-78f846d1f7f7",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/create?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "create"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-9f580a21-b7bc-4e60-b000-78f846d1f7f7"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:43.000Z",
+              "updatedAt": "2026-07-28T01:03:43.000Z",
+              "uid": "35240-886db73d-6aab-4ac2-ba03-da7b5a8a6209"
+            }
+          ],
+          "id": "c1f2ebb7-5e03-453a-b27f-81f3560a55c2",
+          "createdAt": "2026-07-28T01:03:43.000Z",
+          "updatedAt": "2026-07-28T01:03:43.000Z",
+          "uid": "35240-c1f2ebb7-5e03-453a-b27f-81f3560a55c2"
+        },
+        {
+          "name": "update",
+          "item": [
+            {
+              "name": "Update Creative Set",
+              "id": "c4136b95-eb00-470d-a045-2148eff4fb72",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/creative_set/update?account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "creative_set",
+                    "update"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Update an existing creative set."
+              },
+              "response": [
+                {
+                  "id": "c937bccb-af39-427e-85d4-c4da59265b5a",
+                  "name": "Updated creative set reference.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-c937bccb-af39-427e-85d4-c4da59265b5a"
+                },
+                {
+                  "id": "f55953c1-f2b5-43c6-9fe4-cd7edcd98b04",
+                  "name": "Validation or input error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-f55953c1-f2b5-43c6-9fe4-cd7edcd98b04"
+                },
+                {
+                  "id": "789f5c1c-073b-4215-b222-e0fb4163d3ac",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"IMG_INTER_P\",\n      \"resource_type\": \"image\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"VID_LONG_P\",\n      \"resource_type\": \"html\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"LIVE\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/update?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "update"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-789f5c1c-073b-4215-b222-e0fb4163d3ac"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:43.000Z",
+              "updatedAt": "2026-07-28T01:03:43.000Z",
+              "uid": "35240-c4136b95-eb00-470d-a045-2148eff4fb72"
+            }
+          ],
+          "id": "714b404c-f7b5-4687-bed0-2021bec03e53",
+          "createdAt": "2026-07-28T01:03:43.000Z",
+          "updatedAt": "2026-07-28T01:03:43.000Z",
+          "uid": "35240-714b404c-f7b5-4687-bed0-2021bec03e53"
+        },
+        {
+          "name": "clone",
+          "item": [
+            {
+              "name": "Clone Creative Set",
+              "id": "700f2bc5-ecc6-494c-bc23-efb0c9b41245",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"creative_set_id\": \"<string>\",\n  \"status\": \"LIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/creative_set/clone?account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "creative_set",
+                    "clone"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Clone an existing creative set into the same campaign."
+              },
+              "response": [
+                {
+                  "id": "48157e6d-cb8d-4af5-8951-f7e36fbb0d49",
+                  "name": "Cloned creative set reference.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"creative_set_id\": \"<string>\",\n  \"status\": \"LIVE\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/clone?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "clone"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-48157e6d-cb8d-4af5-8951-f7e36fbb0d49"
+                },
+                {
+                  "id": "f9e6bb8d-3dd5-4937-812a-2dbe99411702",
+                  "name": "Validation or input error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"creative_set_id\": \"<string>\",\n  \"status\": \"LIVE\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/clone?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "clone"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-f9e6bb8d-3dd5-4937-812a-2dbe99411702"
+                },
+                {
+                  "id": "1e55fc56-e84a-44ca-a2d3-86dbe6642a21",
+                  "name": "Missing or invalid Authorization header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"creative_set_id\": \"<string>\",\n  \"status\": \"LIVE\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/creative_set/clone?account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "creative_set",
+                        "clone"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Account identifier issued by AppLovin / Axon.",
+                          "key": "account_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:43.000Z",
+                  "updatedAt": "2026-07-28T01:03:43.000Z",
+                  "uid": "35240-1e55fc56-e84a-44ca-a2d3-86dbe6642a21"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:43.000Z",
+              "updatedAt": "2026-07-28T01:03:43.000Z",
+              "uid": "35240-700f2bc5-ecc6-494c-bc23-efb0c9b41245"
+            }
+          ],
+          "id": "e47102ce-1159-4cc2-bcf9-310d858fa580",
+          "createdAt": "2026-07-28T01:03:43.000Z",
+          "updatedAt": "2026-07-28T01:03:43.000Z",
+          "uid": "35240-e47102ce-1159-4cc2-bcf9-310d858fa580"
+        }
+      ],
+      "id": "15ee3500-2175-4954-a8a3-4c6e60235b81",
+      "createdAt": "2026-07-28T01:03:43.000Z",
+      "updatedAt": "2026-07-28T01:03:43.000Z",
+      "uid": "35240-15ee3500-2175-4954-a8a3-4c6e60235b81"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

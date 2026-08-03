@@ -1,0 +1,34 @@
+{
+  "provider": "applovin",
+  "sources": [
+    "applovin-ad-units-api-openapi.yml",
+    "applovin-asset-reporting-api-openapi.yml",
+    "applovin-assets-api-openapi.yml",
+    "applovin-campaigns-api-openapi.yml",
+    "applovin-conversion-events-api-openapi.yml",
+    "applovin-creative-sets-api-openapi.yml",
+    "applovin-experiments-api-openapi.yml",
+    "applovin-growth-reporting-api-openapi.yml",
+    "applovin-revenue-reporting-api-openapi.yml",
+    "applovin-test-devices-api-openapi.yml",
+    "applovin-waterfalls-api-openapi.yml"
+  ],
+  "outputs": [
+    "applovin-ad-units-api-openapi.yml",
+    "applovin-asset-reporting-api-openapi.yml",
+    "applovin-assets-api-openapi.yml",
+    "applovin-campaigns-api-openapi.yml",
+    "applovin-conversion-events-api-openapi.yml",
+    "applovin-creative-sets-api-openapi.yml",
+    "applovin-experiments-api-openapi.yml",
+    "applovin-growth-reporting-api-openapi.yml",
+    "applovin-revenue-reporting-api-openapi.yml",
+    "applovin-test-devices-api-openapi.yml",
+    "applovin-waterfalls-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,1000 @@
+{
+  "info": {
+    "_postman_id": "296447b0-5dfd-4572-b835-08e8eb1ff8d5",
+    "name": "AppLovin Axon Campaign Management Ad Units API",
+    "description": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:38.000Z",
+    "updatedAt": "2026-07-28T01:03:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-296447b0-5dfd-4572-b835-08e8eb1ff8d5"
+  },
+  "item": [
+    {
+      "name": "ad_units",
+      "item": [
+        {
+          "name": "List Ad Units",
+          "id": "2bdf9b21-1a90-45e6-8344-dbb92d1b0029",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ad_units?fields=<string>&limit=<integer>&offset=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ad_units"
+              ],
+              "query": [
+                {
+                  "description": "Comma-separated optional fields to include.",
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "offset",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List active ad unit summaries."
+          },
+          "response": [
+            {
+              "id": "715d4265-deaf-4d3a-94a8-52aea286b908",
+              "name": "Array of ad unit summaries.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ad_units?fields=<string>&limit=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_units"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated optional fields to include.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"ad_format\": \"<string>\",\n    \"package_name\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"ad_format\": \"<string>\",\n    \"package_name\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-715d4265-deaf-4d3a-94a8-52aea286b908"
+            },
+            {
+              "id": "320b13fe-77de-4c04-9718-18f67c63e4e7",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ad_units?fields=<string>&limit=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_units"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated optional fields to include.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-320b13fe-77de-4c04-9718-18f67c63e4e7"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:38.000Z",
+          "updatedAt": "2026-07-28T01:03:38.000Z",
+          "uid": "35240-2bdf9b21-1a90-45e6-8344-dbb92d1b0029"
+        }
+      ],
+      "id": "3f8a45a7-3b15-4c79-a4ff-a27623461da2",
+      "createdAt": "2026-07-28T01:03:38.000Z",
+      "updatedAt": "2026-07-28T01:03:38.000Z",
+      "uid": "35240-3f8a45a7-3b15-4c79-a4ff-a27623461da2"
+    },
+    {
+      "name": "ad_unit",
+      "item": [
+        {
+          "name": "{ad_unit_id}",
+          "item": [
+            {
+              "name": "Get Ad Unit",
+              "id": "3b485d66-8501-4f7d-b41f-4c678a59c6d7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ad_unit/:ad_unit_id?fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_unit",
+                    ":ad_unit_id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-delimited list of optional fields. Supported values:\n`ad_network_settings`, `disabled_ad_network_settings`,\n`frequency_capping_settings`, `bid_floors`, `segments`,\n`banner_refresh_settings`, `mrec_refresh_settings`.\n",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "31f4882f-fb8d-4973-9200-07616596981c",
+                      "key": "ad_unit_id",
+                      "value": "<string>",
+                      "description": "(Required) Ad unit identifier."
+                    }
+                  ]
+                },
+                "description": "Retrieve a single ad unit and its requested fields."
+              },
+              "response": [
+                {
+                  "id": "ac818f22-e38d-4621-b349-076ca7326064",
+                  "name": "Ad unit configuration.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-delimited list of optional fields. Supported values:\n`ad_network_settings`, `disabled_ad_network_settings`,\n`frequency_capping_settings`, `bid_floors`, `segments`,\n`banner_refresh_settings`, `mrec_refresh_settings`.\n",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-ac818f22-e38d-4621-b349-076ca7326064"
+                },
+                {
+                  "id": "c044b157-d44d-4285-a398-6c8d9f596e30",
+                  "name": "Missing or invalid Api-Key header.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-delimited list of optional fields. Supported values:\n`ad_network_settings`, `disabled_ad_network_settings`,\n`frequency_capping_settings`, `bid_floors`, `segments`,\n`banner_refresh_settings`, `mrec_refresh_settings`.\n",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-c044b157-d44d-4285-a398-6c8d9f596e30"
+                },
+                {
+                  "id": "c909cb91-f824-4436-9852-23fa342b0e18",
+                  "name": "Authenticated but not allowed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-delimited list of optional fields. Supported values:\n`ad_network_settings`, `disabled_ad_network_settings`,\n`frequency_capping_settings`, `bid_floors`, `segments`,\n`banner_refresh_settings`, `mrec_refresh_settings`.\n",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-c909cb91-f824-4436-9852-23fa342b0e18"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-3b485d66-8501-4f7d-b41f-4c678a59c6d7"
+            },
+            {
+              "name": "Update Ad Unit",
+              "id": "0bacc77c-1017-483f-acc6-9a8388cd222e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ad_unit/:ad_unit_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_unit",
+                    ":ad_unit_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "76f2bff7-46df-48eb-9d94-57295060ee1f",
+                      "key": "ad_unit_id",
+                      "value": "<string>",
+                      "description": "(Required) Ad unit identifier."
+                    }
+                  ]
+                },
+                "description": "Apply changes to the ad unit. Only fields included in the request\nbody are updated; omitted fields are left unchanged.\n"
+              },
+              "response": [
+                {
+                  "id": "48b5b232-0ed8-4fd8-b5eb-eca214e8ead7",
+                  "name": "Updated ad unit.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-48b5b232-0ed8-4fd8-b5eb-eca214e8ead7"
+                },
+                {
+                  "id": "d67a70d8-ec70-46fa-88fc-d3399f078bf6",
+                  "name": "Validation error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-d67a70d8-ec70-46fa-88fc-d3399f078bf6"
+                },
+                {
+                  "id": "4bd2addb-dec8-4a9b-8f3a-5ab9147925bc",
+                  "name": "Missing or invalid Api-Key header.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-4bd2addb-dec8-4a9b-8f3a-5ab9147925bc"
+                },
+                {
+                  "id": "fc81141e-ed12-40d3-b6dd-c365a3263024",
+                  "name": "Authenticated but not allowed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ad_unit/:ad_unit_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ad_unit",
+                        ":ad_unit_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ad_unit_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:38.000Z",
+                  "updatedAt": "2026-07-28T01:03:38.000Z",
+                  "uid": "35240-fc81141e-ed12-40d3-b6dd-c365a3263024"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-0bacc77c-1017-483f-acc6-9a8388cd222e"
+            }
+          ],
+          "id": "10db5cb3-fc0e-4527-9dcd-24d8776aed8c",
+          "createdAt": "2026-07-28T01:03:38.000Z",
+          "updatedAt": "2026-07-28T01:03:38.000Z",
+          "uid": "35240-10db5cb3-fc0e-4527-9dcd-24d8776aed8c"
+        },
+        {
+          "name": "Create Ad Unit",
+          "id": "ad380c1c-030f-4211-922c-85cec0e4c806",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"INTER\",\n  \"template_size\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ad_unit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ad_unit"
+              ]
+            },
+            "description": "Create a new ad unit for a given app and platform."
+          },
+          "response": [
+            {
+              "id": "420ca594-de35-4794-8979-338a2c386010",
+              "name": "Created ad unit.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"INTER\",\n  \"template_size\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ad_unit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_unit"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"NATIVE\",\n  \"template_size\": \"<string>\",\n  \"has_active_experiment\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"INCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"disabled_ad_network_settings\": [\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"ad_network\": \"<string>\",\n      \"ad_network_ad_units\": [\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"INCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        },\n        {\n          \"ad_network_ad_unit_id\": \"<string>\",\n          \"country_targeting_type\": \"EXCLUDE\",\n          \"countries\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpm\": \"<number>\"\n        }\n      ],\n      \"cpm\": \"<number>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"frequency_capping_settings\": [\n    {\n      \"type\": \"session\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"time\",\n      \"day_limit\": \"<integer>\",\n      \"minute_frequency\": \"<integer>\",\n      \"session_limit\": \"<integer>\",\n      \"country_targeting_type\": \"EXCLUDE\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"bid_floors\": [\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"ad79c\": \"<number>\",\n        \"ut5\": \"<number>\"\n      }\n    },\n    {\n      \"country_group_name\": \"<string>\",\n      \"cpm\": \"<number>\",\n      \"countries\": {\n        \"pariatur_5f\": \"<number>\"\n      }\n    }\n  ],\n  \"segments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"id_type\": \"<string>\",\n      \"device_type\": \"<string>\",\n      \"segment_keys\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"banner_refresh_settings\": {\n    \"eiusmod_5\": \"labore\",\n    \"eiusmod_d\": \"aute aliquip elit\"\n  },\n  \"mrec_refresh_settings\": {\n    \"qui3\": true,\n    \"commodo_6f0\": false,\n    \"veniam_6d\": false\n  }\n}",
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-420ca594-de35-4794-8979-338a2c386010"
+            },
+            {
+              "id": "93f82d3d-6ba6-49c5-9cca-19206736166d",
+              "name": "Validation error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"INTER\",\n  \"template_size\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ad_unit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_unit"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-93f82d3d-6ba6-49c5-9cca-19206736166d"
+            },
+            {
+              "id": "ecd60541-9dcd-4df0-915c-3346d87669a7",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"INTER\",\n  \"template_size\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ad_unit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_unit"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-ecd60541-9dcd-4df0-915c-3346d87669a7"
+            },
+            {
+              "id": "95bd0ab6-a2cf-4d6a-b792-0f1182fa7c22",
+              "name": "Authenticated but not allowed.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"ios\",\n  \"package_name\": \"<string>\",\n  \"ad_format\": \"INTER\",\n  \"template_size\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ad_unit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ad_unit"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:38.000Z",
+              "updatedAt": "2026-07-28T01:03:38.000Z",
+              "uid": "35240-95bd0ab6-a2cf-4d6a-b792-0f1182fa7c22"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:38.000Z",
+          "updatedAt": "2026-07-28T01:03:38.000Z",
+          "uid": "35240-ad380c1c-030f-4211-922c-85cec0e4c806"
+        }
+      ],
+      "id": "6303fa60-9c8b-480a-82ee-82cd316af82e",
+      "createdAt": "2026-07-28T01:03:38.000Z",
+      "updatedAt": "2026-07-28T01:03:38.000Z",
+      "uid": "35240-6303fa60-9c8b-480a-82ee-82cd316af82e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ads.axon.ai/manage/v1"
+    }
+  ]
+}

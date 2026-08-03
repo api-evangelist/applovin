@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: AppLovin Growth Asset Reporting API
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
+  x-last-validated: '2026-05-05'
+  description: |
+    REST endpoints that return creative-level performance metrics for
+    AppLovin AppDiscovery / Axon campaigns. `assetReport` accepts symbolic
+    ranges (yesterday, last_7d, last_month) while `assetAnalyticsReport`
+    accepts arbitrary date ranges within a 45-day window.
+  contact:
+    name: AppLovin Support
+    url: https://support.axon.ai
+servers:
+  - url: https://r.applovin.com
+    description: AppLovin reporting host
+security:
+  - apiKeyQuery: []
+tags:
+  - name: Asset Reporting
+    description: Creative-level performance reporting
+paths:
+  /assetReport:
+    get:
+      operationId: getAssetReport
+      summary: Get Asset Report by Range
+      description: |
+        Returns asset-level metrics (impressions, clicks, CTR, cost) for a
+        symbolic time range such as `yesterday`, `last_7d`, or `last_month`.
+      tags:
+        - Asset Reporting
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - name: range
+          in: query
+          required: true
+          description: Symbolic time range.
+          schema:
+            type: string
+            enum:
+              - yesterday
+              - last_7d
+              - last_month
+        - $ref: '#/components/parameters/Columns'
+        - $ref: '#/components/parameters/Format'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/NotZero'
+      responses:
+        '200':
+          description: Asset report rows
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssetReportRow'
+            text/csv:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /assetAnalyticsReport:
+    get:
+      operationId: getAssetAnalyticsReport
+      summary: Get Asset Report by Date Range
+      description: |
+        Returns asset-level metrics for an arbitrary YYYY-MM-DD date range
+        bounded by a 45-day window.
+      tags:
+        - Asset Reporting
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - $ref: '#/components/parameters/Start'
+        - $ref: '#/components/parameters/End'
+        - $ref: '#/components/parameters/Columns'
+        - $ref: '#/components/parameters/Format'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/NotZero'
+      responses:
+        '200':
+          description: Asset report rows
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssetReportRow'
+            text/csv:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key from the Axon dashboard.
+      schema:
+        type: string
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date YYYY-MM-DD (45-day window with end).
+      schema:
+        type: string
+        format: date
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date YYYY-MM-DD.
+      schema:
+        type: string
+        format: date
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of asset report columns.
+      schema:
+        type: string
+        example: asset_id,asset_name,impressions,clicks,cost
+    Format:
+      name: format
+      in: query
+      required: false
+      description: Response format. Defaults to JSON.
+      schema:
+        type: string
+        enum:
+          - json
+          - csv
+        default: json
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude all-zero rows.
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+  schemas:
+    AssetReportRow:
+      type: object
+      description: |
+        Creative-level report row. x-schema-source: documentation
+      additionalProperties: true
+      properties:
+        asset_id:
+          type: string
+          description: Unique asset identifier.
+        asset_name:
+          type: string
+          description: Human-friendly asset name.
+        asset_url:
+          type: string
+          format: uri
+          description: Raw pre-processed asset URL.
+        campaign:
+          type: string
+          description: Campaign display name.
+        campaign_id:
+          type: string
+          description: Unique campaign reference.
+        campaign_package_name:
+          type: string
+          description: App package or bundle identifier.
+        creative_set:
+          type: string
+          description: Creative set name.
+        creative_set_id:
+          type: string
+          description: Creative set unique ID.
+        impressions:
+          type: integer
+          description: Impression count.
+        clicks:
+          type: integer
+          description: Click count.
+        ctr:
+          type: number
+          description: Click-through rate.
+        cost:
+          type: number
+          description: Advertiser spend in USD.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
