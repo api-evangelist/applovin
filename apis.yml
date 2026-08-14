@@ -25,257 +25,191 @@ tags:
 - User Acquisition
 - Marketing Technology
 - Conversion Tracking
-description: AppLovin is a marketing platform that helps businesses reach, monetize, and grow their global audiences through
-  mobile advertising, mediation, and analytics. The company operates platforms including AppDiscovery (Axon) for performance-based
-  user acquisition, MAX for in-app bidding mediation, Adjust for mobile measurement, and Wurl for connected TV. AppLovin provides
-  SDKs and REST APIs that allow app developers and advertisers to integrate ad serving, monetization, campaign management,
-  conversion tracking, and reporting capabilities into their applications.
+description: AppLovin is a marketing platform that helps businesses reach, monetize, and grow their global audiences through mobile
+  advertising, mediation, and analytics. The company operates platforms including AppDiscovery (Axon) for performance-based user acquisition,
+  MAX for in-app bidding mediation, Adjust for mobile measurement, and Wurl for connected TV. AppLovin provides SDKs and REST APIs that
+  allow app developers and advertisers to integrate ad serving, monetization, campaign management, conversion tracking, and reporting
+  capabilities into their applications.
 created: '2026-05-04'
-modified: '2026-05-19'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: applovin:applovin-ad-units-api
   name: AppLovin Ad Units API
   description: Ad unit lifecycle and configuration
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  baseURL: https://o.applovin.com/mediation/v1
   tags:
   - Ad Units
   properties:
   - type: OpenAPI
     url: openapi/applovin-ad-units-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: APIReference
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: Overlay
+    url: overlays/applovin-ad-units-overlay.yaml
 - aid: applovin:applovin-asset-reporting-api
   name: AppLovin Asset Reporting API
   description: Creative-level performance reporting
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/growth/promoting-your-apps/api/asset-reporting-api
+  baseURL: https://r.applovin.com
   tags:
   - Asset Reporting
   properties:
   - type: OpenAPI
     url: openapi/applovin-asset-reporting-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: APIReference
+    url: https://support.applovin.com/en/growth/promoting-your-apps/api/asset-reporting-api
+  - type: Overlay
+    url: overlays/applovin-asset-reporting-overlay.yaml
 - aid: applovin:applovin-assets-api
   name: AppLovin Assets API
   description: Creative asset upload and listing
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  baseURL: https://api.ads.axon.ai/manage/v1
   tags:
   - Assets
   properties:
   - type: OpenAPI
     url: openapi/applovin-assets-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  - type: APIReference
+    url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  - type: Overlay
+    url: overlays/applovin-assets-overlay.yaml
 - aid: applovin:applovin-campaigns-api
   name: AppLovin Campaigns API
   description: Campaign create / update / list operations
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  baseURL: https://api.ads.axon.ai/manage/v1
   tags:
   - Campaigns
   properties:
   - type: OpenAPI
     url: openapi/applovin-campaigns-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  - type: APIReference
+    url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  - type: Overlay
+    url: overlays/applovin-campaigns-overlay.yaml
 - aid: applovin:applovin-conversion-events-api
   name: AppLovin Conversion Events API
   description: Server-to-server conversion event ingestion
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+  baseURL: https://b.applovin.com
   tags:
   - Conversion Events
   properties:
   - type: OpenAPI
     url: openapi/applovin-conversion-events-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+  - type: APIReference
+    url: https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+  - type: Overlay
+    url: overlays/applovin-conversion-events-overlay.yaml
 - aid: applovin:applovin-creative-sets-api
   name: AppLovin Creative Sets API
   description: Creative set lifecycle operations
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  baseURL: https://api.ads.axon.ai/manage/v1
   tags:
   - Creative Sets
   properties:
   - type: OpenAPI
     url: openapi/applovin-creative-sets-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  - type: APIReference
+    url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  - type: Overlay
+    url: overlays/applovin-creative-sets-overlay.yaml
 - aid: applovin:applovin-experiments-api
   name: AppLovin Experiments API
   description: Ad unit A/B experiment management
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  baseURL: https://o.applovin.com/mediation/v1
   tags:
   - Experiments
   properties:
   - type: OpenAPI
     url: openapi/applovin-experiments-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: APIReference
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: Overlay
+    url: overlays/applovin-experiments-overlay.yaml
 - aid: applovin:applovin-growth-reporting-api
   name: AppLovin Growth Reporting API
   description: Campaign performance reporting for advertisers and publishers
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/growth/promoting-your-apps/api/reporting-api
+  baseURL: https://r.applovin.com
   tags:
   - Growth Reporting
   properties:
   - type: OpenAPI
     url: openapi/applovin-growth-reporting-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/growth/promoting-your-apps/api/reporting-api
+  - type: APIReference
+    url: https://support.applovin.com/en/growth/promoting-your-apps/api/reporting-api
+  - type: Overlay
+    url: overlays/applovin-growth-reporting-overlay.yaml
 - aid: applovin:applovin-revenue-reporting-api
   name: AppLovin Revenue Reporting API
   description: Mediation revenue and user-level reporting
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+  baseURL: https://r.applovin.com
   tags:
   - Revenue Reporting
   properties:
   - type: OpenAPI
     url: openapi/applovin-revenue-reporting-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+  - type: APIReference
+    url: https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+  - type: Overlay
+    url: overlays/applovin-revenue-reporting-overlay.yaml
 - aid: applovin:applovin-test-devices-api
   name: AppLovin Test Devices API
   description: Test device management
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  baseURL: https://o.applovin.com/mediation/v1
   tags:
   - Test Devices
   properties:
   - type: OpenAPI
     url: openapi/applovin-test-devices-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: APIReference
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: Overlay
+    url: overlays/applovin-test-devices-overlay.yaml
 - aid: applovin:applovin-waterfalls-api
   name: AppLovin Waterfalls API
   description: Per-segment waterfall management
-  humanURL: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  baseURL: https://r.applovin.com/maxReport
+  humanURL: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  baseURL: https://o.applovin.com/mediation/v1
   tags:
   - Waterfalls
   properties:
   - type: OpenAPI
     url: openapi/applovin-waterfalls-api-openapi.yml
   - type: Documentation
-    url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
-  - type: Documentation
-    url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
-  - type: Documentation
-    url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: APIReference
+    url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+  - type: Overlay
+    url: overlays/applovin-waterfalls-overlay.yaml
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/applovin/overview
@@ -290,11 +224,12 @@ common:
 - type: Website
   url: https://www.applovin.com
 - type: Documentation
-  url: https://support.axon.ai
+  url: https://support.applovin.com
 - type: DeveloperPortal
-  url: https://developers.applovin.com
+  url: https://support.applovin.com
+  title: Developer portal (developers.applovin.com redirects here)
 - type: Support
-  url: https://support.axon.ai
+  url: https://support.applovin.com
 - type: Blog
   url: https://www.applovin.com/blog/
 - type: TermsOfService
@@ -372,6 +307,71 @@ common:
 - type: JSONSchema
   url: json-schema/applovin-conversion-event-schema.json
   title: AppLovin Conversion Event Schema
+- type: Packages
+  url: packages/applovin-packages.yml
+  title: AppLovin SDK + package inventory
+- type: SDKs
+  url: packages/applovin-packages.yml
+  title: AppLovin first-party SDK inventory
+- type: MCPServer
+  url: mcp/applovin-mcp.yml
+  title: Candidate MCP tool surface (no server published)
+- type: LLMsTxt
+  url: llms/applovin-llms.txt
+  title: AppLovin llms.txt (generated)
+- type: Conformance
+  url: conformance/applovin-conformance.yml
+  title: AppLovin standards conformance
+- type: ErrorCatalog
+  url: errors/applovin-problem-types.yml
+  title: AppLovin error catalog
+- type: Lifecycle
+  url: lifecycle/applovin-lifecycle.yml
+  title: AppLovin API lifecycle
+- type: Conventions
+  url: conventions/applovin-conventions.yml
+  title: AppLovin API conventions
+- type: Idempotency
+  url: conventions/applovin-conventions.yml
+  title: Conversion API dedupe_id deduplication contract
+- type: ChangeLog
+  url: changelog/applovin-changelog.yml
+  title: AppLovin MAX SDK changelog
+- type: Sandbox
+  url: sandbox/applovin-sandbox.yml
+  title: MAX SDK test mode (no API sandbox)
+- type: DataModel
+  url: data-model/applovin-data-model.yml
+  title: AppLovin entity-relationship model
+- type: Webhooks
+  url: asyncapi/applovin-webhooks.yml
+  title: AppLovin server-to-server postback catalog
+- type: AgentSkill
+  url: skills/_index.yml
+  title: AppLovin agent skills
+- type: RateLimits
+  url: rate-limits/applovin-rate-limits.yml
+  title: AppLovin published rate limits
+- type: Plans
+  url: plans/applovin-plans-pricing.yml
+  title: AppLovin plans (none published)
+- type: FinOps
+  url: finops/applovin-finops.yml
+- type: SignUp
+  url: https://max.applovin.com/login
+- type: APIReference
+  url: https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+- type: GettingStarted
+  url: https://support.applovin.com/en/growth/getting-started
+- type: Postman
+  url: https://www.postman.com/kinlaneapi/applovin/overview
+  title: AppLovin Postman workspace (API Evangelist)
 maintainers:
 - FN: API Evangelist
   url: https://apievangelist.com
+  email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 29
+  pass: local-v1
