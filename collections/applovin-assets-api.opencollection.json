@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Assets API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ads.axon.ai/manage/v1/asset/list",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Account identifier issued by AppLovin / Axon."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List creative assets in the account."
+        },
+        {
+          "info": {
+            "name": "Upload Assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ads.axon.ai/manage/v1/asset/upload",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Account identifier issued by AppLovin / Axon."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload up to 40 creative asset files (10 GB total / 1 GB per file).\nSupported MIME types: text/html, image/gif, image/jpeg, image/png,\nvideo/mp4, video/quicktime.\n"
+        },
+        {
+          "info": {
+            "name": "Get Asset Upload Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ads.axon.ai/manage/v1/asset/upload_result",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Account identifier issued by AppLovin / Axon."
+              },
+              {
+                "name": "upload_id",
+                "value": "",
+                "type": "query",
+                "description": "Identifier returned by `/asset/upload`."
+              }
+            ]
+          },
+          "docs": "Poll the status of an asynchronous asset upload."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

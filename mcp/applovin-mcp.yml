@@ -1,0 +1,125 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/*.yml (11 refined specs, 28 operations)
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+  note: >-
+    AppLovin ships no MCP server, hosted or local. We searched the developer portal
+    (developers.applovin.com), the full support.applovin.com sitemap (no page matching
+    mcp / model-context / agent), and the AppLovin GitHub organization (63 public repos —
+    all MAX SDKs, mediation adapters, and infrastructure forks; no MCP package). No
+    /.well-known/ discovery document exists on any AppLovin host to point at one. The tool
+    list below is a CANDIDATE derived from our own harvested OpenAPI, not a published
+    server. No endpoint is asserted because none exists — a guessed URL would read as a
+    verified agent surface.
+searched:
+- {surface: https://developers.applovin.com, result: no MCP reference}
+- {surface: 'https://support.applovin.com/sitemap.xml', result: no mcp/agent/model-context page in sitemap}
+- {surface: 'https://api.github.com/orgs/AppLovin/repos', result: no MCP server package among 63 public repos}
+- {surface: 'https://api.ads.axon.ai/.well-known/*', result: 404 on every path}
+server:
+  name: applovin
+  transport: null
+  url: null
+tools:
+- name: list_ad_units
+  description: List all MAX ad units on the account.
+  source_operation: openapi/applovin-ad-units-api-openapi.yml#listAdUnits
+- name: get_ad_unit
+  description: Get details for one MAX ad unit.
+  source_operation: openapi/applovin-ad-units-api-openapi.yml#getAdUnit
+- name: create_ad_unit
+  description: Create a new MAX ad unit.
+  source_operation: openapi/applovin-ad-units-api-openapi.yml#createAdUnit
+- name: update_ad_unit
+  description: Update the ad network configuration of a MAX ad unit.
+  source_operation: openapi/applovin-ad-units-api-openapi.yml#updateAdUnit
+- name: get_ad_unit_waterfall
+  description: Get the waterfall for one segment of an ad unit.
+  source_operation: openapi/applovin-waterfalls-api-openapi.yml#getAdUnitWaterfall
+- name: update_ad_unit_waterfall
+  description: Create, edit, deprecate, promote, or remove a waterfall for an ad unit segment.
+  source_operation: openapi/applovin-waterfalls-api-openapi.yml#updateAdUnitWaterfall
+- name: get_ad_unit_experiment
+  description: Get the A/B experiment on an ad unit.
+  source_operation: openapi/applovin-experiments-api-openapi.yml#getAdUnitExperiment
+- name: upsert_ad_unit_experiment
+  description: Create, promote, or deprecate an ad unit A/B experiment.
+  source_operation: openapi/applovin-experiments-api-openapi.yml#upsertAdUnitExperiment
+- name: get_ad_unit_experiment_waterfall
+  description: Get the experiment waterfall for an ad unit segment.
+  source_operation: openapi/applovin-experiments-api-openapi.yml#getAdUnitExperimentWaterfall
+- name: update_ad_unit_experiment_waterfall
+  description: Update the experiment waterfall for an ad unit segment.
+  source_operation: openapi/applovin-experiments-api-openapi.yml#updateAdUnitExperimentWaterfall
+- name: list_test_devices
+  description: List MAX test devices on the account.
+  source_operation: openapi/applovin-test-devices-api-openapi.yml#listTestDevices
+- name: get_test_device
+  description: Get one MAX test device.
+  source_operation: openapi/applovin-test-devices-api-openapi.yml#getTestDevice
+- name: create_test_device
+  description: Register a new MAX test device.
+  source_operation: openapi/applovin-test-devices-api-openapi.yml#createTestDevice
+- name: update_test_device
+  description: Update a MAX test device configuration.
+  source_operation: openapi/applovin-test-devices-api-openapi.yml#updateTestDevice
+- name: list_campaigns
+  description: List up to 100 Axon campaigns on the account.
+  source_operation: openapi/applovin-campaigns-api-openapi.yml#listCampaigns
+- name: create_campaign
+  description: Create an Axon campaign.
+  source_operation: openapi/applovin-campaigns-api-openapi.yml#createCampaign
+- name: update_campaign
+  description: Update an Axon campaign.
+  source_operation: openapi/applovin-campaigns-api-openapi.yml#updateCampaign
+- name: list_creative_sets
+  description: List creative sets on the account.
+  source_operation: openapi/applovin-creative-sets-api-openapi.yml#listCreativeSets
+- name: list_creative_sets_by_campaign
+  description: List creative sets attached to one campaign.
+  source_operation: openapi/applovin-creative-sets-api-openapi.yml#listCreativeSetsByCampaignId
+- name: create_creative_set
+  description: Create a creative set.
+  source_operation: openapi/applovin-creative-sets-api-openapi.yml#createCreativeSet
+- name: update_creative_set
+  description: Update a creative set.
+  source_operation: openapi/applovin-creative-sets-api-openapi.yml#updateCreativeSet
+- name: clone_creative_set
+  description: Clone an existing creative set.
+  source_operation: openapi/applovin-creative-sets-api-openapi.yml#cloneCreativeSet
+- name: list_assets
+  description: List uploaded creative assets.
+  source_operation: openapi/applovin-assets-api-openapi.yml#listAssets
+- name: upload_assets
+  description: Upload one or more creative assets.
+  source_operation: openapi/applovin-assets-api-openapi.yml#uploadAssets
+- name: get_asset_upload_result
+  description: Poll the result of an asset upload.
+  source_operation: openapi/applovin-assets-api-openapi.yml#getAssetUploadResult
+- name: get_max_revenue_report
+  description: Retrieve aggregated MAX mediation revenue statistics.
+  source_operation: openapi/applovin-revenue-reporting-api-openapi.yml#getMaxRevenueReport
+- name: get_growth_report
+  description: Retrieve aggregated advertiser or publisher campaign performance.
+  source_operation: openapi/applovin-growth-reporting-api-openapi.yml#getGrowthReport
+- name: get_asset_report
+  description: Retrieve asset-level campaign performance for a fixed time range.
+  source_operation: openapi/applovin-asset-reporting-api-openapi.yml#getAssetReport
+- name: get_asset_analytics_report
+  description: Retrieve asset-level campaign performance for a date range.
+  source_operation: openapi/applovin-asset-reporting-api-openapi.yml#getAssetAnalyticsReport
+- name: post_conversion_events
+  description: Submit a batch of up to 100 web conversion events (page_view / generate_lead).
+  source_operation: openapi/applovin-conversion-events-api-openapi.yml#postConversionEvents
+coverage:
+  rest_operations: 30
+  candidate_tools: 30
+  binding: one tool per operationId, 1:1
+  note: >-
+    Every candidate tool inherits its real input contract from the referenced operation's
+    parameters and requestBody. No tool crosswalk artifact is emitted because there is no
+    published MCP server and no GraphQL surface to diverge from REST.

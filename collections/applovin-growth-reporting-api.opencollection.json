@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Growth Reporting API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Growth Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Growth Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r.applovin.com/report",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Report Key, found under Account > Keys in the Axon dashboard."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              },
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types."
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "query",
+                "description": "Choose between publisher or advertiser report dimensions."
+              },
+              {
+                "name": "day_column",
+                "value": "",
+                "type": "query",
+                "description": "Set to `day` to compute cohort metrics. Defaults to realtime when absent."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum rows to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination row offset."
+              },
+              {
+                "name": "having",
+                "value": "",
+                "type": "query",
+                "description": "URL-encoded numeric filtering (e.g. `impressions > 0`)."
+              },
+              {
+                "name": "not_zero",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to exclude rows where all metrics are zero."
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated AppDiscovery / Axon campaign metrics for either\nthe publisher or advertiser perspective. Date ranges are limited to a\n45-day rolling window. The response payload shape varies with the\nselected `columns` and `report_type`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

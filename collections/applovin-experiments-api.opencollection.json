@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Experiments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Experiments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Ad Unit Experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit_experiment/:ad_unit_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              }
+            ]
+          },
+          "docs": "Get Ad Unit Experiment"
+        },
+        {
+          "info": {
+            "name": "Upsert Ad Unit Experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit_experiment/:ad_unit_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create, update, promote, or deprecate an ad unit experiment. To\ncreate, omit or null the `id` field. To promote or deprecate, set\n`promote: true` or `deprecate: true`.\n"
+        },
+        {
+          "info": {
+            "name": "Get Ad Unit Experiment Waterfall",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit_experiment/:ad_unit_id/:segment_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              },
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path",
+                "description": "Segment identifier scoped under the ad unit."
+              }
+            ]
+          },
+          "docs": "Get Ad Unit Experiment Waterfall"
+        },
+        {
+          "info": {
+            "name": "Update Ad Unit Experiment Waterfall",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit_experiment/:ad_unit_id/:segment_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              },
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path",
+                "description": "Segment identifier scoped under the ad unit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Ad Unit Experiment Waterfall"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,179 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/AppLovin + npm/pub.dev/Maven Central/CocoaPods registry metadata endpoints
+note: >-
+  AppLovin ships client SDKs, not API client libraries. Every package below is a MAX
+  mediation / ad-serving SDK or engine plugin for an app runtime; none of them wrap the
+  REST management or reporting APIs documented at support.applovin.com. The REST surface
+  (Ad Unit Management, Campaign Management, Reporting, Conversion API) has no first-party
+  client library in any registry we probed.
+packages:
+- language: java
+  registry: maven
+  name: com.applovin:applovin-sdk
+  url: https://central.sonatype.com/artifact/com.applovin/applovin-sdk
+  install: implementation 'com.applovin:applovin-sdk:13.6.4'
+  official: true
+  version: 13.6.4
+  published: '2026-08-08'
+  source: https://repo1.maven.org/maven2/com/applovin/applovin-sdk/maven-metadata.xml
+  note: MAX mediation SDK for Android / Amazon FireOS. lastUpdated 20260808044313 in maven-metadata.xml.
+- language: java
+  registry: maven
+  name: com.applovin:axon-sdk
+  url: https://central.sonatype.com/artifact/com.applovin/axon-sdk
+  install: implementation 'com.applovin:axon-sdk:1.3.2'
+  official: true
+  version: 1.3.2
+  published: '2026-08-06'
+  source: https://repo1.maven.org/maven2/com/applovin/axon-sdk/maven-metadata.xml
+- language: java
+  registry: maven
+  name: com.applovin:applovin-signal-provider-sdk
+  url: https://central.sonatype.com/artifact/com.applovin/applovin-signal-provider-sdk
+  install: implementation 'com.applovin:applovin-signal-provider-sdk:1.0.3'
+  official: true
+  version: 1.0.3
+  published: '2024-05-29'
+  source: https://search.maven.org/solrsearch/select?q=g:%22com.applovin%22
+- language: swift
+  registry: swiftpm
+  name: AppLovin-MAX-Swift-Package
+  url: https://github.com/AppLovin/AppLovin-MAX-Swift-Package
+  install: '.package(url: "https://github.com/AppLovin/AppLovin-MAX-Swift-Package.git", from: "13.6.4")'
+  official: true
+  version: 13.6.4
+  published: '2026-08-11'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Swift-Package/tags
+  note: >-
+    Swift Package Manager distribution of the MAX iOS SDK. Version read from the repository
+    tag list; SwiftPM has no central registry metadata endpoint to query.
+- language: objective-c
+  registry: cocoapods
+  name: AppLovinSDK
+  url: https://cocoapods.org/pods/AppLovinSDK
+  install: pod 'AppLovinSDK'
+  official: true
+  version: 6.9.5
+  published: '2019-10-14'
+  source: https://trunk.cocoapods.org/api/v1/pods/AppLovinSDK
+  note: >-
+    DECAY SIGNAL. The public CocoaPods trunk copy stopped at 6.9.5 (163 versions, last
+    published 2019-10-14) while the iOS SDK is on 13.6.4. AppLovin now distributes iOS
+    pods through its own spec repo (github.com/AppLovin/CocoaPods-Specs) and SwiftPM, so
+    a `pod 'AppLovinSDK'` against the public trunk resolves a seven-year-old build.
+- language: dart
+  registry: pub.dev
+  name: applovin_max
+  url: https://pub.dev/packages/applovin_max
+  install: flutter pub add applovin_max
+  official: true
+  version: 4.6.4
+  published: '2026-06-03'
+  source: https://pub.dev/api/packages/applovin_max
+- language: javascript
+  registry: npm
+  name: react-native-applovin-max
+  url: https://www.npmjs.com/package/react-native-applovin-max
+  install: npm install react-native-applovin-max
+  official: true
+  version: 9.6.0
+  published: '2026-06-03'
+  source: https://registry.npmjs.org/react-native-applovin-max
+- language: csharp
+  registry: unity
+  name: AppLovin MAX Unity Plugin
+  url: https://github.com/AppLovin/AppLovin-MAX-Unity-Plugin
+  install: Import the .unitypackage from the GitHub releases page
+  official: true
+  version: null
+  published: '2026-07-31'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Unity-Plugin
+  note: >-
+    Distributed as a .unitypackage from GitHub, not through a registry with a metadata
+    endpoint (no OpenUPM/UPM registry entry found). version recorded as null; the date is
+    the last push to the distribution repository.
+- language: cpp
+  registry: github
+  name: AppLovin-MAX-Unreal
+  url: https://github.com/AppLovin/AppLovin-MAX-Unreal
+  install: Clone into your Unreal project's Plugins directory
+  official: true
+  version: null
+  published: '2026-01-05'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Unreal
+  note: Source distribution only; no registry metadata endpoint. version null by absence, not by omission.
+- language: javascript
+  registry: github
+  name: AppLovin-MAX-Cordova
+  url: https://github.com/AppLovin/AppLovin-MAX-Cordova
+  install: cordova plugin add https://github.com/AppLovin/AppLovin-MAX-Cordova.git
+  official: true
+  version: null
+  published: '2026-05-28'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Cordova
+  note: No npm entry found for the Cordova plugin; installed from git. version null.
+- language: gdscript
+  registry: github
+  name: AppLovin-MAX-Godot
+  url: https://github.com/AppLovin/AppLovin-MAX-Godot
+  install: Download the plugin from the GitHub releases page
+  official: true
+  version: null
+  published: '2025-05-16'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Godot
+  note: No registry. Last repository push 2025-05-16 — over a year behind the Android/iOS SDK line.
+- language: lua
+  registry: github
+  name: AppLovin-MAX-Defold
+  url: https://github.com/AppLovin/AppLovin-MAX-Defold
+  install: Add the release zip URL as a Defold project dependency
+  official: true
+  version: null
+  published: '2025-08-23'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Defold
+- language: actionscript
+  registry: github
+  name: AppLovin-MAX-AIR
+  url: https://github.com/AppLovin/AppLovin-MAX-AIR
+  install: Add the ANE from the GitHub releases page
+  official: true
+  version: null
+  published: '2025-01-09'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-AIR
+  note: Adobe AIR plugin. Last push 2025-01-09; the oldest of the maintained engine plugins.
+- language: java
+  registry: github
+  name: AppLovin-MAX-Ad-Review-SDK-Android
+  url: https://github.com/AppLovin/AppLovin-MAX-Ad-Review-SDK-Android
+  install: See repository README
+  official: true
+  version: null
+  published: '2026-06-15'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Ad-Review-SDK-Android
+- language: objective-c
+  registry: github
+  name: AppLovin-MAX-Ad-Review-SDK-iOS
+  url: https://github.com/AppLovin/AppLovin-MAX-Ad-Review-SDK-iOS
+  install: See repository README
+  official: true
+  version: null
+  published: '2026-06-18'
+  source: https://api.github.com/repos/AppLovin/AppLovin-MAX-Ad-Review-SDK-iOS
+adapters:
+  note: >-
+    AppLovin additionally publishes ~20 per-network SwiftPM adapter repositories under the
+    same GitHub org (AppLovin-MAX-Swift-Package-Google, -Meta, -UnityAds, -Mintegral,
+    -Pangle, -IronSource, -Chartboost, -Smaato, -PubMatic, -BidMachine, -Liftoff, -Verve,
+    -Yandex, -MyTarget, -InMobi, -MobileFuse, -Ogury, -Moloco, -Line, -YSONetwork).
+    They are mediation adapters, not distinct client SDKs, so they are counted here as one
+    family rather than enumerated as packages.
+  org: https://github.com/AppLovin
+  count: 20
+rest_api_clients:
+  found: false
+  note: >-
+    Probed npm, PyPI, RubyGems, crates.io, Packagist, pkg.go.dev and Maven Central for a
+    first-party client of the Ad Unit Management, Campaign Management, Reporting or
+    Conversion APIs. None exists. AppLovin documents these APIs as raw HTTP with curl
+    examples only.

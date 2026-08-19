@@ -1,0 +1,87 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.github.com/repos/AppLovin/AppLovin-MAX-SDK-Android/releases
+docs:
+- https://support.applovin.com/en/max/android/changelog
+- https://support.applovin.com/en/max/ios/changelog
+- https://support.applovin.com/en/max/unity/changelog
+- https://support.applovin.com/en/max/flutter/changelog
+- https://support.applovin.com/en/max/react-native/changelog
+- https://support.applovin.com/en/max/demand-partners/demand-side-platforms/applovin-ortb-specification/changelog
+scope: sdk-only
+note: >-
+  AppLovin publishes a dated changelog for its CLIENT SDKs and for its oRTB specification.
+  It publishes NO changelog for any of its HTTP APIs — there is no release-notes page for
+  the Ad Unit Management, Campaign Management, Reporting, Conversion or Ad Review APIs, and
+  the reporting family is not versioned at all. An integrator has no way to learn that a
+  reporting column, a request window, or a rate limit changed. The entries below are the
+  MAX Android SDK line, which is the closest thing to a versioned public release stream
+  AppLovin operates.
+  The docs changelog pages at support.applovin.com are client-rendered and return an empty
+  document to a non-JS fetch (verified 2026-08-13), so the structured entries below were
+  read from the GitHub release feed for the same artifact, which carries the same version
+  numbers and real publication dates.
+versioning:
+  scheme: semver
+  current: 13.6.4
+  product: MAX SDK (Android / iOS, versions kept in lockstep)
+  cadence: >-
+    Roughly every 6-10 weeks on the patch line; six releases in the last twelve months.
+    Android and iOS ship the same version number on the same day.
+api_versioning:
+  scheme: uri-path
+  note: See conventions/applovin-conventions.yml — /manage/v1, /mediation/v1, /v1/event, /v1/rules, and an unversioned reporting family.
+  changelog: none
+entries:
+- version: 13.6.4
+  date: '2026-08-11'
+  breaking: false
+  highlights:
+  - Add support for user information parameters.
+  - Remove VK Ad Network (MyTarget) adapter detection.
+  - Various improvements and bug fixes.
+- version: 13.6.3
+  date: '2026-06-03'
+  breaking: true
+  highlights:
+  - Set minSdk version to 24.
+  - Minor fixes and improvements.
+  note: A minSdk bump drops devices below Android 7.0 and is breaking for apps that still target them.
+- version: 13.6.2
+  date: '2026-03-30'
+  breaking: false
+  highlights:
+  - Minor fixes and improvements.
+- version: 13.6.1
+  date: '2026-03-14'
+  breaking: false
+  highlights:
+  - Minor fixes and improvements.
+- version: 13.6.0
+  date: '2026-02-17'
+  breaking: true
+  highlights:
+  - Set minSdk version to 23.
+  - Add support for UMP SDK version 4.0.0+.
+  - Various improvements and bug fixes.
+- version: 13.5.1
+  date: '2025-11-17'
+  breaking: false
+  highlights:
+  - Fix duplicate class error for ILicensingService (issue #858).
+  - Minor fixes and improvements.
+other_streams:
+- name: MAX iOS SDK
+  url: https://support.applovin.com/en/max/ios/changelog
+  releases: https://github.com/AppLovin/AppLovin-MAX-Swift-Package/tags
+  current: 13.6.4
+- name: AppLovin oRTB specification
+  url: https://support.applovin.com/en/max/demand-partners/demand-side-platforms/applovin-ortb-specification/changelog
+  note: >-
+    The only changelog in the AppLovin surface that covers a wire protocol rather than a
+    client library. It documents changes to the OpenRTB bid request/response AppLovin
+    exchanges with DSP partners.
+gaps:
+- No changelog for any HTTP API.
+- No deprecation notices, no Sunset headers, no announced removal dates (see lifecycle/applovin-lifecycle.yml).
+- The reporting family carries no version segment, so a breaking change there is unannounceable and undetectable in advance.

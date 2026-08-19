@@ -1,0 +1,80 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.applovin.com/en/max/advanced-features/s2s-impression-level-api
+spec_type: none
+asyncapi: false
+note: >-
+  AppLovin publishes NO AsyncAPI document and no event schema. It does operate a real
+  outbound event surface: two server-to-server postback channels where AppLovin's servers
+  call an endpoint the customer defines. Both are macro-substituted HTTP GET requests
+  against a customer-supplied URL template — there is no JSON event body, no signature
+  header, no subscription API, and no delivery/retry contract published. The webhook
+  catalogue below is what AppLovin documents; the absence of an event schema is the finding.
+docs:
+- https://support.applovin.com/en/max/advanced-features/s2s-impression-level-api
+- https://support.applovin.com/en/max/faq/how-server-to-server-callback-works
+webhooks:
+- id: s2s-impression-revenue
+  name: Server-to-server impression revenue postback
+  direction: outbound
+  transport: http-get
+  trigger: Every MAX impression recorded by AppLovin's servers.
+  endpoint: customer-defined URL template with macros
+  payload: query-string macros, no body
+  self_serve: false
+  enablement: >-
+    Not self-serve. "Contact your account team or the support team to enable this feature."
+    There is no API or dashboard toggle documented to turn it on.
+  timing: >-
+    Sent soon after the impression but may be delayed by a few minutes. AppLovin publishes
+    an impression-timestamp macro specifically so a receiver can reconcile the delay
+    between impression time and postback time.
+  retry_policy: unpublished
+  signature: none
+  docs: https://support.applovin.com/en/max/advanced-features/s2s-impression-level-api
+  alternatives:
+  - {name: User-Level Ad Revenue API, mode: pull, latency: 8 hours after UTC day end, url: 'https://support.applovin.com/en/max/reporting-apis/user-level-ad-revenue-api'}
+  - {name: Client-side impression-level revenue callback, mode: in-app SDK, latency: real-time}
+  - {name: MMP integration, mode: third-party, partners: [Adjust, AppsFlyer, GameAnalytics, Singular]}
+- id: s2s-rewarded-callback
+  name: Server-to-server rewarded video callback
+  direction: outbound
+  transport: http-get
+  trigger: A user completes a rewarded ad and qualifies for a reward.
+  endpoint: customer-defined 'Server Side Callback URL', set per ad unit in the MAX dashboard (or in Manage Apps for non-MAX)
+  payload: query-string macros, no body
+  self_serve: true
+  test_behaviour: >-
+    Callbacks are NOT sent for test ads, only live ads. An integration cannot be verified
+    end-to-end in test mode — this is the most common surprise in this channel.
+  fraud_model: >-
+    The callback never transmits through the user's device. The SDK notifies AppLovin's
+    server after verifying the rewarded video completed; AppLovin's server then calls the
+    customer endpoint. The user cannot forge a reward by tampering with the client.
+  verification:
+    mechanism: shared-secret hash
+    macros: ['{EVENT_ID}', '{EVENT_TOKEN}']
+    algorithm: sha1(EVENT_ID + EVENT_KEY)
+    key_location: AppLovin dashboard, Account > General > Keys ('Event Key')
+    note: >-
+      SHA-1 of a concatenated secret, passed as a query parameter. It authenticates the
+      caller but it is neither an HMAC nor a modern signature scheme, and there is no
+      timestamp in the signed material, so a captured callback URL replays indefinitely.
+  retry_policy: unpublished
+  docs: https://support.applovin.com/en/max/faq/how-server-to-server-callback-works
+  macros_reference: https://support.applovin.com/en/max/faq/how-server-to-server-callback-works
+related_streaming:
+  - name: AppLovin oRTB (OpenRTB) exchange
+    note: >-
+      AppLovin runs a real-time bidding exchange with a published oRTB specification and a
+      dated changelog for DSP partners. It is a bidding protocol between AppLovin and
+      demand partners, not a customer event stream, so it is recorded here as context and
+      not as a webhook.
+    docs: https://support.applovin.com/en/max/demand-partners/demand-side-platforms/applovin-ortb-specification/changelog
+gaps:
+- No AsyncAPI document.
+- No event payload schema — the postbacks are macro-substituted query strings, so the shape is whatever URL template the customer wrote.
+- No webhook management API: endpoints are configured in the dashboard or by the account team, never programmatically.
+- No delivery guarantees, retry policy, or dead-letter behaviour published for either channel.
+- No modern signature (HMAC-SHA256 + timestamp) on either channel; rewarded callbacks use SHA-1 of a concatenated secret and impression postbacks are unsigned.
+- The impression revenue postback is gated behind the account team, so it is not reachable by a self-serve developer.

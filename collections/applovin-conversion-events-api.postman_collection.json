@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "2a41cbcd-dcb4-4bd2-983a-2764ea1a23a1",
+      "name": "Conversion Events",
+      "description": {
+        "content": "Server-to-server conversion event ingestion",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "31f11e72-d9aa-4bd6-b107-cb333e5c048e",
+          "name": "Post Conversion Events",
+          "request": {
+            "name": "Post Conversion Events",
+            "description": {
+              "content": "Submit a batch of up to 100 server-side conversion events\n(`page_view`, `generate_lead`) for ingestion against your Axon Pixel.\nAt least one user identifier is required per event in `user_data`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pixel_id",
+                  "value": "<string>",
+                  "description": "(Required) Axon Event Key for the destination pixel."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"name\": \"<string>\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"<string>\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"<string>\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"event_time\": \"<long>\",\n      \"event_source_url\": \"<uri>\",\n      \"data\": {\n        \"currency\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"user_data\": {\n        \"client_ip_address\": \"<string>\",\n        \"client_user_agent\": \"<string>\",\n        \"esi\": \"<string>\",\n        \"aleid\": \"<string>\",\n        \"axwrt\": \"<string>\",\n        \"alart\": \"<string>\",\n        \"client_id\": \"<string>\",\n        \"user_id\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"os\": \"<string>\",\n        \"sid\": \"<string>\",\n        \"ifa\": \"<string>\",\n        \"idfv\": \"<string>\"\n      },\n      \"dedupe_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ad1dca3-2b20-4012-b4c5-e4f1be52a52c",
+              "name": "All events processed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pixel_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"event_time\": 1741784485001,\n      \"event_source_url\": \"https://applovin.com\",\n      \"name\": \"page_view\",\n      \"data\": null,\n      \"user_data\": {\n        \"client_ip_address\": \"172.59.8.172\",\n        \"client_user_agent\": \"chrome/123.456 android mobile\",\n        \"aleid\": \"_aleid-query-param\",\n        \"axwrt\": \"_axwrt-cookie-value\",\n        \"user_id\": \"_user_id\",\n        \"esi\": \"web\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ac95340-cfca-4521-814c-b476e76f511c",
+              "name": "Request error; entire batch dropped.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pixel_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"event_time\": 1741784485001,\n      \"event_source_url\": \"https://applovin.com\",\n      \"name\": \"page_view\",\n      \"data\": null,\n      \"user_data\": {\n        \"client_ip_address\": \"172.59.8.172\",\n        \"client_user_agent\": \"chrome/123.456 android mobile\",\n        \"aleid\": \"_aleid-query-param\",\n        \"axwrt\": \"_axwrt-cookie-value\",\n        \"user_id\": \"_user_id\",\n        \"esi\": \"web\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a6c3cbb-bc34-495f-9b68-f0c49bc2d516",
+              "name": "Authentication failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pixel_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"event_time\": 1741784485001,\n      \"event_source_url\": \"https://applovin.com\",\n      \"name\": \"page_view\",\n      \"data\": null,\n      \"user_data\": {\n        \"client_ip_address\": \"172.59.8.172\",\n        \"client_user_agent\": \"chrome/123.456 android mobile\",\n        \"aleid\": \"_aleid-query-param\",\n        \"axwrt\": \"_axwrt-cookie-value\",\n        \"user_id\": \"_user_id\",\n        \"esi\": \"web\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://b.applovin.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9b457027-1999-4188-b072-78aa273a1f70",
+    "name": "AppLovin Axon Campaign Management Ad Units Conversion Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+      "type": "text/plain"
+    }
+  }
+}

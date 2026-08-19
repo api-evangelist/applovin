@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/*.yml + https://support.applovin.com
+note: >-
+  Standards conformance derived from the harvested specifications and the provider's own
+  documentation. AppLovin's only real standards alignment is in the AD TECH layer (OpenRTB,
+  IAB frameworks, MMP integrations), not in the API layer — the HTTP APIs implement no
+  cross-cutting web-API standard beyond HTTP itself.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    AppLovin publishes no OpenAPI. The 11 specifications in openapi/ were written by API
+    Evangelist from the documentation. Probed api.ads.axon.ai and r.applovin.com for
+    /openapi.json, /openapi.yaml, /swagger.json, /api-docs and /docs — 404 on the nginx
+    host, 400 on the reporting host.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in any spec; no token endpoint documented; /.well-known/oauth-authorization-server 404 on every host.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 (api.ads.axon.ai) or 400 (r.applovin.com); the 200s on the marketing hosts are HTML shells.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere. Error semantics travel in the x-al-error-code and
+    x-al-error-message RESPONSE HEADERS. See errors/applovin-problem-types.yml.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation headers; no deprecation policy published.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    No /.well-known/security.txt on any host. The 200s observed on www.applovin.com,
+    axon.ai, developers.applovin.com and support.applovin.com are Next.js catch-all HTML
+    shells, not documents. See well-known/applovin-well-known.yml.
+- id: rfc9239-ratelimit-headers
+  conforms: false
+  evidence: >-
+    Limits are documented in prose (1,000/60s, 2,000/hour) but no RateLimit-* or
+    X-RateLimit-* header is returned, and no Retry-After on 429.
+- id: idempotency
+  conforms: partial
+  evidence: >-
+    A per-event `dedupe_id` on the Conversion API is the only idempotency contract in the
+    surface. No Idempotency-Key header; all Campaign Management and MAX ad-unit writes are
+    non-idempotent. See conventions/applovin-conventions.yml.
+- id: pagination
+  conforms: partial
+  evidence: >-
+    Two incompatible styles across products — page/size (max 100) on Campaign Management,
+    limit/offset on the reporting family, and none at all on the MAX ad-unit collections.
+    No cursors, no total counts, no link headers.
+- id: json-api
+  conforms: false
+  evidence: Responses are bare arrays or product-specific objects; no JSON:API document structure.
+- id: openrtb
+  conforms: true
+  evidence: >-
+    AppLovin publishes an oRTB (OpenRTB) specification for demand-side platform partners
+    with its own dated changelog — the exchange protocol it speaks to DSPs.
+  docs: https://support.applovin.com/en/max/demand-partners/demand-side-platforms/applovin-ortb-specification/changelog
+- id: iab-in-app-bidding
+  conforms: true
+  evidence: >-
+    MAX is an in-app header bidding / mediation platform built on real-time in-app bidding;
+    the whole product category is defined by the IAB Tech Lab in-app bidding work.
+  docs: https://support.applovin.com/en/max
+- id: gdpr
+  conforms: true
+  evidence: >-
+    AppLovin publishes a GDPR deleted-device-ID API for demand partners and operates
+    consent flows (UMP SDK 4.0.0+ support added in MAX SDK 13.6.0). A regulatory obligation
+    it operationalizes, not a certification.
+  docs: https://support.applovin.com/en/max/demand-partners/demand-side-platforms/gdpr-deleted-device-ids-api
+- id: mmp-attribution
+  conforms: true
+  evidence: >-
+    Documented impression-level ad revenue integrations with the mobile measurement
+    partners — Adjust, AppsFlyer, GameAnalytics, Singular.
+  docs: https://support.applovin.com/en/max/advanced-features/s2s-impression-level-api
+certifications:
+  published: false
+  trust_center:
+    url: https://trust.applovin.com/
+    status: 200
+    readable: false
+    note: >-
+      trust.applovin.com resolves and returns HTTP 200, served by HyperComply. The response
+      is a client-rendered shell whose only readable content is the <title>HyperComply</title> —
+      no AppLovin branding, no certification names, no policy links are present in the HTML.
+      We could not verify from a machine-readable fetch that this page belongs to AppLovin
+      or what it asserts, so NO TrustCenter and NO Compliance pointer is emitted in apis.yml.
+      Recorded here as an unverified lead: a human should open it in a browser, and if it
+      does list named certifications, this file and the pointers should be upgraded.
+  named_certifications: []
+  note: >-
+    No SOC 2, ISO 27001, PCI DSS, HIPAA or FedRAMP claim was found in machine-readable form
+    on any AppLovin host. Absence of a readable claim is recorded as absence, not as a
+    negative finding about the company's actual security posture.

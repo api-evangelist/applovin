@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Asset Reporting API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Asset Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Asset Report by Range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r.applovin.com/assetReport",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Report Key from the Axon dashboard."
+              },
+              {
+                "name": "range",
+                "value": "",
+                "type": "query",
+                "description": "Symbolic time range."
+              },
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of asset report columns."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "not_zero",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to exclude all-zero rows."
+              }
+            ]
+          },
+          "docs": "Returns asset-level metrics (impressions, clicks, CTR, cost) for a\nsymbolic time range such as `yesterday`, `last_7d`, or `last_month`.\n"
+        },
+        {
+          "info": {
+            "name": "Get Asset Report by Date Range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r.applovin.com/assetAnalyticsReport",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Report Key from the Axon dashboard."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date YYYY-MM-DD (45-day window with end)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date YYYY-MM-DD."
+              },
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of asset report columns."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "not_zero",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to exclude all-zero rows."
+              }
+            ]
+          },
+          "docs": "Returns asset-level metrics for an arbitrary YYYY-MM-DD date range\nbounded by a 45-day window.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

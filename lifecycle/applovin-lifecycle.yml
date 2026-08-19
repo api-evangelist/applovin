@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.applovin.com/sitemap.xml + direct probes
+versioning:
+  scheme: uri-path
+  current:
+    axon-campaign-management: v1
+    max-ad-unit-management: v1
+    conversion-api: v1
+    ad-review-rules: v1
+    reporting: unversioned
+  docs: https://support.applovin.com
+  policy_url: null
+  note: >-
+    No published versioning policy. Four products carry a /v1 path segment; the entire
+    reporting family (maxReport, report, assetReport, assetAnalyticsReport, webReport,
+    maxCohort, max/userAdRevenueReport) carries no version at all, so there is no mechanism
+    by which AppLovin could ship a breaking reporting change without breaking callers.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    No deprecation policy, no Sunset or Deprecation response headers, no advance-notice
+    commitment published anywhere in the developer documentation. Searched the full
+    support.applovin.com sitemap for a deprecation, sunset, migration, or end-of-life page
+    for the API surface — none exists.
+  in_product_deprecation:
+    note: >-
+      "deprecate" IS a first-class VERB in the MAX Ad Unit Management API: a waterfall or
+      an A/B experiment can be deprecated by the customer via updateAdUnitWaterfall /
+      upsertAdUnitExperiment. That is a customer-facing lifecycle operation on the
+      customer's own configuration — it is not AppLovin deprecating an API, and must not be
+      read as a deprecation policy.
+    operations:
+    - openapi/applovin-waterfalls-api-openapi.yml#updateAdUnitWaterfall
+    - openapi/applovin-experiments-api-openapi.yml#upsertAdUnitExperiment
+    - openapi/applovin-experiments-api-openapi.yml#updateAdUnitExperimentWaterfall
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment for the API surface.
+status_page:
+  url: null
+  found: false
+  evidence:
+  - {url: 'https://applovin.statuspage.io', status: 200, result: 'redirects to /inactive — the Statuspage account exists but has been deactivated'}
+  - {url: 'https://status.applovin.com', status: 0, result: NXDOMAIN — host does not resolve}
+  - {url: 'https://status.axon.ai', status: 0, result: NXDOMAIN — host does not resolve}
+  note: >-
+    AppLovin operates NO status page. This is a specific, checkable finding rather than an
+    absence of search: applovin.statuspage.io resolves and returns 200, but Statuspage
+    serves it at /inactive, meaning AppLovin provisioned a status page at some point and
+    then let it lapse. No StatusPage pointer is emitted in apis.yml, because there is
+    nothing for a caller to check during an incident.
+support:
+  channel: https://support.applovin.com
+  trace_header: X-TRACE-ID
+  note: >-
+    The documented incident path is a support ticket carrying the X-TRACE-ID returned on
+    the failing response. There is no self-serve status surface and no incident feed.
+release_stream:
+  sdk: changelog/applovin-changelog.yml
+  api: none
+  note: >-
+    The SDKs have dated, versioned public releases. The APIs have neither a changelog nor
+    a version policy. See changelog/applovin-changelog.yml.

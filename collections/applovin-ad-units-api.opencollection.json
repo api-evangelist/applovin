@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ad Units",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Ad Units",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/ad_units",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated optional fields to include."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List active ad unit summaries."
+        },
+        {
+          "info": {
+            "name": "Create Ad Unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new ad unit for a given app and platform."
+        },
+        {
+          "info": {
+            "name": "Get Ad Unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit/:ad_unit_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of optional fields. Supported values:\n`ad_network_settings`, `disabled_ad_network_settings`,\n`frequency_capping_settings`, `bid_floors`, `segments`,\n`banner_refresh_settings`, `mrec_refresh_settings`.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a single ad unit and its requested fields."
+        },
+        {
+          "info": {
+            "name": "Update Ad Unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit/:ad_unit_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply changes to the ad unit. Only fields included in the request\nbody are updated; omitted fields are left unchanged.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

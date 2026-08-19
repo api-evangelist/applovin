@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Test Devices API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Test Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Test Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/test_devices"
+          },
+          "docs": "List Test Devices"
+        },
+        {
+          "info": {
+            "name": "Create Test Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/test_device",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Test Device"
+        },
+        {
+          "info": {
+            "name": "Get Test Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/test_device/:test_device_id",
+            "params": [
+              {
+                "name": "test_device_id",
+                "value": "",
+                "type": "path",
+                "description": "Test device identifier."
+              }
+            ]
+          },
+          "docs": "Get Test Device"
+        },
+        {
+          "info": {
+            "name": "Update Test Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/test_device/:test_device_id",
+            "params": [
+              {
+                "name": "test_device_id",
+                "value": "",
+                "type": "path",
+                "description": "Test device identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Test Device"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

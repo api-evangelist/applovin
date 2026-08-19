@@ -1,22 +1,74 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: probed
-source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+source: live DNS/TLS/HTTP probes of every apis.yml baseURL host, every OpenAPI servers[] host, and the website/portal hosts
+note: >-
+  Every AppLovin host negotiates TLS 1.3 with a valid certificate, and the applovin.com
+  domain publishes SPF and a DMARC policy of `reject` — the strongest email posture
+  available. The gaps are in the API layer: HSTS is set on the marketing site and the
+  dashboard but NOT on any of the four API hosts, there is no CAA record on either
+  registrable domain, and DNSSEC is not enabled on either. The four API hosts also carry
+  no /.well-known/ surface at all (see well-known/applovin-well-known.yml).
 hosts:
 - host: www.applovin.com
+  role: Website
   https: true
   tls_version: TLSv1.3
-  cert_expires: Aug 30 07:59:18 2026 GMT
+  cert_expires: 'Oct 22 01:15:43 2026 GMT'
+  hsts: true
+  hsts_max_age: 31536000
+- host: support.applovin.com
+  role: Documentation / DeveloperPortal
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: 'Oct 19 17:17:28 2026 GMT'
   hsts: false
-- host: support.axon.ai
+- host: max.applovin.com
+  role: Dashboard / SignUp (dash.applovin.com redirects here)
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 28 07:48:25 2026 GMT
+  cert_expires: 'Sep  1 22:30:27 2026 GMT'
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  root_status: 302
+- host: o.applovin.com
+  role: MAX Ad Unit Management API (baseURL)
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: 'Sep 28 05:29:31 2026 GMT'
   hsts: false
 - host: r.applovin.com
+  role: Reporting family (baseURL)
   https: true
   tls_version: TLSv1.3
-  cert_expires: Aug 18 23:32:17 2026 GMT
-  hsts: null
+  cert_expires: 'Oct 11 00:50:43 2026 GMT'
+  hsts: false
+  root_status: 400
+  note: >-
+    Returns {"error":"Bad request"} for any unrouted path, including every /.well-known/
+    probe. This is also the host that accepts the Report Key as a query-string parameter.
+- host: b.applovin.com
+  role: Conversion API (baseURL)
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: 'Oct  5 05:04:46 2026 GMT'
+  hsts: false
+  root_status: 403
+- host: api.ads.axon.ai
+  role: Axon Campaign Management API (baseURL / OpenAPI servers[])
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: 'Oct  5 07:03:36 2026 GMT'
+  hsts: false
+  root_status: 404
+  server: nginx
+- host: api-safedk.applovin.com
+  role: Ad Review Rules Management API
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: 'Oct 14 01:17:28 2026 GMT'
+  hsts: false
+  root_status: 200
 domains:
 - domain: applovin.com
   dnssec: false
@@ -27,6 +79,17 @@ domains:
 - domain: axon.ai
   dnssec: false
   caa: []
-  spf: true
-  dmarc: true
-  dmarc_policy: none
+  spf: false
+  dmarc: false
+  note: >-
+    The axon.ai domain — which serves the Campaign Management API host and, until recently,
+    the documentation — publishes no SPF and no DMARC record, unlike applovin.com which
+    publishes both with p=reject. A brand AppLovin routes production API traffic through
+    has materially weaker DNS-layer hygiene than its primary domain.
+findings:
+- {severity: info, finding: 'All eight hosts negotiate TLS 1.3 with valid certificates.'}
+- {severity: info, finding: 'applovin.com publishes SPF and DMARC p=reject.'}
+- {severity: low, finding: 'No HSTS on any of the four API hosts (o., r., b., api.ads.axon.ai) or on api-safedk.'}
+- {severity: low, finding: 'No CAA record on applovin.com or axon.ai — any CA may issue for either domain.'}
+- {severity: low, finding: 'DNSSEC not enabled on applovin.com or axon.ai.'}
+- {severity: medium, finding: 'axon.ai publishes neither SPF nor DMARC, while it serves a production API host.'}

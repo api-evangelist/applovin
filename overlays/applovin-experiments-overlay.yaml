@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AppLovin Axon Campaign Management Ad Units Experiments API
+  version: 1.0.0
+extends: openapi/applovin-experiments-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: applovin
+    x-apievangelist-product: MAX Ad Unit Management API
+    x-apievangelist-docs: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+    x-apievangelist-authentication: Api-Key header (Management Key)
+    x-apievangelist-rate-limit: 2000 requests / hour
+    x-apievangelist-spec-provenance: Written by API Evangelist from AppLovin published documentation. AppLovin publishes no
+      OpenAPI of its own.
+- target: $.servers
+  update:
+  - url: https://o.applovin.com/mediation/v1
+    description: MAX Ad Unit Management API
+  x-note: Repairs a refine-step regression that propagated the Axon campaign-management server to every split spec. Base confirmed
+    against openapi/_original/ and the provider documentation.
+- target: $.info
+  update:
+    x-apievangelist-error-transport: Response headers x-al-error-code / x-al-error-message; X-TRACE-ID on all responses. No
+      RFC 9457 problem+json.
+    x-apievangelist-idempotency: None on this product.
+    x-apievangelist-artifacts:
+      authentication: authentication/applovin-authentication.yml
+      conventions: conventions/applovin-conventions.yml
+      errors: errors/applovin-problem-types.yml
+      rate_limits: rate-limits/applovin-rate-limits.yml
+      data_model: data-model/applovin-data-model.yml
+x-operations:
+- getAdUnitExperiment
+- upsertAdUnitExperiment
+- getAdUnitExperimentWaterfall
+- updateAdUnitExperimentWaterfall

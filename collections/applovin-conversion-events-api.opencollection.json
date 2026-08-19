@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Conversion Events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversion Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post Conversion Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://b.applovin.com/v1/event",
+            "params": [
+              {
+                "name": "pixel_id",
+                "value": "",
+                "type": "query",
+                "description": "Axon Event Key for the destination pixel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a batch of up to 100 server-side conversion events\n(`page_view`, `generate_lead`) for ingestion against your Axon Pixel.\nAt least one user identifier is required per event in `user_data`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

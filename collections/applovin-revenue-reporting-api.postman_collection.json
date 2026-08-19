@@ -1,0 +1,353 @@
+{
+  "item": [
+    {
+      "id": "70eb3a80-0e1b-429d-906c-e3cd945f43c1",
+      "name": "Revenue Reporting",
+      "description": {
+        "content": "Mediation revenue and user-level reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee3f9042-5ab6-4200-af3d-42afa88e2b62",
+          "name": "Get MAX Revenue Report",
+          "request": {
+            "name": "Get MAX Revenue Report",
+            "description": {
+              "content": "Retrieve aggregated MAX revenue and user-level metrics for a publisher\naccount. Specify the columns you want returned plus a date range\n(start, end) within a rolling 45-day window. Optional filters, sort,\nlimit, and offset support customised reporting and pagination.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "maxReport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Report Key (issued under Account > Keys in the Axon dashboard)."
+                },
+                {
+                  "disabled": false,
+                  "key": "columns",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of report columns to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<date>",
+                  "description": "(Required) Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<date>",
+                  "description": "(Required) Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format. Defaults to JSON."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum rows to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of rows to skip for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "not_zero",
+                  "value": "<integer>",
+                  "description": "Set to 1 to exclude rows where all metrics are zero."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3220e0b5-d32c-43ef-a55d-dc8cd0350241",
+              "name": "Report results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maxReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "day,application,ad_format,country,impressions,ecpm,revenue"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2019-03-25"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2019-03-29"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "not_zero",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"count\": 2,\n  \"results\": [\n    {\n      \"day\": \"2019-03-25\",\n      \"hour\": \"00:00\",\n      \"application\": \"My Test App\",\n      \"impressions\": \"987654\"\n    },\n    {\n      \"day\": \"2019-03-26\",\n      \"hour\": \"00:00\",\n      \"application\": \"My Test App\",\n      \"impressions\": \"876543\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d84b6a3f-8ad8-4b93-ac1c-ebcebeddb1ab",
+              "name": "Malformed or invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maxReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "day,application,ad_format,country,impressions,ecpm,revenue"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2019-03-25"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2019-03-29"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "not_zero",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"message\": \"Invalid date range\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed409a47-6e5f-482f-9aa1-7096b898f264",
+              "name": "Missing or invalid api_key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "maxReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "day,application,ad_format,country,impressions,ecpm,revenue"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2019-03-25"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2019-03-29"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "not_zero",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://r.applovin.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "db8417b9-b7af-4ec6-b6f8-d7b1cc8ad657",
+    "name": "AppLovin Axon Campaign Management Ad Units Revenue Reporting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+      "type": "text/plain"
+    }
+  }
+}

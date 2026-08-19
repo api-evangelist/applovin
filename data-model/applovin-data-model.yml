@@ -1,0 +1,207 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/*.yml (11 refined specs, 34 component schemas)
+docs:
+- https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+- https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+note: >-
+  AppLovin's object graph is two disconnected domains that share no identifier. The
+  MONETIZATION domain (MAX: ad units, segments, waterfalls, experiments, test devices) and
+  the ADVERTISING domain (Axon: campaigns, creative sets, assets) live on different hosts,
+  use different credentials, and have no foreign key between them. Reporting is a third,
+  flat projection over both. There is no account, user, or organization entity exposed
+  anywhere in the API surface — `account_id` is a query parameter, never a resource.
+domains:
+- id: monetization
+  name: MAX mediation
+  host: o.applovin.com/mediation/v1
+  credential: Management Key
+  root_entity: AdUnit
+- id: advertising
+  name: Axon campaign management
+  host: api.ads.axon.ai/manage/v1
+  credential: Campaign Management API key
+  root_entity: Campaign
+- id: reporting
+  name: Reporting
+  host: r.applovin.com
+  credential: Report Key
+  root_entity: none
+  note: Reporting returns flat denormalized rows, not entities. Rows reference entities by name and by id but return no links.
+- id: ingestion
+  name: Conversion API
+  host: b.applovin.com
+  credential: Conversion API key
+  root_entity: ServerEvent
+entities:
+- name: AdUnit
+  domain: monetization
+  id_field: id
+  id_format: 16-character lowercase hex (e.g. deb878533ea4e76a)
+  spec: openapi/applovin-ad-units-api-openapi.yml
+  key_fields: [id, name, platform, package_name, ad_format, template_size, disabled, has_active_experiment]
+  summary_projection: AdUnitSummary
+  note: >-
+    The MAX ad unit is the central monetization object. Its id is the same value that
+    appears as max_ad_unit_id in the revenue report, which is the ONLY join key between the
+    monetization domain and reporting.
+- name: Segment
+  domain: monetization
+  id_field: id
+  parent: AdUnit
+  key_fields: [id, name, id_type, device_type, segment_keys]
+- name: Waterfall
+  domain: monetization
+  id_field: composite (ad_unit_id + segment_id)
+  spec: openapi/applovin-waterfalls-api-openapi.yml
+  key_fields: [ad_unit_id, segment_id, ad_network_settings, bid_floors]
+  note: Has no identifier of its own; it is addressed only by the (ad unit, segment) pair.
+- name: AdUnitExperiment
+  domain: monetization
+  id_field: id
+  spec: openapi/applovin-experiments-api-openapi.yml
+  key_fields: [id, ad_unit_id, experiment_name, promote, deprecate, ad_network_settings]
+  note: >-
+    An ad unit has at most ONE active experiment (upsertAdUnitExperiment "creates a new
+    experiment if the ad unit does not have an active one"), which AdUnit.has_active_experiment
+    reflects. promote and deprecate are lifecycle verbs carried in the payload, not separate endpoints.
+- name: AdNetworkSetting
+  domain: monetization
+  id_field: none
+  key_fields: [ad_network, ad_network_ad_units, cpm, country_targeting_type, countries]
+  note: Value object embedded in AdUnit, Waterfall and AdUnitExperiment. Duplicated verbatim in three specs.
+- name: AdNetworkAdUnit
+  domain: monetization
+  id_field: ad_network_ad_unit_id
+  key_fields: [ad_network_ad_unit_id, country_targeting_type, countries, cpm]
+  note: The THIRD-PARTY network's ad unit identifier — an external key AppLovin stores but does not mint.
+- name: BidFloor
+  domain: monetization
+  id_field: none
+  key_fields: [country_group_name, cpm, countries]
+- name: FrequencyCappingSetting
+  domain: monetization
+  id_field: none
+  key_fields: [type, day_limit, minute_frequency, session_limit, country_targeting_type, countries]
+- name: TestDevice
+  domain: monetization
+  id_field: id
+  spec: openapi/applovin-test-devices-api-openapi.yml
+  key_fields: [id, name, device_id, disabled, network]
+  note: >-
+    device_id is a real device advertising identifier (GAID / IDFA) supplied by the
+    developer, not a value AppLovin mints. Orphan entity — no relationship to AdUnit.
+- name: Campaign
+  domain: advertising
+  id_field: id
+  alt_id: hashed_ids (external campaign IDs)
+  spec: openapi/applovin-campaigns-api-openapi.yml
+  key_fields: [id, name, type, status, platform, package_name, itunes_id, start_date, end_date, bidding_strategy, budget, goal, tracking, targeting]
+  note: >-
+    Two parallel identifier spaces — internal `ids` and external `hashed_ids` — and the
+    list endpoint forbids using both in one request. The reporting family exposes a third
+    name for the same thing, campaign_id_external, which it documents as equal to the
+    {CAMPAIGN_ID} click macro.
+- name: Budget
+  domain: advertising
+  id_field: none
+  key_fields: [daily_budget_for_all_countries, country_code_to_daily_budget]
+- name: Goal
+  domain: advertising
+  id_field: none
+  key_fields: [goal_value_for_all_countries, country_code_to_goal_value, goal_type, roas_day_target]
+- name: Targeting
+  domain: advertising
+  id_field: none
+  key_fields: [country_code, region_codes, metro_names]
+- name: Tracking
+  domain: advertising
+  id_field: none
+  key_fields: [tracking_method, impression_url, click_url]
+  note: Where an MMP tracking template is attached to a campaign — the seam between AppLovin and Adjust/AppsFlyer/Singular.
+- name: CreativeSet
+  domain: advertising
+  id_field: id
+  spec: openapi/applovin-creative-sets-api-openapi.yml
+  key_fields: [id, campaign_id, name, type, status, assets, languages, countries, product_page]
+- name: Asset
+  domain: advertising
+  id_field: id
+  spec: openapi/applovin-assets-api-openapi.yml
+  key_fields: [id, name, url, type, resource_type]
+- name: AssetUploadResult
+  domain: advertising
+  id_field: none
+  key_fields: [upload_status, summary, details]
+  note: >-
+    Asset upload is ASYNCHRONOUS. uploadAssets returns a receipt; the caller polls
+    getAssetUploadResult for per-file status. Each file returning status FAILURE counts as
+    one error against the 100-errors-per-5-minutes account budget.
+- name: ServerEvent
+  domain: ingestion
+  id_field: dedupe_id
+  spec: openapi/applovin-conversion-events-api-openapi.yml
+  key_fields: [name, event_time, event_source_url, data, user_data, dedupe_id]
+  note: >-
+    The only write entity carrying a client-supplied idempotency key. name is constrained
+    to page_view or generate_lead.
+- name: UserData
+  domain: ingestion
+  id_field: none
+  key_fields: [aleid, axwrt, alart, client_id, user_id, email, phone, client_ip_address, client_user_agent, esi, country_code, zip, os, sid, ifa, idfv]
+  pii: true
+  note: >-
+    The highest-sensitivity schema in the surface: hashed email and phone, IP address, user
+    agent, and device advertising identifiers (ifa, idfv). Any agent handling this object is
+    handling personal data.
+- name: Error
+  domain: shared
+  id_field: none
+  key_fields: [code, message]
+  note: >-
+    Present in nine of eleven specs, but see errors/applovin-problem-types.yml — AppLovin's
+    real error detail travels in x-al-error-code / x-al-error-message RESPONSE HEADERS, not
+    in a body object.
+relationships:
+- {from: AdUnit, to: Segment, type: has_many, via: segments}
+- {from: AdUnit, to: AdNetworkSetting, type: has_many, via: ad_network_settings}
+- {from: AdUnit, to: AdNetworkSetting, type: has_many, via: disabled_ad_network_settings}
+- {from: AdUnit, to: FrequencyCappingSetting, type: has_many, via: frequency_capping_settings}
+- {from: AdUnit, to: BidFloor, type: has_many, via: bid_floors}
+- {from: AdUnit, to: AdUnitExperiment, type: has_one, via: has_active_experiment}
+- {from: AdNetworkSetting, to: AdNetworkAdUnit, type: has_many, via: ad_network_ad_units}
+- {from: Waterfall, to: AdUnit, type: belongs_to, via: ad_unit_id}
+- {from: Waterfall, to: Segment, type: belongs_to, via: segment_id}
+- {from: Waterfall, to: AdNetworkSetting, type: has_many, via: ad_network_settings}
+- {from: Waterfall, to: BidFloor, type: has_many, via: bid_floors}
+- {from: AdUnitExperiment, to: AdUnit, type: belongs_to, via: ad_unit_id}
+- {from: AdUnitExperiment, to: AdNetworkSetting, type: has_many, via: ad_network_settings}
+- {from: Campaign, to: Budget, type: has_one, via: budget}
+- {from: Campaign, to: Goal, type: has_one, via: goal}
+- {from: Campaign, to: Tracking, type: has_one, via: tracking}
+- {from: Campaign, to: Targeting, type: has_one, via: targeting}
+- {from: CreativeSet, to: Campaign, type: belongs_to, via: campaign_id}
+- {from: CreativeSet, to: CreativeSetAsset, type: has_many, via: assets}
+- {from: CreativeSetAsset, to: Asset, type: belongs_to, via: id}
+- {from: AssetUploadResult, to: AssetUploadDetail, type: has_many, via: details}
+- {from: AssetUploadDetail, to: Asset, type: belongs_to, via: asset_id}
+- {from: EventBatch, to: ServerEvent, type: has_many, via: events}
+- {from: ServerEvent, to: EventData, type: has_one, via: data}
+- {from: ServerEvent, to: UserData, type: has_one, via: user_data}
+- {from: CreativeSetsByCampaign, to: Campaign, type: has_many, via: campaigns}
+reporting_joins:
+  note: >-
+    Reporting rows are flat and carry no links, but they do carry join keys back into the
+    two entity domains. These are the only cross-domain seams in the surface.
+  keys:
+  - {report_column: max_ad_unit_id, joins_to: AdUnit.id, domain: monetization}
+  - {report_column: campaign_id, joins_to: Campaign.id, domain: advertising}
+  - {report_column: campaign_id_external, joins_to: Campaign.hashed_ids, domain: advertising, note: 'Also equals the {CAMPAIGN_ID} click macro.'}
+  - {report_column: creative_set_id, joins_to: CreativeSet.id, domain: advertising}
+  - {report_column: asset_id, joins_to: Asset.id, domain: advertising}
+gaps:
+- No Account, User, Organization or App entity is exposed. account_id exists only as a required query parameter on the Campaign Management API.
+- No relationship of any kind between the monetization and advertising domains. A publisher's ad units and an advertiser's campaigns are unreachable from one another.
+- TestDevice is an orphan — it configures SDK behaviour but has no modelled link to any AdUnit.
+- Three id spaces for a campaign (id, hashed_ids, campaign_id_external) with no endpoint that translates between them.
+- Waterfall and AdNetworkSetting are duplicated verbatim across three specs because AppLovin exposes the same object through three endpoints.

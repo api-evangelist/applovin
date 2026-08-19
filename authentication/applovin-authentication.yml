@@ -1,35 +1,134 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/applovin-axon-campaign-management.yaml, openapi/applovin-conversion-api-lead-gen.yaml,
-  openapi/applovin-growth-asset-reporting.yaml, openapi/applovin-growth-reporting.yaml, openapi/applovin-max-ad-unit-management.yaml,
-  openapi/applovin-max-revenue-reporting.yaml
+generated: '2026-08-13'
+method: searched
+source: openapi/*.yml + provider documentation
+docs:
+- https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+- https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+- https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+- https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+- https://support.applovin.com/en/max/ad-review/rules-management-api
+note: >-
+  Upgraded from derived to searched on 2026-08-13. The derived pass read three security
+  schemes out of the OpenAPI. The documentation shows the real model is worse than the
+  spec suggests: AppLovin issues SIX distinct, non-interchangeable, account-wide static
+  keys across five products, in three different transport locations, with no OAuth, no
+  scopes, no expiry and no programmatic rotation. A 401 on a well-formed AppLovin request
+  is usually the right key sent to the wrong product.
 summary:
-  types:
-  - apiKey
-  - http
-  api_key_in:
-  - header
-  - query
+  types: [apiKey, http]
+  api_key_in: [header, query]
+  oauth2_flows: []
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+  distinct_credentials: 6
+  key_issuance: 'AppLovin dashboard, Account > General > Keys'
+  dashboard: https://max.applovin.com/login
+credentials:
+- name: Campaign Management API key
+  product: Axon Campaign Management API
+  transport: header
+  parameter: Authorization
+  format: raw key, no Bearer prefix
+  additional_required: 'account_id query parameter on every request'
+  hosts: [api.ads.axon.ai]
+  scheme: bearerAuth
+  docs: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+  note: >-
+    The docs explicitly warn this is a different key from the Management key used by the
+    Ad Unit Management API.
+- name: Management Key
+  product: MAX Ad Unit Management API
+  transport: header
+  parameter: Api-Key
+  hosts: [o.applovin.com]
+  scheme: apiKeyHeader
+  docs: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+- name: Report Key
+  product: Reporting family (revenue, growth, asset, cohort, web, user-level)
+  transport: query
+  parameter: api_key
+  hosts: [r.applovin.com]
+  scheme: apiKeyQuery
+  docs: https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+  risk: >-
+    A long-lived account-wide credential carried in the QUERY STRING of every reporting
+    request. It will appear in web-server access logs, proxy logs, CDN logs and any
+    shell history that contains the curl command. AppLovin publishes no header-based
+    alternative for the reporting hosts.
+- name: Conversion API key
+  product: Conversion API (web events)
+  transport: header
+  parameter: Authorization
+  additional_required: 'pixel_id query parameter carrying the AppLovin Event Key'
+  hosts: [b.applovin.com]
+  docs: https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+- name: Ad Review Key
+  product: Ad Review Rules Management API
+  transport: header
+  parameter: Api-Key
+  hosts: [api-safedk.applovin.com]
+  docs: https://support.applovin.com/en/max/ad-review/rules-management-api
+  note: Same header NAME as the MAX Management Key, different credential value and different host.
+- name: SDK Key / Event Key
+  product: MAX client SDKs and server-to-server callbacks
+  transport: embedded in the mobile app / used as a hashing secret
+  docs: https://support.applovin.com/en/max/faq/how-server-to-server-callback-works
+  note: >-
+    The Event Key is not an API credential — it is the shared secret AppLovin hashes with
+    an event ID to produce the {EVENT_TOKEN} macro on rewarded callbacks,
+    sha1(EVENT_ID + EVENT_KEY). Recorded here because it is issued from the same Keys page
+    and is routinely confused with the API keys.
 schemes:
 - name: bearerAuth
   type: http
   scheme: bearer
   description: Campaign Management API key passed in the `Authorization` header.
   sources:
-  - openapi/applovin-axon-campaign-management.yaml
-  - openapi/applovin-conversion-api-lead-gen.yaml
+  - openapi/applovin-campaigns-api-openapi.yml
+  - openapi/applovin-creative-sets-api-openapi.yml
+  - openapi/applovin-assets-api-openapi.yml
+  - openapi/applovin-conversion-events-api-openapi.yml
+  note: >-
+    Modelled as http/bearer in the spec, but AppLovin's documented examples send the raw
+    key with no `Bearer ` prefix. Treat as an opaque Authorization-header credential.
 - name: apiKeyQuery
   type: apiKey
   in: query
   parameter: api_key
+  description: Report Key.
   sources:
-  - openapi/applovin-growth-asset-reporting.yaml
-  - openapi/applovin-growth-reporting.yaml
-  - openapi/applovin-max-revenue-reporting.yaml
+  - openapi/applovin-revenue-reporting-api-openapi.yml
+  - openapi/applovin-growth-reporting-api-openapi.yml
+  - openapi/applovin-asset-reporting-api-openapi.yml
 - name: apiKeyHeader
   type: apiKey
   in: header
   parameter: Api-Key
-  description: Management Key from AppLovin dashboard (Account > General > Keys).
+  description: Management Key from the AppLovin dashboard (Account > General > Keys).
   sources:
-  - openapi/applovin-max-ad-unit-management.yaml
+  - openapi/applovin-ad-units-api-openapi.yml
+  - openapi/applovin-waterfalls-api-openapi.yml
+  - openapi/applovin-experiments-api-openapi.yml
+  - openapi/applovin-test-devices-api-openapi.yml
+agent_readiness:
+  scoped_credentials: false
+  short_lived_tokens: false
+  programmatic_rotation: false
+  revocation_api: false
+  least_privilege: false
+  assessment: >-
+    Every AppLovin credential is a long-lived, account-wide, full-privilege static key with
+    no expiry and no API-driven rotation or revocation. There is no read-only variant of
+    any key: the Management Key that lists ad units is the same key that rewrites their
+    waterfalls, and the Campaign Management key that lists campaigns is the same key that
+    creates them and spends money. An agent cannot be given a narrower credential than a
+    human employee, which makes delegation to an autonomous agent an all-or-nothing
+    decision.
+gaps:
+- No OAuth 2.0, no OpenID Connect, no token endpoint, no /.well-known/oauth-authorization-server (probed, 404/400 on every API host).
+- No scopes, so scopes/applovin-scopes.yml is intentionally not emitted.
+- No mTLS.
+- No key expiry or rotation API; rotation is a manual dashboard action.
+- Report Key travels in the query string.
+- Same header name (Api-Key) reused for two different credentials on two different hosts.

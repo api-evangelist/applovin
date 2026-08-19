@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "b5a7e808-280e-4c80-aa67-1476dd76d8ea",
+      "name": "Growth Reporting",
+      "description": {
+        "content": "Campaign performance reporting for advertisers and publishers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fa4aca47-a575-411d-9141-1df11a38efcb",
+          "name": "Get Growth Report",
+          "request": {
+            "name": "Get Growth Report",
+            "description": {
+              "content": "Retrieve aggregated AppDiscovery / Axon campaign metrics for either\nthe publisher or advertiser perspective. Date ranges are limited to a\n45-day rolling window. The response payload shape varies with the\nselected `columns` and `report_type`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Report Key, found under Account > Keys in the Axon dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "(Required) Response format."
+                },
+                {
+                  "disabled": false,
+                  "key": "columns",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types."
+                },
+                {
+                  "disabled": false,
+                  "key": "report_type",
+                  "value": "publisher",
+                  "description": "Choose between publisher or advertiser report dimensions."
+                },
+                {
+                  "disabled": false,
+                  "key": "day_column",
+                  "value": "<string>",
+                  "description": "Set to `day` to compute cohort metrics. Defaults to realtime when absent."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum rows to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination row offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "having",
+                  "value": "<string>",
+                  "description": "URL-encoded numeric filtering (e.g. `impressions > 0`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "not_zero",
+                  "value": "<integer>",
+                  "description": "Set to 1 to exclude rows where all metrics are zero."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92087dec-c0d6-4968-b5d9-9550ab222448",
+              "name": "Report rows",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2015-04-20"
+                    },
+                    {
+                      "key": "end",
+                      "value": "now"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "day,campaign,impressions,clicks,conversions,cost"
+                    },
+                    {
+                      "key": "report_type",
+                      "value": "publisher"
+                    },
+                    {
+                      "key": "day_column",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "having",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "not_zero",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"day\": \"2015-04-20\",\n    \"campaign\": \"My Campaign\",\n    \"impressions\": 12345,\n    \"clicks\": 678,\n    \"conversions\": 90,\n    \"cost\": \"125.34\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e818f7c3-b8f6-4ce9-8862-a39d86aa24aa",
+              "name": "Malformed parameters or out-of-range date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2015-04-20"
+                    },
+                    {
+                      "key": "end",
+                      "value": "now"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "day,campaign,impressions,clicks,conversions,cost"
+                    },
+                    {
+                      "key": "report_type",
+                      "value": "publisher"
+                    },
+                    {
+                      "key": "day_column",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "having",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "not_zero",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 809,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "515f2e06-e51b-4757-b616-b2f5e4d10033",
+              "name": "Missing or invalid api_key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2015-04-20"
+                    },
+                    {
+                      "key": "end",
+                      "value": "now"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "day,campaign,impressions,clicks,conversions,cost"
+                    },
+                    {
+                      "key": "report_type",
+                      "value": "publisher"
+                    },
+                    {
+                      "key": "day_column",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "having",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "not_zero",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 809,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://r.applovin.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f33b9c02-f8f5-4f13-ace8-712cc90b19ef",
+    "name": "AppLovin Axon Campaign Management Ad Units Growth Reporting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+      "type": "text/plain"
+    }
+  }
+}

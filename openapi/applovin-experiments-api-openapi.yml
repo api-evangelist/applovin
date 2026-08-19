@@ -20,8 +20,8 @@ info:
     name: AppLovin Support
     url: https://support.axon.ai
 servers:
-- url: https://api.ads.axon.ai/manage/v1
-  description: Axon campaign management API
+- url: https://o.applovin.com/mediation/v1
+  description: AppLovin MAX mediation management host
 security:
 - bearerAuth: []
 tags:

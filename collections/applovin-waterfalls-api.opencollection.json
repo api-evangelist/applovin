@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Waterfalls API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Waterfalls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Ad Unit Waterfall",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit/:ad_unit_id/:segment_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              },
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path",
+                "description": "Segment identifier scoped under the ad unit."
+              }
+            ]
+          },
+          "docs": "Retrieve the waterfall configuration for a segment."
+        },
+        {
+          "info": {
+            "name": "Update Ad Unit Waterfall",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://o.applovin.com/mediation/v1/ad_unit/:ad_unit_id/:segment_id",
+            "params": [
+              {
+                "name": "ad_unit_id",
+                "value": "",
+                "type": "path",
+                "description": "Ad unit identifier."
+              },
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path",
+                "description": "Segment identifier scoped under the ad unit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create, edit, promote, or remove a waterfall for a segment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

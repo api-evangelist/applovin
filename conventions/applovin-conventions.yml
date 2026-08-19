@@ -1,0 +1,192 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+docs:
+- https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+- https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+- https://support.applovin.com/en/max/reporting-apis/revenue-reporting-api
+- https://support.applovin.com/en/growth/promoting-your-apps/api/reporting-api
+- https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+note: >-
+  AppLovin has no single set of API conventions. It has four products that were built
+  separately and never harmonized, and the differences below are load-bearing for anyone
+  writing a client: the auth header name, the pagination style, the error envelope and the
+  rate limit all change depending on which host you are calling. This artifact records each
+  product's conventions separately rather than averaging them into a fiction.
+products:
+- id: axon-campaign-management
+  name: Axon Campaign Management API
+  base: https://api.ads.axon.ai/manage/v1
+  auth:
+    style: api-key
+    location: header
+    header: Authorization
+    value: Campaign Management API key (raw key, no Bearer prefix)
+    extra: 'account_id query parameter is required on every request'
+    note: >-
+      The Campaign Management API key is a different credential from the Management Key
+      used by the Ad Unit Management API. The docs say so explicitly.
+  pagination:
+    style: page-number
+    params: [page, size]
+    first_page: 1
+    max_page_size: 100
+    default_page_size: 100
+    response_fields: []
+    note: >-
+      /campaign/list returns a bare JSON array, not an envelope. There is no total count
+      and no next-page cursor — an empty array is the only end-of-results signal.
+  filtering:
+    params: [ids, hashed_ids]
+    max_ids: 100
+    note: ids and hashed_ids are mutually exclusive.
+  errors:
+    envelope: headers
+    headers: [x-al-error-code, x-al-error-message]
+    note: >-
+      Error detail is returned in RESPONSE HEADERS, not in the body. An agent that only
+      reads the body learns nothing about why a request failed.
+  tracing:
+    header: X-TRACE-ID
+    direction: response
+    note: Returned on all responses. AppLovin support asks for this value on every ticket.
+  rate_limit:
+    limit: 1000
+    window: 60s
+    on_exhaustion: 429 for ten minutes
+    error_budget: 100 error responses in a five-minute window blocks the account for 24 hours
+    error_budget_code: 100007
+- id: max-ad-unit-management
+  name: MAX Ad Unit Management API
+  base: https://o.applovin.com/mediation/v1
+  auth:
+    style: api-key
+    location: header
+    header: Api-Key
+    value: account Management Key
+  pagination:
+    style: none
+    note: /ad_units and /test_devices return the full collection unpaginated.
+  errors:
+    envelope: unknown
+    note: The Ad Unit Management docs do not publish an error schema or error code table.
+  rate_limit:
+    limit: 2000
+    window: 1h
+- id: reporting
+  name: Reporting family (revenue, growth, asset, cohort, web, user-level)
+  base: https://r.applovin.com
+  auth:
+    style: api-key
+    location: query
+    parameter: api_key
+    value: Report Key
+    note: >-
+      The Report Key travels in the QUERY STRING on every reporting call. It will be
+      written to any access log, proxy log or browser history that touches the request.
+      This is the weakest credential handling in the AppLovin surface.
+  pagination:
+    style: limit-offset
+    params: [limit, offset]
+    note: >-
+      The Cohort API docs add a caveat the others do not: set offset=0 explicitly on the
+      first request to preserve result ordering across pages.
+  sorting:
+    params: ['sort_<column>']
+    values: [ASC, DESC]
+    note: Multiple sort_ parameters apply in query-string order.
+  filtering:
+    params: ['filter_<column>', having, not_zero]
+    note: >-
+      `having` accepts a URL-encoded numeric expression (e.g. impressions > 0 AND revenue
+      > 0). The docs warn it slows the response and increases timeout likelihood.
+  content_negotiation:
+    parameter: format
+    values: [json, csv]
+    note: Format is a query parameter, not an Accept header. There is no content negotiation.
+  time_window:
+    default: 45 days
+    exceptions:
+      web_reporting: 90 days
+    note: >-
+      Requests whose start/end fall outside the window fail. This is the single most
+      common integration error against the reporting family.
+  errors:
+    envelope: unknown
+    note: No published error schema for the reporting hosts.
+- id: conversion-api
+  name: Conversion API (web events)
+  base: https://b.applovin.com
+  auth:
+    style: api-key
+    location: header
+    header: Authorization
+    value: Conversion API key
+    extra: pixel_id query parameter carrying the AppLovin Event Key is required
+  batching:
+    max_batch: 100
+    atomicity: all-or-nothing
+    note: >-
+      'All events must be valid. Any invalid event will fail the batch.' A 400 drops the
+      ENTIRE batch, not the offending event.
+  errors:
+    codes:
+      200: All events processed successfully
+      400: Error in the request; entire batch is dropped
+      401: Authentication failed
+idempotency:
+  supported: partial
+  scope: conversion-api
+  mechanism: client-supplied deduplication key
+  field: dedupe_id
+  location: body (per event)
+  header: null
+  retention: unpublished
+  docs: https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+  description: >-
+    The Conversion API accepts a per-event `dedupe_id` — "a unique identifier for this
+    event, used for de-duplication". Its documented purpose is cross-channel: the browser
+    pixel event and the server-to-server event for the same action should carry the same
+    dedupe_id so AppLovin counts them once. It is a real client-supplied idempotency key
+    on the only write-heavy ingestion endpoint AppLovin publishes, and it is the one place
+    in this surface where a retry is safe.
+  limits: >-
+    HONEST SCOPE: this is the ONLY idempotency contract AppLovin publishes. There is no
+    Idempotency-Key header anywhere. The Campaign Management writes (createCampaign,
+    updateCampaign, createCreativeSet, cloneCreativeSet, uploadAssets) and the MAX ad-unit
+    writes (createAdUnit, createTestDevice, upsertAdUnitExperiment) have NO idempotency
+    mechanism at all — a retried createCampaign creates a second campaign. The retention
+    window for dedupe_id is not published, so an agent cannot know how long a replay stays
+    safe.
+versioning:
+  scheme: uri-path
+  note: >-
+    Versioning is per product and inconsistent. Campaign Management is /manage/v1, MAX ad
+    unit management is /mediation/v1, the Conversion API is /v1/event, Ad Review is
+    /v1/rules, and the entire reporting family is UNVERSIONED — https://r.applovin.com/maxReport
+    carries no version segment at all. There is no header-based or date-based versioning
+    and no published version policy.
+  versioned_products: [axon-campaign-management, max-ad-unit-management, conversion-api, ad-review]
+  unversioned_products: [reporting]
+rate_limit_signaling:
+  headers: []
+  note: >-
+    AppLovin publishes rate limits in prose but returns NO rate-limit headers. There is no
+    X-RateLimit-Limit, no RateLimit-Remaining, no Retry-After documented anywhere. A client
+    cannot see how much budget it has left; it discovers the limit by being blocked. See
+    rate-limits/applovin-rate-limits.yml.
+metadata:
+  supported: false
+  note: No custom-metadata or tagging facility on any AppLovin object.
+field_expansion:
+  supported: false
+  note: >-
+    No expand/include parameter. The reporting family's `columns` parameter is the nearest
+    equivalent — it selects which columns a report returns — but it projects a flat report,
+    it does not expand related objects.
+cross_links:
+  errors: errors/applovin-problem-types.yml
+  lifecycle: lifecycle/applovin-lifecycle.yml
+  authentication: authentication/applovin-authentication.yml
+  rate_limits: rate-limits/applovin-rate-limits.yml
+  webhooks: asyncapi/applovin-webhooks.yml

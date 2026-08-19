@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AppLovin Axon Campaign Management Ad Units Revenue Reporting API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Revenue Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get MAX Revenue Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r.applovin.com/maxReport",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Report Key (issued under Account > Keys in the Axon dashboard)."
+              },
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of report columns to return."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum rows to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of rows to skip for pagination."
+              },
+              {
+                "name": "not_zero",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to exclude rows where all metrics are zero."
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated MAX revenue and user-level metrics for a publisher\naccount. Specify the columns you want returned plus a date range\n(start, end) within a rolling 45-day window. Optional filters, sort,\nlimit, and offset support customised reporting and pagination.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

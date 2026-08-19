@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: probed
+source: direct HTTPS probe of every apis.yml baseURL host, every OpenAPI servers[] host, and the docs/portal hosts
+result: none
+note: >-
+  AppLovin serves NO /.well-known/ documents on any host in its API surface. Two distinct
+  failure shapes were observed and both are recorded below because they read very
+  differently in a raw status log:
+  (1) the API hosts return honest 404s (api.ads.axon.ai, nginx) or a blanket 400
+  (r.applovin.com rejects any path it does not route);
+  (2) the marketing and docs hosts (www.applovin.com, axon.ai, developers.applovin.com,
+  support.applovin.com / support.axon.ai) are Next.js applications with a catch-all route
+  that answers HTTP 200 with the site's HTML shell for EVERY /.well-known/* path,
+  including paths that cannot exist. Those 200s are NOT documents. Each is recorded with
+  status 200 and body: html-spa-shell so it is never mistaken for a hit.
+  Because nothing returned a real document, this file emits NO WellKnown and NO SecurityTxt
+  pointer in apis.yml. The probe is the finding.
+hosts:
+- host: https://api.ads.axon.ai
+  role: Campaign Management API (OpenAPI servers[])
+  server: nginx
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://r.applovin.com
+  role: Reporting hosts (revenue, growth, asset, cohort, web, user-level)
+  documents:
+  - {path: /.well-known/security.txt, status: 400, body: '{"error":"Bad request"}'}
+  - {path: /.well-known/openid-configuration, status: 400, body: '{"error":"Bad request"}'}
+  - {path: /.well-known/oauth-authorization-server, status: 400, body: '{"error":"Bad request"}'}
+  - {path: /.well-known/api-catalog, status: 400, body: '{"error":"Bad request"}'}
+  - {path: /.well-known/ai-plugin.json, status: 400, body: '{"error":"Bad request"}'}
+  - {path: /.well-known/agent-card.json, status: 400, body: '{"error":"Bad request"}'}
+  - {path: /.well-known/agent.json, status: 400, body: '{"error":"Bad request"}'}
+- host: https://www.applovin.com
+  role: Website
+  documents:
+  - {path: /.well-known/security.txt, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/openid-configuration, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/api-catalog, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent-card.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /security.txt, status: 200, body: html-spa-shell, hit: false}
+- host: https://axon.ai
+  role: Axon brand site
+  documents:
+  - {path: /.well-known/security.txt, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent-card.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/api-catalog, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/openid-configuration, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, body: html-spa-shell, hit: false}
+- host: https://developers.applovin.com
+  role: DeveloperPortal
+  documents:
+  - {path: /.well-known/security.txt, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent-card.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/api-catalog, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/openid-configuration, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, body: html-spa-shell, hit: false}
+- host: https://support.axon.ai
+  role: Documentation (302s to support.applovin.com)
+  documents:
+  - {path: /.well-known/security.txt, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent-card.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/agent.json, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/api-catalog, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/openid-configuration, status: 200, body: html-spa-shell, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, body: html-spa-shell, hit: false}
+summary:
+  hosts_probed: 6
+  paths_probed: 38
+  real_documents: 0
+  soft_200_html_shells: 26
+  security_txt: false
+  api_catalog: false
+  oauth_metadata: false
+  agent_card: false

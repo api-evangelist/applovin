@@ -1,0 +1,97 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.applovin.com/en/max/android/testing-networks/test-mode
+docs:
+- https://support.applovin.com/en/max/android/testing-networks/test-mode
+- https://support.applovin.com/en/max/android/testing-networks/mediation-debugger
+- https://support.applovin.com/en/max/android/testing-networks/creative-debugger
+- https://support.applovin.com/en/max/android/testing-networks/demo-app
+- https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+note: >-
+  AppLovin's sandbox is CLIENT-SIDE ONLY. There is a genuine, well-documented test mode for
+  the MAX SDKs — test devices, a mediation debugger, a creative debugger, demo apps. There
+  is NO test mode for the HTTP APIs: no sandbox host, no test-vs-live key prefixes, no test
+  account, and no way to exercise createCampaign, uploadAssets or postConversionEvents
+  against anything but production. Every API key is a live key.
+api_sandbox:
+  exists: false
+  test_host: null
+  key_prefixes: null
+  note: >-
+    The five AppLovin API credentials (SDK Key, Management Key, Report Key, Campaign
+    Management API key, Conversion API key, Ad Review Key) have no test/live variants and
+    no distinguishing prefix. There is no way to tell a test key from a live key because
+    there are no test keys. An agent calling createCampaign is spending real money against
+    a real advertising account on its first call.
+  consequence: >-
+    This is the highest-consequence gap in the AppLovin developer surface. The write
+    operations control live advertising spend and live monetization configuration, and
+    none of them can be rehearsed.
+sdk_test_mode:
+  exists: true
+  name: Test Mode
+  purpose: >-
+    Verify that specific ad networks are integrated. Test Mode increases the likelihood of
+    ad fill during testing.
+  activation:
+  - method: Mediation Debugger
+    description: Open the Mediation Debugger in the app and enable test ads.
+  - method: programmatic
+    description: >-
+      Pass test device advertising IDs (GAIDs on Android, IDFAs on iOS) into the SDK
+      initialization configuration. Must be set when the first SDK instance is created.
+    android_api: AppLovinSdkInitializationConfiguration.builder("«SDK-key»").setTestDeviceAdvertisingIds([...])
+  - method: api
+    description: >-
+      Test devices can also be registered over HTTP through the MAX Test Devices API rather
+      than hardcoded in the app.
+    operations:
+    - openapi/applovin-test-devices-api-openapi.yml#listTestDevices
+    - openapi/applovin-test-devices-api-openapi.yml#createTestDevice
+    - openapi/applovin-test-devices-api-openapi.yml#getTestDevice
+    - openapi/applovin-test-devices-api-openapi.yml#updateTestDevice
+    note: >-
+      The Test Devices API is the one place where the HTTP surface touches testing — and
+      it configures testing for the SDK, it does not provide a test mode for itself.
+  verification:
+    log_line: 'Test Mode On: true'
+    location: AppLovin SDK initialization logs
+    side_effect: Test Mode makes the MAX SDK emit verbose device logging to the IDE console.
+  accounting:
+    tracked: false
+    note: >-
+      AppLovin does not track impressions, clicks, or revenue for test ads. Test traffic
+      never reaches reporting, which also means an integration cannot be validated
+      end-to-end by watching a report.
+  caveats:
+  - No-fills are common in test mode and typically do not indicate an integration problem; the docs recommend loading live ads to confirm.
+  - Server-to-server rewarded callbacks are NOT sent for test ads, only live ads. The rewarded callback path is therefore unverifiable in test mode.
+tooling:
+- name: Mediation Debugger
+  type: in-app
+  description: Inspect network integration status, toggle test ads, and inspect the live waterfall from inside the app.
+  docs: https://support.applovin.com/en/max/android/testing-networks/mediation-debugger
+- name: Creative Debugger
+  type: in-app
+  description: Identify the specific creative shown in an impression, for reporting bad ads.
+  docs: https://support.applovin.com/en/max/android/testing-networks/creative-debugger
+- name: Demo apps
+  type: sample-application
+  description: First-party demo applications per platform, shipped in the SDK repositories.
+  docs: https://support.applovin.com/en/max/android/testing-networks/demo-app
+  repos:
+  - https://github.com/AppLovin/AppLovin-MAX-Unity-Plugin
+  - https://github.com/AppLovin/AppLovin-MAX-SDK-Android
+  - https://github.com/AppLovin/AppLovin-MAX-SDK-iOS
+- name: DSP testing
+  type: partner
+  description: A separate testing path documented for demand-side platform partners on the oRTB exchange.
+  docs: https://support.applovin.com/en/max/demand-partners/demand-side-platforms/dsp-testing
+magic_values:
+  published: false
+  note: >-
+    No test card numbers, magic identifiers, test SIDs, fixture triggers or time-simulation
+    tooling. AppLovin is not a payments provider and publishes no synthetic test data. Test
+    device identifiers are the customer's OWN device GAIDs/IDFAs — real values the developer
+    supplies, not values AppLovin publishes. Nothing is recorded here that AppLovin did not
+    publish.

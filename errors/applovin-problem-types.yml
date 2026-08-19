@@ -1,0 +1,122 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/*.yml (11 refined specs) + https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+docs:
+- https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+- https://support.applovin.com/en/growth/promoting-your-websites/api/conversion-api-for-lead-gen
+- https://support.applovin.com/en/max/android/overview/error-handling
+format: proprietary
+rfc9457: false
+envelope:
+  transport: response-headers
+  headers:
+  - name: x-al-error-code
+    description: Numeric AppLovin error code. Present on Campaign Management API failures.
+  - name: x-al-error-message
+    description: Human-readable message for the error code.
+  - name: X-TRACE-ID
+    description: >-
+      Returned on ALL responses, success or failure. AppLovin support requires this value
+      on every ticket to trace a request.
+  note: >-
+    AppLovin does not use application/problem+json and does not publish a JSON error body
+    schema for any REST product. Error semantics travel in headers. An agent that reads
+    only the response body sees a status code and nothing else.
+published_codes:
+- code: 100007
+  http_status: 429
+  header: x-al-error-code
+  api: Axon Campaign Management API
+  title: Account temporarily blocked for error-rate abuse
+  description: >-
+    Returned for 24 hours after an account generates 100 error responses within a
+    five-minute window. Every request during the block fails with 429 and this code. For
+    asset uploads, each asset returning file_status FAILURE counts as an individual error.
+  remediation: >-
+    Stop retrying. Fix the underlying request before calling again — a retry loop against
+    a 400 is what triggers this, and the penalty is a full day of downtime for the account,
+    not just the failing call.
+  source: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+problems:
+- status: 400
+  title: Bad request
+  description: Malformed request or invalid field values.
+  operations:
+  - openapi/applovin-ad-units-api-openapi.yml#createAdUnit
+  - openapi/applovin-ad-units-api-openapi.yml#updateAdUnit
+  - openapi/applovin-assets-api-openapi.yml#uploadAssets
+  - openapi/applovin-asset-reporting-api-openapi.yml#getAssetReport
+  - openapi/applovin-asset-reporting-api-openapi.yml#getAssetAnalyticsReport
+  - openapi/applovin-campaigns-api-openapi.yml#createCampaign
+  - openapi/applovin-campaigns-api-openapi.yml#updateCampaign
+  - openapi/applovin-conversion-events-api-openapi.yml#postConversionEvents
+  - openapi/applovin-creative-sets-api-openapi.yml#createCreativeSet
+  - openapi/applovin-creative-sets-api-openapi.yml#updateCreativeSet
+  - openapi/applovin-creative-sets-api-openapi.yml#cloneCreativeSet
+  - openapi/applovin-experiments-api-openapi.yml#upsertAdUnitExperiment
+  - openapi/applovin-experiments-api-openapi.yml#updateAdUnitExperimentWaterfall
+  - openapi/applovin-growth-reporting-api-openapi.yml#getGrowthReport
+  - openapi/applovin-revenue-reporting-api-openapi.yml#getMaxRevenueReport
+  - openapi/applovin-test-devices-api-openapi.yml#createTestDevice
+  - openapi/applovin-test-devices-api-openapi.yml#updateTestDevice
+  - openapi/applovin-waterfalls-api-openapi.yml#updateAdUnitWaterfall
+  remediation: >-
+    On the Conversion API a 400 drops the ENTIRE batch of up to 100 events, not the
+    offending event. Validate every event client-side before submitting. On the Campaign
+    Management API a 400 counts against the 100-errors-per-five-minutes budget that
+    triggers a 24-hour block — do not retry it.
+- status: 401
+  title: Authentication failed
+  description: Missing, malformed, or wrong-product API key.
+  operations: [all 30 operations across all 11 specs]
+  remediation: >-
+    AppLovin issues five separate, non-interchangeable keys (SDK Key, Management Key,
+    Report Key, Campaign Management API key, Conversion API key, Ad Review Key). A 401 on a
+    request that looks correct is most often the right key sent to the wrong product. Check
+    Account > General > Keys in the dashboard.
+- status: 403
+  title: Forbidden
+  description: The authenticated account does not own the requested ad unit.
+  operations:
+  - openapi/applovin-ad-units-api-openapi.yml#getAdUnit
+  - openapi/applovin-ad-units-api-openapi.yml#updateAdUnit
+  - openapi/applovin-ad-units-api-openapi.yml#createAdUnit
+- status: 429
+  title: Rate limit exceeded
+  description: >-
+    Request rate exceeded (1,000/60s on Campaign Management, 2,000/hour on Ad Unit
+    Management), or the account is inside the 24-hour error-budget block.
+  operations:
+  - openapi/applovin-campaigns-api-openapi.yml#listCampaigns
+  - openapi/applovin-campaigns-api-openapi.yml#createCampaign
+  - openapi/applovin-campaigns-api-openapi.yml#updateCampaign
+  - openapi/applovin-creative-sets-api-openapi.yml#listCreativeSets
+  - openapi/applovin-creative-sets-api-openapi.yml#listCreativeSetsByCampaignId
+  remediation: >-
+    No Retry-After header is returned. A rate-limit 429 clears after ten minutes; an
+    error-budget 429 (x-al-error-code 100007) clears after 24 hours. Read the header to
+    tell them apart — the status code alone cannot.
+sdk_errors:
+  note: >-
+    Separate from the HTTP surface, the MAX client SDKs expose a first-class MaxError
+    object with a numeric code table, documented per platform. These are client-side ad
+    load/display failures, not API errors, and are catalogued here only so the two are not
+    conflated.
+  docs: https://support.applovin.com/en/max/android/overview/error-handling
+  interface: MaxError
+  accessors: [getCode, getMessage, getMediatedNetworkErrorCode, getMediatedNetworkErrorMessage, getWaterfall]
+  sample_codes:
+  - {code: 204, constant: MaxErrorCode.NO_FILL, phase: load, description: No ads eligible for this device.}
+  - {code: -1, constant: MaxErrorCode.UNSPECIFIED, phase: load, description: Uncategorized state; read the message field.}
+  - {code: -23, constant: MaxErrorCode.FULLSCREEN_AD_ALREADY_SHOWING, phase: load/display, description: A fullscreen ad is already showing.}
+  - {code: -24, constant: MaxErrorCode.FULLSCREEN_AD_NOT_READY, phase: display, description: Show called before the ad loaded.}
+  - {code: -1000, constant: MaxErrorCode.NETWORK_ERROR, phase: display, description: Generic network error on the ad request.}
+  - {code: -1001, constant: MaxErrorCode.NETWORK_TIMEOUT, phase: load, description: Ad request timed out.}
+  - {code: -1009, constant: MaxErrorCode.NO_NETWORK, phase: load, description: Device is offline.}
+  - {code: -4205, constant: MaxErrorCode.AD_DISPLAY_FAILED, phase: load, description: Error while displaying the ad.}
+  - {code: -5001, constant: MaxErrorCode.AD_LOAD_FAILED, phase: display, description: Ad failed to load.}
+gaps:
+- No RFC 9457 problem+json anywhere in the surface.
+- No published error-code registry for the Ad Unit Management, Reporting, or Ad Review APIs — only the Campaign Management API documents a code (100007).
+- No error body schema is published for any product; the OpenAPI 4xx responses in this repo describe status codes only because that is all AppLovin documents.
+- No Retry-After on 429.

@@ -1,0 +1,869 @@
+{
+  "item": [
+    {
+      "id": "c40bd6e3-d74f-4a81-a07d-d13245bc07f5",
+      "name": "Campaigns",
+      "description": {
+        "content": "Campaign create / update / list operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0162774c-d26f-4184-8d02-79fb0217d315",
+          "name": "List Campaigns",
+          "request": {
+            "name": "List Campaigns",
+            "description": {
+              "content": "List campaigns for the authenticated account, optionally filtered by ID lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Comma-separated campaign IDs (max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "hashed_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated external (hashed) campaign IDs (max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c86cb81c-fbdf-42d0-98c8-6a264525b409",
+              "name": "Array of Campaign objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"APP\",\n    \"platform\": \"IOS\",\n    \"start_date\": \"1983-10-29T09:32:16.314Z\",\n    \"bidding_strategy\": \"TARGET_GOAL_WITH_CPI_BILLING\",\n    \"budget\": {\n      \"daily_budget_for_all_countries\": \"6000\",\n      \"country_code_to_daily_budget\": {\n        \"US\": \"5000\",\n        \"CA\": \"1000\"\n      }\n    },\n    \"goal\": {\n      \"goal_type\": \"CHK_ROAS\",\n      \"goal_value_for_all_countries\": \"string\",\n      \"country_code_to_goal_value\": {\n        \"key_0\": \"string\"\n      },\n      \"roas_day_target\": \"string\"\n    },\n    \"tracking\": {\n      \"tracking_method\": \"BRANCH\",\n      \"impression_url\": \"https://AGHhIIXsIDJMESdaaGPbMNUoX.xkoRuqwPJRh7eiS4Un0FTVWcodgWTR4bp9PmDHNGyZnzHanNy\",\n      \"click_url\": \"http://mTOimRaIjXxBzogNkEBEQU.xupdhiJSfMBChpjjp.nBjTAbf.6+oVHxq48Y7m9iMYR8BRIGrTIlTnSqwi1s6LTSx+,nvg7d,VAHV.MnhOZimc\"\n    },\n    \"targeting\": [\n      {\n        \"country_code\": \"string\",\n        \"region_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"metro_names\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"country_code\": \"string\",\n        \"region_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"metro_names\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"id\": 6341,\n    \"status\": \"LIVE\",\n    \"package_name\": \"string\",\n    \"itunes_id\": 9091,\n    \"end_date\": \"2016-08-06T23:58:42.619Z\"\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"APP\",\n    \"platform\": \"IOS\",\n    \"start_date\": \"1995-11-14T15:31:17.333Z\",\n    \"bidding_strategy\": \"AUTO_BIDDING_WITH_CPM_BILLING\",\n    \"budget\": {\n      \"daily_budget_for_all_countries\": \"6000\",\n      \"country_code_to_daily_budget\": {\n        \"US\": \"5000\",\n        \"CA\": \"1000\"\n      }\n    },\n    \"goal\": {\n      \"goal_type\": \"CPE\",\n      \"goal_value_for_all_countries\": \"string\",\n      \"country_code_to_goal_value\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"roas_day_target\": \"string\"\n    },\n    \"tracking\": {\n      \"tracking_method\": \"BRANCH\",\n      \"impression_url\": \"https://KmOdtTFHsbGFiaFnkBsBl.qsigEOzDkOAIUDsRXuYTAi-VXqlcK8QKatzWZNfMgN3Cafq\",\n      \"click_url\": \"http://TbwfDGcolPbjvPSQumLdEUgqN.omO0oAnLSR+bduSnLtYRK0unQ9pb0usSBYp3rOIiIZvr7RxCDqZyUwDPq.uPoAJJF-NHRTFb18IEApmVam\"\n    },\n    \"targeting\": [\n      {\n        \"country_code\": \"string\",\n        \"region_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"metro_names\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"country_code\": \"string\",\n        \"region_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"metro_names\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"id\": 9038,\n    \"status\": \"LIVE\",\n    \"package_name\": \"string\",\n    \"itunes_id\": 4324,\n    \"end_date\": \"1953-02-11T06:24:41.666Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93c70f1c-8939-440b-89ca-123147c5d1f6",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55ea42cd-91ba-4fc7-ac42-14674da598b1",
+              "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a1f6b4d-8cb9-4300-972a-3a61e92cb1ae",
+          "name": "Create Campaign",
+          "request": {
+            "name": "Create Campaign",
+            "description": {
+              "content": "Create a new AppDiscovery / Axon campaign. The `id` field is\nforbidden on create. The `bidding_strategy` field is required and\ncannot be updated after creation.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b284a689-6ea7-4c86-bc51-10058debfbb1",
+              "name": "Newly created campaign reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95e93f0a-96e1-4e35-9d67-6b43d52ec05e",
+              "name": "Validation or input error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99a99a5a-6e59-4316-a0a3-79ddbd9462c8",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe43330b-ad48-4ba7-9f1c-44998638799a",
+              "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cac73ca-6c28-4e3f-818a-d9fc4599476e",
+          "name": "Update Campaign",
+          "request": {
+            "name": "Update Campaign",
+            "description": {
+              "content": "Update an existing campaign. `id`, `type`, and `campaign_id` are required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"<string>\",\n    \"country_code_to_daily_budget\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "728c81b6-c1e5-4360-a234-9c6456c0aef2",
+              "name": "Updated campaign reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b64870d-03aa-4ab5-a3f5-a4f85af7b2c9",
+              "name": "Validation or input error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28c34339-0723-432c-afd1-3303fc4d8a55",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb5f68a6-91e1-4787-b487-d7396bbf4ed6",
+              "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"bidding_strategy\": \"<string>\",\n  \"budget\": {\n    \"daily_budget_for_all_countries\": \"6000\",\n    \"country_code_to_daily_budget\": {\n      \"US\": \"5000\",\n      \"CA\": \"1000\"\n    }\n  },\n  \"goal\": {\n    \"goal_type\": \"<string>\",\n    \"goal_value_for_all_countries\": \"<string>\",\n    \"country_code_to_goal_value\": {\n      \"key_0\": \"<string>\"\n    },\n    \"roas_day_target\": \"<string>\"\n  },\n  \"tracking\": {\n    \"tracking_method\": \"<string>\",\n    \"impression_url\": \"<uri>\",\n    \"click_url\": \"<uri>\"\n  },\n  \"targeting\": [\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"country_code\": \"<string>\",\n      \"region_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metro_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<long>\",\n  \"status\": \"<string>\",\n  \"package_name\": \"<string>\",\n  \"itunes_id\": \"<long>\",\n  \"end_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3384,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ads.axon.ai/manage/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7e26e0e4-f3be-4fc6-9d93-ae9dc0da0a03",
+    "name": "AppLovin Axon Campaign Management Ad Units Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+      "type": "text/plain"
+    }
+  }
+}

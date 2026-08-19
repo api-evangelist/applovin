@@ -3,8 +3,11 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: AppLovin
 providerId: applovin
+generated: '2026-08-13'
+method: searched
+source: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
 created: '2026-05-22'
-modified: '2026-05-22'
+modified: '2026-08-13'
 tags:
 - Advertising
 - Mobile
@@ -17,43 +20,130 @@ tags:
 - Rate Limiting
 - Quotas
 - Throttling
-description: Scaffolded rate limit definitions for the AppLovin API surface. Captures per-tier quotas, burst behavior, response
-  signaling, and recovery semantics. Defaults are scaffold values to be replaced with published provider limits.
+description: >-
+  Published AppLovin API rate limits, read from the provider's own documentation on
+  2026-08-13. This file previously carried scaffold placeholder values (10 rpm free /
+  120 rpm pro, X-RateLimit-* headers) that AppLovin does not publish; those have been
+  replaced with the real, sourced limits and the real header behaviour, which is that
+  AppLovin returns NO rate-limit headers at all.
+limit_count: 2
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+  note: >-
+    AppLovin returns no rate-limit signalling headers on any product. Neither the legacy
+    X-RateLimit-* family nor the RFC 9239 RateLimit-* family is present, and no Retry-After
+    is returned on 429. A client cannot observe its remaining budget or the reset time; it
+    learns the limit only by being blocked. This is the single largest agent-readiness gap
+    in the AppLovin surface — the limits are knowable from the docs but not from the wire.
+  observed: >-
+    Error detail on a throttled Campaign Management request travels in x-al-error-code and
+    x-al-error-message headers, not in the body.
 responseCodes:
   throttled: 429
   quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-- tier: free
-  name: Free Tier Default
-  scope: api-key
-  metric: requests_per_minute
-  limit: 10
-  burst: 20
-  timeFrame: minute
+- name: Axon Campaign Management API
+  scope: account
+  metric: requests
+  limit: 1000
+  timeFrame: 60s
+  burst: null
   applies:
-  - https://r.applovin.com/maxReport
-  description: Default per-token request rate for the free tier. Bursts above the limit return HTTP 429 with Retry-After.
-- tier: pro
-  name: Pro Tier Default
-  scope: api-key
-  metric: requests_per_minute
-  limit: 120
-  burst: 240
-  timeFrame: minute
+  - https://api.ads.axon.ai/manage/v1
+  operations:
+  - listCampaigns
+  - createCampaign
+  - updateCampaign
+  - listCreativeSets
+  - listCreativeSetsByCampaignId
+  - createCreativeSet
+  - updateCreativeSet
+  - cloneCreativeSet
+  - listAssets
+  - uploadAssets
+  - getAssetUploadResult
+  on_exhaustion:
+    status: 429
+    duration: 10 minutes
+    description: 'Exceeding 1,000 requests per 60 seconds fails all requests with 429 for ten minutes.'
+  source: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+- name: MAX Ad Unit Management API
+  scope: account
+  metric: requests
+  limit: 2000
+  timeFrame: 1h
+  burst: null
   applies:
-  - https://r.applovin.com/maxReport
-  description: Higher rate envelope for paid plans; reconcile against published commercial terms.
+  - https://o.applovin.com/mediation/v1
+  operations:
+  - listAdUnits
+  - getAdUnit
+  - createAdUnit
+  - updateAdUnit
+  - getAdUnitWaterfall
+  - updateAdUnitWaterfall
+  - getAdUnitExperiment
+  - upsertAdUnitExperiment
+  - getAdUnitExperimentWaterfall
+  - updateAdUnitExperimentWaterfall
+  - listTestDevices
+  - getTestDevice
+  - createTestDevice
+  - updateTestDevice
+  source: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api
+error_budget:
+  name: Error-rate circuit breaker
+  api: Axon Campaign Management API
+  threshold: 100 error responses
+  window: 5 minutes
+  penalty: All requests blocked for 24 hours
+  status: 429
+  signal_header: x-al-error-code
+  signal_value: 100007
+  counts_as_error: >-
+    Any failed request. For asset uploads, EACH asset returning file_status FAILURE counts
+    as an individual error, so one bad multi-asset upload can consume a large share of the
+    budget in a single call.
+  description: >-
+    This is the most consequential and least-known limit in the AppLovin surface, and it
+    is not a rate limit — it is an error-rate limit. A naive retry loop against a 400
+    reaches 100 errors in seconds and costs the account a full day of API access. Any
+    agent calling this API must fail closed on the first 4xx rather than retrying.
+  source: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+undocumented:
+- api: Reporting family (r.applovin.com — maxReport, report, assetReport, assetAnalyticsReport, webReport, maxCohort, max/userAdRevenueReport)
+  note: >-
+    No rate limit is published for any reporting endpoint. The docs instead constrain the
+    reports by request WINDOW — 45 days for the MAX, growth, asset, cohort and user-level
+    reports, 90 days for web reporting — and warn that the `having` filter parameter
+    increases timeout likelihood. Absence of a published limit is recorded here as an
+    absence, not inferred as unlimited.
+- api: Conversion API (b.applovin.com)
+  note: >-
+    No rate limit published. A batch cap of 100 events per POST is documented, which is a
+    payload bound rather than a rate bound.
+- api: Ad Review Rules Management API (api-safedk.applovin.com)
+  note: No rate limit published.
 recoveryStrategies:
-- name: Exponential Backoff
-  description: Wait Retry-After seconds (or back off exponentially up to 60s) before retrying.
-- name: Queue and Retry
-  description: Submit bulk work in batches under the burst envelope.
-notes:
-- Replace scaffold values with the provider's published rate limit policy.
+- name: Fail closed on 4xx
+  description: >-
+    Do not retry a 400 against the Campaign Management API. Errors are budgeted and the
+    penalty is a 24-hour account block.
+- name: Blind backoff
+  description: >-
+    With no Retry-After and no reset header, a client must use a fixed conservative backoff.
+    A rate-limit 429 clears in ten minutes; an error-budget 429 clears in 24 hours. Read
+    x-al-error-code to distinguish them — 100007 means the long block.
+- name: Stay under the window
+  description: >-
+    Reporting calls fail outside the 45-day (90-day for web) request window. Chunk long
+    date ranges client-side rather than discovering the bound at runtime.
+references:
+- name: Axon Campaign Management API
+  url: https://support.applovin.com/en/app-discovery/api/axon-campaign-management-api/
+- name: MAX Ad Unit Management API
+  url: https://support.applovin.com/en/max/advanced-features/ad-unit-management-api

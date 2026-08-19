@@ -1,0 +1,1223 @@
+{
+  "item": [
+    {
+      "id": "e99f2f14-b0dc-476d-a9d1-2176cc5bc552",
+      "name": "Creative Sets",
+      "description": {
+        "content": "Creative set lifecycle operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "645518bd-0e45-40ff-a8aa-3704b8ee7bde",
+          "name": "List Creative Sets",
+          "request": {
+            "name": "List Creative Sets",
+            "description": {
+              "content": "List creative sets, optionally filtered by IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "creative_set",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Comma-separated creative set IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "hashed_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb86e96a-2621-41c3-bc00-cb6de52e11a9",
+              "name": "Array of CreativeSet objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"campaign_id\": \"string\",\n    \"type\": \"string\",\n    \"assets\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"string\",\n        \"url\": \"https://amFBlrKRT.diNyOQvFral6qL8UPqH+.qlI4-wJ0iyIrckLF55vzTW\",\n        \"type\": \"IMG_BANNER\",\n        \"resource_type\": \"image\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"string\",\n        \"url\": \"https://bWgsIRpQS.jsmzx17Cit9qVysTpYI0ryoZBp5iKD1FJRH.wzYZs75i\",\n        \"type\": \"VID_LONG_P\",\n        \"resource_type\": \"video\"\n      }\n    ],\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"status\": \"LIVE\",\n    \"languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"countries\": [\n      \"string\",\n      \"string\"\n    ],\n    \"product_page\": \"string\"\n  },\n  {\n    \"campaign_id\": \"string\",\n    \"type\": \"string\",\n    \"assets\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"string\",\n        \"url\": \"https://sXvGDxIDAlYCggUDrhmEtsOnddlTgVcf.zzxBfu5Xe4IPOymMp8oRpvJSmjVf8TRpSKQa.Vhh8LYlMrnxmacx6fCU7\",\n        \"type\": \"VID_SHORT_P\",\n        \"resource_type\": \"video\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"string\",\n        \"url\": \"https://mJbJSetWpuvHylURnZK.dazpnl0Vp3x5Q9IXKE1urwd0cktV2O3I.\",\n        \"type\": \"IMG_BANNER\",\n        \"resource_type\": \"html\"\n      }\n    ],\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"status\": \"PAUSED\",\n    \"languages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"countries\": [\n      \"string\",\n      \"string\"\n    ],\n    \"product_page\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84c4a8fc-a5ef-4517-a3f1-f2c28897c2c2",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eff61775-9cf3-4282-847a-3af1ea70ede3",
+              "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hashed_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8447a593-27eb-4d92-9016-5f3c74c54e53",
+          "name": "List Creative Sets By Campaign ID",
+          "request": {
+            "name": "List Creative Sets By Campaign ID",
+            "description": {
+              "content": "List creative sets grouped by campaign ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "creative_set",
+                "list_by_campaign_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated campaign IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ced7e0b-75d7-458a-b864-e1ce38f916dd",
+              "name": "Creative sets grouped by campaign.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "list_by_campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"campaign_count\": 8216,\n  \"creative_set_count\": 5953,\n  \"campaigns\": {\n    \"key_0\": [\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://gMPDBaaNryCynwGYfZibHMWdcgSlrL.gnOERmMN4.hMandGvNk8sUgPCIn0e.3VZSf+\",\n            \"type\": \"IMG_BANNER\",\n            \"resource_type\": \"image\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://zkMLMPCCLwAsGiOOrKpcCmcCb.udYl.MbKWI0aebHRuT3r8XVupCHgdp1QNZbk9z\",\n            \"type\": \"IMG_INTER_P\",\n            \"resource_type\": \"html\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      },\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://qZiAh.jfeOyt1MfVYI,GDTA4cytVQetLv7mfEIPBbS+sbPVyG9,\",\n            \"type\": \"IMG_BANNER\",\n            \"resource_type\": \"image\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://ww.kgjghISxc0XIjPUZt.taEGRICB44JbPC6uwSv,wjLo7mb4fMe,A75ejIFNDXn-ivnOB\",\n            \"type\": \"VID_SHORT_P\",\n            \"resource_type\": \"html\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"LIVE\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://ZPWnOnumgjvEZOYfkAiOYdLGT.hkhgXi6ztPNiefnrYniPaLg0Ga39oGFdcV7AB7A,xE3zWPv+NdYR5pFZvZRGPyPVuebgZ\",\n            \"type\": \"VID_SHORT_P\",\n            \"resource_type\": \"html\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://movqqQkvTCPiXCwkgLDScrzoCbZkwNB.qihSIYTl1ayAaDAqD\",\n            \"type\": \"IMG_BANNER\",\n            \"resource_type\": \"image\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      },\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://MgGzlZkxcnhWwtLZsyqQkFSSWlJtL.kphspI.NOWHpT7sa\",\n            \"type\": \"VID_SHORT_P\",\n            \"resource_type\": \"html\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://qTpuTbvlzWIIJedAP.cupCF+aYTnw+AZhY1HetZ8Gu\",\n            \"type\": \"VID_LONG_P\",\n            \"resource_type\": \"video\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      }\n    ],\n    \"key_2\": [\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://cLyTHr.qszObq.-cS5m\",\n            \"type\": \"IMG_BANNER\",\n            \"resource_type\": \"image\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://hhoMw.mexTH\",\n            \"type\": \"IMG_INTER_P\",\n            \"resource_type\": \"html\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      },\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://FAcnakjiPICrQWeEhVUTMU.krwyQdnEYJvXBCgq8U\",\n            \"type\": \"VID_SHORT_P\",\n            \"resource_type\": \"image\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://vMa.bjerr7qCAItzYhk4EPp+fROz0NoJa-tgOF-nFi46NGNNLcwk+vRMa.QZ-MmNx\",\n            \"type\": \"IMG_INTER_P\",\n            \"resource_type\": \"video\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      }\n    ],\n    \"key_3\": [\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://DiVqwDAa.gzcgdZIZ2eOoDIJTewPbQQH-lpx61-njq6-0runa.h27pR+x1qvEhdLEK2dq4D\",\n            \"type\": \"VID_LONG_P\",\n            \"resource_type\": \"html\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"https://KWpZDPgZscFnAhizpkcDVjimXYoji.sftzRMz+he7y6YC3tFK4zaiOo7AX\",\n            \"type\": \"IMG_INTER_P\",\n            \"resource_type\": \"image\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      },\n      {\n        \"campaign_id\": \"string\",\n        \"type\": \"string\",\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://is.lxbvjk4ljIqGzIR37,An,oSbnJ45WVwP\",\n            \"type\": \"VID_LONG_P\",\n            \"resource_type\": \"image\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"url\": \"http://YJeREfuLueUPDZB.etnZwyhgyY38CIbBblrqOkrAj9vV-GWDSw+ImR,homzeBQLCS+RKB1Ai8frKykwp.32-aOcaXFE03rM2\",\n            \"type\": \"IMG_INTER_P\",\n            \"resource_type\": \"image\"\n          }\n        ],\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"PAUSED\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"countries\": [\n          \"string\",\n          \"string\"\n        ],\n        \"product_page\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e0c8028-852a-44d4-a3d0-b8d74bead49b",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "list_by_campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f62c6ffc-e7ab-4812-beea-e5e98bcee729",
+              "name": "Rate limit exceeded (1,000 requests per 60 seconds).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "list_by_campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f4af41d-0a6b-48c4-bf2d-2b84d8430a61",
+          "name": "Create Creative Set",
+          "request": {
+            "name": "Create Creative Set",
+            "description": {
+              "content": "Create a new creative set under a campaign.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "creative_set",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc3e8de6-4509-4a4b-af2c-5611ddfdd85a",
+              "name": "Created creative set reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9710742e-fd99-4181-82e7-c63807066f56",
+              "name": "Validation or input error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d54d38ed-1369-4e2a-89a8-ff9682bb7822",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afbeb8ad-936f-430c-a848-4c79fe14c1db",
+          "name": "Update Creative Set",
+          "request": {
+            "name": "Update Creative Set",
+            "description": {
+              "content": "Update an existing creative set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "creative_set",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce6c5951-b02a-4e76-acd9-9bf7bf2288f9",
+              "name": "Updated creative set reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "087f841c-1e51-497d-aa08-4060ce52890a",
+              "name": "Validation or input error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db99e734-d62d-4b54-9c30-01a3659dc9a9",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"assets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"<string>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"product_page\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30875571-8490-4fc2-8786-fdd678a8d7f7",
+          "name": "Clone Creative Set",
+          "request": {
+            "name": "Clone Creative Set",
+            "description": {
+              "content": "Clone an existing creative set into the same campaign.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "creative_set",
+                "clone"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "(Required) Account identifier issued by AppLovin / Axon."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"creative_set_id\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99c4d41c-39e3-4eb9-9a71-eae56cb241e6",
+              "name": "Cloned creative set reference.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"12345\",\n  \"creative_set_id\": \"39823\",\n  \"status\": \"LIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd1a75fa-37ef-4df6-9a05-1a768b4cdf07",
+              "name": "Validation or input error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"12345\",\n  \"creative_set_id\": \"39823\",\n  \"status\": \"LIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74d6a7c1-be1e-4234-8c41-a0d9cb66e968",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "creative_set",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"12345\",\n  \"creative_set_id\": \"39823\",\n  \"status\": \"LIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2382,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ads.axon.ai/manage/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f18ae729-50b9-439f-ad43-84abc61a0a6f",
+    "name": "AppLovin Axon Campaign Management Ad Units Creative Sets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST endpoints used to programmatically manage AppLovin AppDiscovery\n(Axon) campaigns, creative sets, and creative assets. All endpoints\nrequire an `Authorization` header with the Campaign Management API key\nand an `account_id` query parameter. Rate limit: 1,000 requests per 60\nseconds (HTTP 429 on overflow).\n\n\nContact Support:\n Name: AppLovin Support",
+      "type": "text/plain"
+    }
+  }
+}

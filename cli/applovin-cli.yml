@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/AppLovin/homebrew-Mobile-Tools
+scope: mobile-development-tooling
+api_cli:
+  exists: false
+  note: >-
+    HONEST SCOPE FIRST. AppLovin ships NO command-line client for any of its HTTP APIs.
+    There is no `applovin` binary, no `max` CLI, nothing that wraps the Ad Unit Management,
+    Campaign Management, Reporting or Conversion APIs. Every documented example is a raw
+    curl invocation. What AppLovin does publish is a Homebrew tap of internal mobile-team
+    utilities, recorded below because it is a genuine, first-party, installable command-line
+    distribution — but it is Android/iOS build tooling, not an API client, and it should
+    never be read as one.
+name: AppLovin Mobile Tools
+repository: https://github.com/AppLovin/homebrew-Mobile-Tools
+official: true
+maintainer: AppLovin Mobile team
+last_updated: '2026-04-02'
+install:
+- method: homebrew-tap
+  commands:
+  - brew tap AppLovin/homebrew-Mobile-Tools
+  - brew install <formula>
+  upgrade: brew upgrade <formula>
+  note: >-
+    Requires Xcode command line tools on macOS below Catalina (10.15). The tap installs
+    each tool into the user bin.
+formulae:
+- name: aldroid
+  type: formula
+  file: Formula/aldroid.rb
+  language: shell
+  description: >-
+    AppLovin's Android developer utility. Distributed as a shell script with a companion
+    `aldroid-running-app` helper in the tap repository.
+- name: apktool
+  type: formula
+  file: Formula/apktool@2.11.1.rb
+  version: 2.11.1
+  description: Version-pinned formula for apktool, the Android APK reverse-engineering tool. A third-party tool AppLovin pins and redistributes, not an AppLovin original.
+  official: false
+- name: uncrustify-al
+  type: formula
+  file: Formula/uncrustify-al.rb
+  description: AppLovin's build of uncrustify, the C/C++/Objective-C source code beautifier. AppLovin-configured fork of a third-party tool.
+  official: false
+- name: swiftformat-al
+  type: cask
+  file: Casks/swiftformat-al.rb
+  description: AppLovin's build of SwiftFormat. AppLovin also maintains a fork at github.com/AppLovin/SwiftFormat.
+  official: false
+rating_note: >-
+  No `type: CLI` pointer is emitted in apis.yml for this artifact. The cli_present check
+  is meant to signal that a developer can drive the API from a terminal, and this tap does
+  not do that — it installs Android/iOS build utilities, three of the four formulae are
+  repackaged third-party tools (apktool, uncrustify, SwiftFormat), and none of them touches
+  an AppLovin API. Claiming the check here would credit AppLovin with an API CLI it does
+  not ship. Same discipline as the well-known and agent-card probes: the artifact records
+  what exists, the pointer asserts what the provider actually serves.
+surface:
+  commands: []
+  note: >-
+    No command reference is published for any formula. The tap README documents how to ADD
+    a tool, not how to use one. We do not enumerate flags or subcommands here because
+    AppLovin does not publish them and inventing them would be fabrication.
+related:
+  cocoapods_specs:
+    url: https://github.com/AppLovin/CocoaPods-Specs
+    description: >-
+      AppLovin's private CocoaPods spec repository. Not a CLI, but it is the distribution
+      channel a developer must add to their Podfile for iOS — the public CocoaPods trunk
+      copy of AppLovinSDK has been frozen at 6.9.5 since 2019. See packages/applovin-packages.yml.
+  debug_tools:
+    note: >-
+      The nearest thing to an interactive developer tool for the API surface is the
+      in-app Mediation Debugger and Creative Debugger, catalogued in
+      sandbox/applovin-sandbox.yml. Both are on-device UIs, not command-line tools.
