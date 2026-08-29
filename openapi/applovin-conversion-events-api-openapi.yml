@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: AppLovin Axon Campaign Management Ad Units Conversion Events API
   version: v1
@@ -110,21 +110,39 @@ components:
             $ref: '#/components/schemas/ServerEvent'
       required:
       - events
-    EventData:
+    ServerEvent:
       type: object
-      description: Required for generate_lead events; null for page_view.
       properties:
-        currency:
+        name:
           type: string
-          description: ISO 4217 three-letter currency code.
-          example: USD
-        value:
-          type: number
-          minimum: 0
-          description: Monetary value of the lead.
+          enum:
+          - page_view
+          - generate_lead
+          description: Event type.
+        event_time:
+          type: integer
+          format: int64
+          description: Unix epoch time of the event in milliseconds.
+        event_source_url:
+          type: string
+          format: uri
+          description: Complete URL where the event occurred.
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/EventData'
+          - type: 'null'
+          description: Event-specific data. Null for page_view, EventData for generate_lead.
+        user_data:
+          $ref: '#/components/schemas/UserData'
+        dedupe_id:
+          type: string
+          description: Unique identifier used to deduplicate against pixel-fired events.
       required:
-      - currency
-      - value
+      - name
+      - event_time
+      - event_source_url
+      - data
+      - user_data
     UserData:
       type: object
       description: 'User identifiers and browser context. At least one of (`aleid`,
@@ -196,39 +214,21 @@ components:
       - client_ip_address
       - client_user_agent
       - esi
-    ServerEvent:
+    EventData:
       type: object
+      description: Required for generate_lead events; null for page_view.
       properties:
-        name:
+        currency:
           type: string
-          enum:
-          - page_view
-          - generate_lead
-          description: Event type.
-        event_time:
-          type: integer
-          format: int64
-          description: Unix epoch time of the event in milliseconds.
-        event_source_url:
-          type: string
-          format: uri
-          description: Complete URL where the event occurred.
-        data:
-          oneOf:
-          - $ref: '#/components/schemas/EventData'
-          - type: 'null'
-          description: Event-specific data. Null for page_view, EventData for generate_lead.
-        user_data:
-          $ref: '#/components/schemas/UserData'
-        dedupe_id:
-          type: string
-          description: Unique identifier used to deduplicate against pixel-fired events.
+          description: ISO 4217 three-letter currency code.
+          example: USD
+        value:
+          type: number
+          minimum: 0
+          description: Monetary value of the lead.
       required:
-      - name
-      - event_time
-      - event_source_url
-      - data
-      - user_data
+      - currency
+      - value
   securitySchemes:
     bearerAuth:
       type: http

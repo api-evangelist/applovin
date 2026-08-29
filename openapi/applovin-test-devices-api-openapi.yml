@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: AppLovin Axon Campaign Management Ad Units Test Devices API
   version: v1
@@ -122,15 +122,29 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    TestDeviceId:
-      name: test_device_id
-      in: path
-      required: true
-      description: Test device identifier.
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
     TestDevice:
       type: object
       properties:
@@ -150,28 +164,14 @@ components:
       - device_id
       - disabled
       - network
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
-  responses:
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    TestDeviceId:
+      name: test_device_id
+      in: path
+      required: true
+      description: Test device identifier.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

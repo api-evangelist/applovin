@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: AppLovin Axon Campaign Management Ad Units Experiments API
   version: v1
@@ -133,33 +133,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AdNetworkAdUnit:
-      type: object
-      properties:
-        ad_network_ad_unit_id:
-          type: string
-        country_targeting_type:
-          type: string
-          enum:
-          - INCLUDE
-          - EXCLUDE
-        countries:
-          type: array
-          items:
-            type: string
-        cpm:
-          type: number
-    BidFloor:
-      type: object
-      properties:
-        country_group_name:
-          type: string
-        cpm:
-          type: number
-        countries:
-          type: object
-          additionalProperties:
-            type: number
     AdUnitExperiment:
       type: object
       properties:
@@ -179,6 +152,46 @@ components:
             $ref: '#/components/schemas/AdNetworkSetting'
       required:
       - experiment_name
+    AdNetworkAdUnit:
+      type: object
+      properties:
+        ad_network_ad_unit_id:
+          type: string
+        country_targeting_type:
+          type: string
+          enum:
+          - INCLUDE
+          - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+        cpm:
+          type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
     AdNetworkSetting:
       type: object
       properties:
@@ -199,30 +212,17 @@ components:
           type: array
           items:
             type: string
-    Waterfall:
+    BidFloor:
       type: object
       properties:
-        ad_unit_id:
+        country_group_name:
           type: string
-        segment_id:
-          type: string
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
-        bid_floors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BidFloor'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
+        cpm:
+          type: number
+        countries:
+          type: object
+          additionalProperties:
+            type: number
   responses:
     Unauthorized:
       description: Missing or invalid Api-Key header.

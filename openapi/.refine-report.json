@@ -29,6 +29,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "applovin-ad-units-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-asset-reporting-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-assets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-campaigns-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-conversion-events-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-creative-sets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-experiments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-growth-reporting-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-revenue-reporting-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-test-devices-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "applovin-waterfalls-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

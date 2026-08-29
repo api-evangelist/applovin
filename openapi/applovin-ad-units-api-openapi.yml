@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: AppLovin Axon Campaign Management Ad Units API
   version: v1
@@ -197,60 +197,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FrequencyCappingSetting:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - time
-          - session
-        day_limit:
-          type: integer
-        minute_frequency:
-          type: integer
-        session_limit:
-          type: integer
-        country_targeting_type:
-          type: string
-          enum:
-          - INCLUDE
-          - EXCLUDE
-        countries:
-          type: array
-          items:
-            type: string
-    Segment:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        id_type:
-          type: string
-        device_type:
-          type: string
-        segment_keys:
-          type: array
-          items:
-            type: string
-    AdNetworkAdUnit:
-      type: object
-      properties:
-        ad_network_ad_unit_id:
-          type: string
-        country_targeting_type:
-          type: string
-          enum:
-          - INCLUDE
-          - EXCLUDE
-        countries:
-          type: array
-          items:
-            type: string
-        cpm:
-          type: number
     AdUnit:
       type: object
       description: 'MAX ad unit configuration. x-schema-source: documentation
@@ -308,6 +254,69 @@ components:
         mrec_refresh_settings:
           type: object
           additionalProperties: true
+    FrequencyCappingSetting:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - time
+          - session
+        day_limit:
+          type: integer
+        minute_frequency:
+          type: integer
+        session_limit:
+          type: integer
+        country_targeting_type:
+          type: string
+          enum:
+          - INCLUDE
+          - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+    Segment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        id_type:
+          type: string
+        device_type:
+          type: string
+        segment_keys:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+    AdNetworkAdUnit:
+      type: object
+      properties:
+        ad_network_ad_unit_id:
+          type: string
+        country_targeting_type:
+          type: string
+          enum:
+          - INCLUDE
+          - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+        cpm:
+          type: number
     BidFloor:
       type: object
       properties:
@@ -354,24 +363,15 @@ components:
           type: string
         disabled:
           type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
   responses:
-    Forbidden:
-      description: Authenticated but not allowed.
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
+    Forbidden:
+      description: Authenticated but not allowed.
       content:
         application/json:
           schema:

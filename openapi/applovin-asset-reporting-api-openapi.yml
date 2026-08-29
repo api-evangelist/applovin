@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: AppLovin Axon Campaign Management Ad Units Asset Reporting API
   version: v1
@@ -116,6 +116,13 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key from the Axon dashboard.
+      schema:
+        type: string
     Columns:
       name: columns
       in: query
@@ -124,6 +131,28 @@ components:
       schema:
         type: string
         example: asset_id,asset_name,impressions,clicks,cost
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date YYYY-MM-DD (45-day window with end).
+      schema:
+        type: string
+        format: date
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
     End:
       name: end
       in: query
@@ -143,28 +172,6 @@ components:
         - json
         - csv
         default: json
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key from the Axon dashboard.
-      schema:
-        type: string
-    Start:
-      name: start
-      in: query
-      required: true
-      description: Inclusive start date YYYY-MM-DD (45-day window with end).
-      schema:
-        type: string
-        format: date
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
     NotZero:
       name: not_zero
       in: query
@@ -175,13 +182,6 @@ components:
         enum:
         - 0
         - 1
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
   responses:
     Unauthorized:
       description: Unauthorized
@@ -196,6 +196,15 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
     AssetReportRow:
       type: object
       description: 'Creative-level report row. x-schema-source: documentation
@@ -240,15 +249,6 @@ components:
         cost:
           type: number
           description: Advertiser spend in USD.
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
   securitySchemes:
     bearerAuth:
       type: http

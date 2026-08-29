@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: AppLovin Axon Campaign Management Ad Units Waterfalls API
   version: v1
@@ -80,6 +80,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     AdNetworkAdUnit:
       type: object
@@ -97,17 +110,30 @@ components:
             type: string
         cpm:
           type: number
-    BidFloor:
+    Error:
       type: object
       properties:
-        country_group_name:
+        code:
+          type: integer
+        message:
           type: string
-        cpm:
-          type: number
-        countries:
-          type: object
-          additionalProperties:
-            type: number
+      required:
+      - code
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
     AdNetworkSetting:
       type: object
       properties:
@@ -128,43 +154,17 @@ components:
           type: array
           items:
             type: string
-    Waterfall:
+    BidFloor:
       type: object
       properties:
-        ad_unit_id:
+        country_group_name:
           type: string
-        segment_id:
-          type: string
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
-        bid_floors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BidFloor'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
-  responses:
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        cpm:
+          type: number
+        countries:
+          type: object
+          additionalProperties:
+            type: number
   parameters:
     AdUnitId:
       name: ad_unit_id
