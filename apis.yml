@@ -15,17 +15,19 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: free
-  onboarding: self-serve
+  pricing: unknown
+  onboarding: unknown
   trial: false
-  try_now: true
+  try_now: false
   public: false
-  label: Free · Self-serve signup
-  confidence: high
+  label: Unknown
+  confidence: low
   source:
-  - plans
   - authentication
-  generated: '2026-07-22'
+  - rate-limits
+  - security
+  - sandbox
+  generated: '2026-09-03'
   method: derived
 image: https://www.applovin.com/favicon.ico
 tags:
@@ -325,8 +327,9 @@ common:
 - type: SDKs
   url: packages/applovin-packages.yml
   title: AppLovin first-party SDK inventory
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/applovin-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
   title: Candidate MCP tool surface (no server published)
 - type: LLMsTxt
   url: llms/applovin-llms.txt
