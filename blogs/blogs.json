@@ -2,13 +2,18 @@
   "repo": "applovin",
   "feeds": [
     {
+      "source": "https://support.applovin.com",
+      "feed_url": "https://support.applovin.com",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://blog.applovin.com/feed/",
       "feed_url": "https://blog.applovin.com/feed/",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
+      "method": "none"
     },
     {
       "source": "https://support.axon.ai",
@@ -16,16 +21,9 @@
       "title": "",
       "saved": 0,
       "method": "none"
-    },
-    {
-      "source": "https://support.applovin.com",
-      "feed_url": "https://support.applovin.com",
-      "title": "",
-      "saved": 0,
-      "method": "none"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 10,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
