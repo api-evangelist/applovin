@@ -1,21 +1,19 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Conversion Events API
+  title: AppLovin Conversion API for Lead Generation Conversion…
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-source-url: https://support.axon.ai/en/growth/promoting-your-websites/api/lead-gen-capi/
   x-last-validated: '2026-05-05'
-  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+  description: 'Server-to-server conversion API (CAPI) used to deliver `page_view` and
 
-    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    `generate_lead` events to AppLovin / Axon for attribution and
 
-    require an `Authorization` header with the Campaign Management API key
+    optimization. Up to 100 events can be batched per request, deduplicated
 
-    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
+    against pixel-fired client-side events via `dedupe_id`. PII fields like
 
-    seconds (HTTP 429 on overflow).
-
-    '
+    email and phone are auto-hashed with SHA-256.'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -36,9 +34,7 @@ paths:
 
         (`page_view`, `generate_lead`) for ingestion against your Axon Pixel.
 
-        At least one user identifier is required per event in `user_data`.
-
-        '
+        At least one user identifier is required per event in `user_data`.'
       tags:
       - Conversion Events
       parameters:
@@ -97,52 +93,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EventBatch:
-      type: object
-      description: 'Wrapper around the events array. x-schema-source: documentation
-
-        '
-      properties:
-        events:
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ServerEvent'
-      required:
-      - events
-    ServerEvent:
-      type: object
-      properties:
-        name:
-          type: string
-          enum:
-          - page_view
-          - generate_lead
-          description: Event type.
-        event_time:
-          type: integer
-          format: int64
-          description: Unix epoch time of the event in milliseconds.
-        event_source_url:
-          type: string
-          format: uri
-          description: Complete URL where the event occurred.
-        data:
-          oneOf:
-          - $ref: '#/components/schemas/EventData'
-          - type: 'null'
-          description: Event-specific data. Null for page_view, EventData for generate_lead.
-        user_data:
-          $ref: '#/components/schemas/UserData'
-        dedupe_id:
-          type: string
-          description: Unique identifier used to deduplicate against pixel-fired events.
-      required:
-      - name
-      - event_time
-      - event_source_url
-      - data
-      - user_data
     UserData:
       type: object
       description: 'User identifiers and browser context. At least one of (`aleid`,
@@ -229,8 +179,54 @@ components:
       required:
       - currency
       - value
+    ServerEvent:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+          - page_view
+          - generate_lead
+          description: Event type.
+        event_time:
+          type: integer
+          format: int64
+          description: Unix epoch time of the event in milliseconds.
+        event_source_url:
+          type: string
+          format: uri
+          description: Complete URL where the event occurred.
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/EventData'
+          - type: 'null'
+          description: Event-specific data. Null for page_view, EventData for generate_lead.
+        user_data:
+          $ref: '#/components/schemas/UserData'
+        dedupe_id:
+          type: string
+          description: Unique identifier used to deduplicate against pixel-fired events.
+      required:
+      - name
+      - event_time
+      - event_source_url
+      - data
+      - user_data
+    EventBatch:
+      type: object
+      description: 'Wrapper around the events array. x-schema-source: documentation
+
+        '
+      properties:
+        events:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ServerEvent'
+      required:
+      - events
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Campaign Management API key passed in the `Authorization` header.
+      description: Conversion API key passed in the `Authorization` header.

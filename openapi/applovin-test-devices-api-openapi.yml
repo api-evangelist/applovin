@@ -1,21 +1,15 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Test Devices API
+  title: AppLovin MAX Ad Unit Management Test Devices API
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-source-url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
   x-last-validated: '2026-05-05'
-  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+  description: 'Programmatic management of AppLovin MAX ad units, waterfalls,
 
-    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    experiments, and test devices. Authentication uses the `Api-Key` HTTP
 
-    require an `Authorization` header with the Campaign Management API key
-
-    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
-
-    seconds (HTTP 429 on overflow).
-
-    '
+    header. Rate limit: 2,000 requests per hour.'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -23,7 +17,7 @@ servers:
 - url: https://o.applovin.com/mediation/v1
   description: AppLovin MAX mediation management host
 security:
-- bearerAuth: []
+- apiKeyHeader: []
 tags:
 - name: Test Devices
   description: Test device management
@@ -122,29 +116,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    TestDeviceId:
+      name: test_device_id
+      in: path
+      required: true
+      description: Test device identifier.
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
     TestDevice:
       type: object
       properties:
@@ -164,16 +144,31 @@ components:
       - device_id
       - disabled
       - network
-  parameters:
-    TestDeviceId:
-      name: test_device_id
-      in: path
-      required: true
-      description: Test device identifier.
-      schema:
-        type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+  responses:
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Campaign Management API key passed in the `Authorization` header.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Management Key from AppLovin dashboard (Account > General > Keys).

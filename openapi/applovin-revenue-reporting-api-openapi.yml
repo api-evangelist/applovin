@@ -1,21 +1,17 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Revenue Reporting API
+  title: AppLovin MAX Revenue Reporting API
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-source-url: https://support.axon.ai/en/max/reporting-apis/revenue-reporting-api
   x-last-validated: '2026-05-05'
-  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+  description: 'REST endpoint that returns aggregated MAX mediation revenue and user-level
 
-    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    publisher data. Authenticate with your Report Key, request a list of
 
-    require an `Authorization` header with the Campaign Management API key
+    columns, and constrain the result with a date range (max 45-day window).
 
-    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
-
-    seconds (HTTP 429 on overflow).
-
-    '
+    Supports JSON and CSV output, plus filter / sort / pagination.'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -23,7 +19,7 @@ servers:
 - url: https://r.applovin.com
   description: AppLovin reporting host
 security:
-- bearerAuth: []
+- apiKeyQuery: []
 tags:
 - name: Revenue Reporting
   description: Mediation revenue and user-level reporting
@@ -38,9 +34,7 @@ paths:
 
         (start, end) within a rolling 45-day window. Optional filters, sort,
 
-        limit, and offset support customised reporting and pagination.
-
-        '
+        limit, and offset support customised reporting and pagination.'
       tags:
       - Revenue Reporting
       parameters:
@@ -109,6 +103,17 @@ components:
       - code
       - count
       - results
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error description.
+      required:
+      - code
     RevenueReportRow:
       type: object
       description: 'A single report row. The exact set of keys depends on the requested
@@ -155,26 +160,7 @@ components:
         revenue:
           type: string
           description: Revenue in USD.
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable error description.
-      required:
-      - code
   parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key (issued under Account > Keys in the Axon dashboard).
-      schema:
-        type: string
-        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
     Columns:
       name: columns
       in: query
@@ -183,14 +169,17 @@ components:
       schema:
         type: string
         example: day,application,ad_format,country,impressions,ecpm,revenue
-    Offset:
-      name: offset
+    Format:
+      name: format
       in: query
       required: false
-      description: Number of rows to skip for pagination.
+      description: Response format. Defaults to JSON.
       schema:
-        type: integer
-        minimum: 0
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
     Start:
       name: start
       in: query
@@ -208,26 +197,6 @@ components:
       schema:
         type: integer
         minimum: 1
-    End:
-      name: end
-      in: query
-      required: true
-      description: Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start.
-      schema:
-        type: string
-        format: date
-        example: '2019-03-29'
-    Format:
-      name: format
-      in: query
-      required: false
-      description: Response format. Defaults to JSON.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
     NotZero:
       name: not_zero
       in: query
@@ -238,16 +207,32 @@ components:
         enum:
         - 0
         - 1
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start.
+      schema:
+        type: string
+        format: date
+        example: '2019-03-29'
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of rows to skip for pagination.
+      schema:
+        type: integer
+        minimum: 0
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key (issued under Account > Keys in the Axon dashboard).
+      schema:
+        type: string
+        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
   responses:
-    Unauthorized:
-      description: Missing or invalid api_key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: 401
-            message: Unauthorized
     BadRequest:
       description: Malformed or invalid request parameters.
       content:
@@ -257,8 +242,18 @@ components:
           example:
             code: 400
             message: Invalid date range
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Unauthorized
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Campaign Management API key passed in the `Authorization` header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Report Key issued by the AppLovin / Axon dashboard.

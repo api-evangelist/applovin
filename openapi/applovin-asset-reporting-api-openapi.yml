@@ -1,21 +1,17 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Asset Reporting API
+  title: AppLovin Growth Asset Reporting API
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-source-url: https://support.axon.ai/en/growth/promoting-your-apps/api/asset-reporting-api
   x-last-validated: '2026-05-05'
-  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+  description: 'REST endpoints that return creative-level performance metrics for
 
-    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    AppLovin AppDiscovery / Axon campaigns. `assetReport` accepts symbolic
 
-    require an `Authorization` header with the Campaign Management API key
+    ranges (yesterday, last_7d, last_month) while `assetAnalyticsReport`
 
-    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
-
-    seconds (HTTP 429 on overflow).
-
-    '
+    accepts arbitrary date ranges within a 45-day window.'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -23,7 +19,7 @@ servers:
 - url: https://r.applovin.com
   description: AppLovin reporting host
 security:
-- bearerAuth: []
+- apiKeyQuery: []
 tags:
 - name: Asset Reporting
   description: Creative-level performance reporting
@@ -34,9 +30,7 @@ paths:
       summary: Get Asset Report by Range
       description: 'Returns asset-level metrics (impressions, clicks, CTR, cost) for a
 
-        symbolic time range such as `yesterday`, `last_7d`, or `last_month`.
-
-        '
+        symbolic time range such as `yesterday`, `last_7d`, or `last_month`.'
       tags:
       - Asset Reporting
       parameters:
@@ -81,9 +75,7 @@ paths:
       summary: Get Asset Report by Date Range
       description: 'Returns asset-level metrics for an arbitrary YYYY-MM-DD date range
 
-        bounded by a 45-day window.
-
-        '
+        bounded by a 45-day window.'
       tags:
       - Asset Reporting
       parameters:
@@ -116,13 +108,13 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    ApiKey:
-      name: api_key
+    Limit:
+      name: limit
       in: query
-      required: true
-      description: Report Key from the Axon dashboard.
+      required: false
       schema:
-        type: string
+        type: integer
+        minimum: 1
     Columns:
       name: columns
       in: query
@@ -131,36 +123,6 @@ components:
       schema:
         type: string
         example: asset_id,asset_name,impressions,clicks,cost
-    Start:
-      name: start
-      in: query
-      required: true
-      description: Inclusive start date YYYY-MM-DD (45-day window with end).
-      schema:
-        type: string
-        format: date
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-    End:
-      name: end
-      in: query
-      required: true
-      description: Inclusive end date YYYY-MM-DD.
-      schema:
-        type: string
-        format: date
     Format:
       name: format
       in: query
@@ -172,6 +134,14 @@ components:
         - json
         - csv
         default: json
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date YYYY-MM-DD (45-day window with end).
+      schema:
+        type: string
+        format: date
     NotZero:
       name: not_zero
       in: query
@@ -182,19 +152,28 @@ components:
         enum:
         - 0
         - 1
-  responses:
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date YYYY-MM-DD.
+      schema:
+        type: string
+        format: date
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key from the Axon dashboard.
+      schema:
+        type: string
   schemas:
     Error:
       type: object
@@ -249,8 +228,21 @@ components:
         cost:
           type: number
           description: Advertiser spend in USD.
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Campaign Management API key passed in the `Authorization` header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key

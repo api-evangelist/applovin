@@ -1,21 +1,15 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Waterfalls API
+  title: AppLovin MAX Ad Unit Management Waterfalls API
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-source-url: https://support.axon.ai/en/max/advanced-features/ad-unit-management-api
   x-last-validated: '2026-05-05'
-  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+  description: 'Programmatic management of AppLovin MAX ad units, waterfalls,
 
-    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    experiments, and test devices. Authentication uses the `Api-Key` HTTP
 
-    require an `Authorization` header with the Campaign Management API key
-
-    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
-
-    seconds (HTTP 429 on overflow).
-
-    '
+    header. Rate limit: 2,000 requests per hour.'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -23,7 +17,7 @@ servers:
 - url: https://o.applovin.com/mediation/v1
   description: AppLovin MAX mediation management host
 security:
-- bearerAuth: []
+- apiKeyHeader: []
 tags:
 - name: Waterfalls
   description: Per-segment waterfall management
@@ -80,45 +74,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    AdNetworkAdUnit:
-      type: object
-      properties:
-        ad_network_ad_unit_id:
-          type: string
-        country_targeting_type:
-          type: string
-          enum:
-          - INCLUDE
-          - EXCLUDE
-        countries:
-          type: array
-          items:
-            type: string
-        cpm:
-          type: number
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
     Waterfall:
       type: object
       properties:
@@ -134,6 +90,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BidFloor'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
     AdNetworkSetting:
       type: object
       properties:
@@ -154,6 +119,22 @@ components:
           type: array
           items:
             type: string
+    AdNetworkAdUnit:
+      type: object
+      properties:
+        ad_network_ad_unit_id:
+          type: string
+        country_targeting_type:
+          type: string
+          enum:
+          - INCLUDE
+          - EXCLUDE
+        countries:
+          type: array
+          items:
+            type: string
+        cpm:
+          type: number
     BidFloor:
       type: object
       properties:
@@ -166,13 +147,6 @@ components:
           additionalProperties:
             type: number
   parameters:
-    AdUnitId:
-      name: ad_unit_id
-      in: path
-      required: true
-      description: Ad unit identifier.
-      schema:
-        type: string
     SegmentId:
       name: segment_id
       in: path
@@ -180,8 +154,29 @@ components:
       description: Segment identifier scoped under the ad unit.
       schema:
         type: string
+    AdUnitId:
+      name: ad_unit_id
+      in: path
+      required: true
+      description: Ad unit identifier.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Campaign Management API key passed in the `Authorization` header.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Management Key from AppLovin dashboard (Account > General > Keys).

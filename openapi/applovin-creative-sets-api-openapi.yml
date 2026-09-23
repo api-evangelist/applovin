@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Creative Sets API
+  title: AppLovin Axon Campaign Management Creative Sets API
   version: v1
   x-generated-from: documentation
   x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
@@ -13,9 +13,7 @@ info:
 
     and an `account_id` query parameter. Rate limit: 1,000 requests per 60
 
-    seconds (HTTP 429 on overflow).
-
-    '
+    seconds (HTTP 429 on overflow).'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -202,7 +200,35 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (1,000 requests per 60 seconds).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation or input error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
     AccountId:
       name: account_id
       in: query
@@ -218,35 +244,33 @@ components:
         type: integer
         minimum: 1
         default: 1
-    Size:
-      name: size
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-  responses:
-    Unauthorized:
-      description: Missing or invalid Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (1,000 requests per 60 seconds).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation or input error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    CreativeSetAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - HOSTED_HTML
+          - VID_LONG_P
+          - VID_SHORT_P
+          - IMG_BANNER
+          - IMG_INTER_P
+        resource_type:
+          type: string
+          enum:
+          - image
+          - html
+          - video
     Error:
       type: object
       properties:
@@ -297,32 +321,6 @@ components:
       - campaign_id
       - type
       - assets
-    CreativeSetAsset:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        url:
-          type: string
-          format: uri
-        type:
-          type: string
-          enum:
-          - HOSTED_HTML
-          - VID_LONG_P
-          - VID_SHORT_P
-          - IMG_BANNER
-          - IMG_INTER_P
-        resource_type:
-          type: string
-          enum:
-          - image
-          - html
-          - video
     CreativeSetsByCampaign:
       type: object
       properties:

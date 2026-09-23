@@ -1,21 +1,17 @@
 openapi: 3.2.0
 info:
-  title: AppLovin Axon Campaign Management Ad Units Growth Reporting API
+  title: AppLovin Growth (Axon / AppDiscovery) Reporting Growth…
   version: v1
   x-generated-from: documentation
-  x-source-url: https://support.axon.ai/en/app-discovery/api/axon-campaign-management-api/
+  x-source-url: https://support.axon.ai/en/growth/promoting-your-apps/api/reporting-api
   x-last-validated: '2026-05-05'
-  description: 'REST endpoints used to programmatically manage AppLovin AppDiscovery
+  description: 'REST endpoint that returns aggregated campaign performance for AppLovin''s
 
-    (Axon) campaigns, creative sets, and creative assets. All endpoints
+    Growth / AppDiscovery / Axon advertising platform. Returns publisher or
 
-    require an `Authorization` header with the Campaign Management API key
+    advertiser report rows for a date range (max 45 days) with filtering,
 
-    and an `account_id` query parameter. Rate limit: 1,000 requests per 60
-
-    seconds (HTTP 429 on overflow).
-
-    '
+    sorting, paging, and JSON or CSV output.'
   contact:
     name: AppLovin Support
     url: https://support.axon.ai
@@ -23,7 +19,7 @@ servers:
 - url: https://r.applovin.com
   description: AppLovin reporting host
 security:
-- bearerAuth: []
+- apiKeyQuery: []
 tags:
 - name: Growth Reporting
   description: Campaign performance reporting for advertisers and publishers
@@ -38,9 +34,7 @@ paths:
 
         45-day rolling window. The response payload shape varies with the
 
-        selected `columns` and `report_type`.
-
-        '
+        selected `columns` and `report_type`.'
       tags:
       - Growth Reporting
       parameters:
@@ -83,20 +77,111 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Malformed parameters or out-of-range date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid api_key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
+      schema:
+        type: string
+        example: day,campaign,impressions,clicks,conversions,cost
+    Format:
+      name: format
+      in: query
+      required: true
+      description: Response format.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.
+      schema:
+        type: string
+        example: '2015-04-20'
+    ReportType:
+      name: report_type
+      in: query
+      required: false
+      description: Choose between publisher or advertiser report dimensions.
+      schema:
+        type: string
+        enum:
+        - publisher
+        - advertiser
+        default: publisher
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude rows where all metrics are zero.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
+      schema:
+        type: string
+        example: now
+    DayColumn:
+      name: day_column
+      in: query
+      required: false
+      description: Set to `day` to compute cohort metrics. Defaults to realtime when absent.
+      schema:
+        type: string
+        enum:
+        - day
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination row offset.
+      schema:
+        type: integer
+        minimum: 0
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key, found under Account > Keys in the Axon dashboard.
+      schema:
+        type: string
+    Having:
+      name: having
+      in: query
+      required: false
+      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
     GrowthReportRow:
       type: object
       description: 'Single Growth report row. Keys correspond to the requested `columns`;
@@ -143,112 +228,22 @@ components:
         revenue:
           type: string
           description: Publisher revenue in USD.
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
-  parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key, found under Account > Keys in the Axon dashboard.
-      schema:
-        type: string
-    Having:
-      name: having
-      in: query
-      required: false
-      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
-      schema:
-        type: string
-    DayColumn:
-      name: day_column
-      in: query
-      required: false
-      description: Set to `day` to compute cohort metrics. Defaults to realtime when absent.
-      schema:
-        type: string
-        enum:
-        - day
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
-      schema:
-        type: string
-        example: day,campaign,impressions,clicks,conversions,cost
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination row offset.
-      schema:
-        type: integer
-        minimum: 0
-    Start:
-      name: start
-      in: query
-      required: true
-      description: Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.
-      schema:
-        type: string
-        example: '2015-04-20'
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum rows to return.
-      schema:
-        type: integer
-        minimum: 1
-    End:
-      name: end
-      in: query
-      required: true
-      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
-      schema:
-        type: string
-        example: now
-    ReportType:
-      name: report_type
-      in: query
-      required: false
-      description: Choose between publisher or advertiser report dimensions.
-      schema:
-        type: string
-        enum:
-        - publisher
-        - advertiser
-        default: publisher
-    Format:
-      name: format
-      in: query
-      required: true
-      description: Response format.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-    NotZero:
-      name: not_zero
-      in: query
-      required: false
-      description: Set to 1 to exclude rows where all metrics are zero.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
+  responses:
+    BadRequest:
+      description: Malformed parameters or out-of-range date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Campaign Management API key passed in the `Authorization` header.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Report Key issued by the Axon dashboard.
