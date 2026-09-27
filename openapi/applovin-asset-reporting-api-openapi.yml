@@ -108,32 +108,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of asset report columns.
-      schema:
-        type: string
-        example: asset_id,asset_name,impressions,clicks,cost
-    Format:
-      name: format
-      in: query
-      required: false
-      description: Response format. Defaults to JSON.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
     Start:
       name: start
       in: query
@@ -142,16 +116,13 @@ components:
       schema:
         type: string
         format: date
-    NotZero:
-      name: not_zero
+    ApiKey:
+      name: api_key
       in: query
-      required: false
-      description: Set to 1 to exclude all-zero rows.
+      required: true
+      description: Report Key from the Axon dashboard.
       schema:
-        type: integer
-        enum:
-        - 0
-        - 1
+        type: string
     End:
       name: end
       in: query
@@ -167,23 +138,56 @@ components:
       schema:
         type: integer
         minimum: 0
-    ApiKey:
-      name: api_key
+    Format:
+      name: format
       in: query
-      required: true
-      description: Report Key from the Axon dashboard.
+      required: false
+      description: Response format. Defaults to JSON.
       schema:
         type: string
+        enum:
+        - json
+        - csv
+        default: json
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of asset report columns.
+      schema:
+        type: string
+        example: asset_id,asset_name,impressions,clicks,cost
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude all-zero rows.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
     AssetReportRow:
       type: object
       description: 'Creative-level report row. x-schema-source: documentation
@@ -228,19 +232,15 @@ components:
         cost:
           type: number
           description: Advertiser spend in USD.
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
   securitySchemes:
     apiKeyQuery:
       type: apiKey

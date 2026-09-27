@@ -116,14 +116,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    TestDeviceId:
-      name: test_device_id
-      in: path
-      required: true
-      description: Test device identifier.
-      schema:
-        type: string
+  responses:
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     TestDevice:
       type: object
@@ -153,19 +158,14 @@ components:
           type: string
       required:
       - code
-  responses:
-    BadRequest:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    TestDeviceId:
+      name: test_device_id
+      in: path
+      required: true
+      description: Test device identifier.
+      schema:
+        type: string
   securitySchemes:
     apiKeyHeader:
       type: apiKey

@@ -125,30 +125,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Waterfall:
+    AdUnitExperiment:
       type: object
       properties:
+        id:
+          type: string
         ad_unit_id:
           type: string
-        segment_id:
+        experiment_name:
           type: string
+        promote:
+          type: boolean
+        deprecate:
+          type: boolean
         ad_network_settings:
           type: array
           items:
             $ref: '#/components/schemas/AdNetworkSetting'
-        bid_floors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BidFloor'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
       required:
-      - code
+      - experiment_name
     AdNetworkSetting:
       type: object
       properties:
@@ -169,25 +164,15 @@ components:
           type: array
           items:
             type: string
-    AdUnitExperiment:
+    Error:
       type: object
       properties:
-        id:
+        code:
+          type: integer
+        message:
           type: string
-        ad_unit_id:
-          type: string
-        experiment_name:
-          type: string
-        promote:
-          type: boolean
-        deprecate:
-          type: boolean
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
       required:
-      - experiment_name
+      - code
     BidFloor:
       type: object
       properties:
@@ -199,6 +184,21 @@ components:
           type: object
           additionalProperties:
             type: number
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
     AdNetworkAdUnit:
       type: object
       properties:
@@ -215,21 +215,6 @@ components:
             type: string
         cpm:
           type: number
-  parameters:
-    SegmentId:
-      name: segment_id
-      in: path
-      required: true
-      description: Segment identifier scoped under the ad unit.
-      schema:
-        type: string
-    AdUnitId:
-      name: ad_unit_id
-      in: path
-      required: true
-      description: Ad unit identifier.
-      schema:
-        type: string
   responses:
     BadRequest:
       description: Validation error.
@@ -243,6 +228,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    AdUnitId:
+      name: ad_unit_id
+      in: path
+      required: true
+      description: Ad unit identifier.
+      schema:
+        type: string
+    SegmentId:
+      name: segment_id
+      in: path
+      required: true
+      description: Segment identifier scoped under the ad unit.
+      schema:
+        type: string
   securitySchemes:
     apiKeyHeader:
       type: apiKey

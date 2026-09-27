@@ -74,31 +74,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Waterfall:
-      type: object
-      properties:
-        ad_unit_id:
-          type: string
-        segment_id:
-          type: string
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
-        bid_floors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BidFloor'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
     AdNetworkSetting:
       type: object
       properties:
@@ -119,6 +108,41 @@ components:
           type: array
           items:
             type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+    BidFloor:
+      type: object
+      properties:
+        country_group_name:
+          type: string
+        cpm:
+          type: number
+        countries:
+          type: object
+          additionalProperties:
+            type: number
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
     AdNetworkAdUnit:
       type: object
       properties:
@@ -135,25 +159,7 @@ components:
             type: string
         cpm:
           type: number
-    BidFloor:
-      type: object
-      properties:
-        country_group_name:
-          type: string
-        cpm:
-          type: number
-        countries:
-          type: object
-          additionalProperties:
-            type: number
   parameters:
-    SegmentId:
-      name: segment_id
-      in: path
-      required: true
-      description: Segment identifier scoped under the ad unit.
-      schema:
-        type: string
     AdUnitId:
       name: ad_unit_id
       in: path
@@ -161,19 +167,13 @@ components:
       description: Ad unit identifier.
       schema:
         type: string
-  responses:
-    BadRequest:
-      description: Validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    SegmentId:
+      name: segment_id
+      in: path
+      required: true
+      description: Segment identifier scoped under the ad unit.
+      schema:
+        type: string
   securitySchemes:
     apiKeyHeader:
       type: apiKey

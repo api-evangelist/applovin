@@ -93,6 +93,67 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    EventBatch:
+      type: object
+      description: 'Wrapper around the events array. x-schema-source: documentation
+
+        '
+      properties:
+        events:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ServerEvent'
+      required:
+      - events
+    ServerEvent:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+          - page_view
+          - generate_lead
+          description: Event type.
+        event_time:
+          type: integer
+          format: int64
+          description: Unix epoch time of the event in milliseconds.
+        event_source_url:
+          type: string
+          format: uri
+          description: Complete URL where the event occurred.
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/EventData'
+          - type: 'null'
+          description: Event-specific data. Null for page_view, EventData for generate_lead.
+        user_data:
+          $ref: '#/components/schemas/UserData'
+        dedupe_id:
+          type: string
+          description: Unique identifier used to deduplicate against pixel-fired events.
+      required:
+      - name
+      - event_time
+      - event_source_url
+      - data
+      - user_data
+    EventData:
+      type: object
+      description: Required for generate_lead events; null for page_view.
+      properties:
+        currency:
+          type: string
+          description: ISO 4217 three-letter currency code.
+          example: USD
+        value:
+          type: number
+          minimum: 0
+          description: Monetary value of the lead.
+      required:
+      - currency
+      - value
     UserData:
       type: object
       description: 'User identifiers and browser context. At least one of (`aleid`,
@@ -164,67 +225,6 @@ components:
       - client_ip_address
       - client_user_agent
       - esi
-    EventData:
-      type: object
-      description: Required for generate_lead events; null for page_view.
-      properties:
-        currency:
-          type: string
-          description: ISO 4217 three-letter currency code.
-          example: USD
-        value:
-          type: number
-          minimum: 0
-          description: Monetary value of the lead.
-      required:
-      - currency
-      - value
-    ServerEvent:
-      type: object
-      properties:
-        name:
-          type: string
-          enum:
-          - page_view
-          - generate_lead
-          description: Event type.
-        event_time:
-          type: integer
-          format: int64
-          description: Unix epoch time of the event in milliseconds.
-        event_source_url:
-          type: string
-          format: uri
-          description: Complete URL where the event occurred.
-        data:
-          oneOf:
-          - $ref: '#/components/schemas/EventData'
-          - type: 'null'
-          description: Event-specific data. Null for page_view, EventData for generate_lead.
-        user_data:
-          $ref: '#/components/schemas/UserData'
-        dedupe_id:
-          type: string
-          description: Unique identifier used to deduplicate against pixel-fired events.
-      required:
-      - name
-      - event_time
-      - event_source_url
-      - data
-      - user_data
-    EventBatch:
-      type: object
-      description: 'Wrapper around the events array. x-schema-source: documentation
-
-        '
-      properties:
-        events:
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ServerEvent'
-      required:
-      - events
   securitySchemes:
     bearerAuth:
       type: http
