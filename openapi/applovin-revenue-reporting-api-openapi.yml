@@ -77,51 +77,79 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Malformed or invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: 400
-            message: Invalid date range
-    Unauthorized:
-      description: Missing or invalid api_key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: 401
-            message: Unauthorized
+  parameters:
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude rows where all metrics are zero.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+    Format:
+      name: format
+      in: query
+      required: false
+      description: Response format. Defaults to JSON.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end.
+      schema:
+        type: string
+        format: date
+        example: '2019-03-25'
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of report columns to return.
+      schema:
+        type: string
+        example: day,application,ad_format,country,impressions,ecpm,revenue
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key (issued under Account > Keys in the Axon dashboard).
+      schema:
+        type: string
+        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of rows to skip for pagination.
+      schema:
+        type: integer
+        minimum: 0
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start.
+      schema:
+        type: string
+        format: date
+        example: '2019-03-29'
   schemas:
-    RevenueReportResponse:
-      type: object
-      description: 'Top-level wrapper around revenue report results.
-
-        x-schema-source: documentation
-
-        '
-      properties:
-        code:
-          type: integer
-          description: HTTP status code echoed in the body (200 indicates success).
-          example: 200
-        count:
-          type: integer
-          description: Number of rows in `results`.
-          example: 2
-        results:
-          type: array
-          description: Result rows whose keys are the requested columns.
-          items:
-            $ref: '#/components/schemas/RevenueReportRow'
-      required:
-      - code
-      - count
-      - results
     Error:
       type: object
       properties:
@@ -179,78 +207,50 @@ components:
         revenue:
           type: string
           description: Revenue in USD.
-  parameters:
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key (issued under Account > Keys in the Axon dashboard).
-      schema:
-        type: string
-        example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
-    Start:
-      name: start
-      in: query
-      required: true
-      description: Inclusive start date in YYYY-MM-DD. Must fall within a 45-day request window with end.
-      schema:
-        type: string
-        format: date
-        example: '2019-03-25'
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Number of rows to skip for pagination.
-      schema:
-        type: integer
-        minimum: 0
-    End:
-      name: end
-      in: query
-      required: true
-      description: Inclusive end date in YYYY-MM-DD. Must fall within a 45-day request window with start.
-      schema:
-        type: string
-        format: date
-        example: '2019-03-29'
-    Format:
-      name: format
-      in: query
-      required: false
-      description: Response format. Defaults to JSON.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of report columns to return.
-      schema:
-        type: string
-        example: day,application,ad_format,country,impressions,ecpm,revenue
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum rows to return.
-      schema:
-        type: integer
-        minimum: 1
-    NotZero:
-      name: not_zero
-      in: query
-      required: false
-      description: Set to 1 to exclude rows where all metrics are zero.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
+    RevenueReportResponse:
+      type: object
+      description: 'Top-level wrapper around revenue report results.
+
+        x-schema-source: documentation
+
+        '
+      properties:
+        code:
+          type: integer
+          description: HTTP status code echoed in the body (200 indicates success).
+          example: 200
+        count:
+          type: integer
+          description: Number of rows in `results`.
+          example: 2
+        results:
+          type: array
+          description: Result rows whose keys are the requested columns.
+          items:
+            $ref: '#/components/schemas/RevenueReportRow'
+      required:
+      - code
+      - count
+      - results
+  responses:
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Unauthorized
+    BadRequest:
+      description: Malformed or invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Invalid date range
   securitySchemes:
     apiKeyQuery:
       type: apiKey

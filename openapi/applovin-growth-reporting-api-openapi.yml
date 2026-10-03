@@ -77,61 +77,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Malformed parameters or out-of-range date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid api_key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    Start:
-      name: start
-      in: query
-      required: true
-      description: Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.
-      schema:
-        type: string
-        example: '2015-04-20'
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key, found under Account > Keys in the Axon dashboard.
-      schema:
-        type: string
-    Offset:
-      name: offset
+    Having:
+      name: having
       in: query
       required: false
-      description: Pagination row offset.
-      schema:
-        type: integer
-        minimum: 0
-    End:
-      name: end
-      in: query
-      required: true
-      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
+      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
       schema:
         type: string
-        example: now
-    Format:
-      name: format
-      in: query
-      required: true
-      description: Response format.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
     DayColumn:
       name: day_column
       in: query
@@ -141,29 +94,6 @@ components:
         type: string
         enum:
         - day
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
-      schema:
-        type: string
-        example: day,campaign,impressions,clicks,conversions,cost
-    Having:
-      name: having
-      in: query
-      required: false
-      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum rows to return.
-      schema:
-        type: integer
-        minimum: 1
     NotZero:
       name: not_zero
       in: query
@@ -174,6 +104,31 @@ components:
         enum:
         - 0
         - 1
+    Format:
+      name: format
+      in: query
+      required: true
+      description: Response format.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key, found under Account > Keys in the Axon dashboard.
+      schema:
+        type: string
     ReportType:
       name: report_type
       in: query
@@ -185,6 +140,38 @@ components:
         - publisher
         - advertiser
         default: publisher
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
+      schema:
+        type: string
+        example: day,campaign,impressions,clicks,conversions,cost
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination row offset.
+      schema:
+        type: integer
+        minimum: 0
+    Start:
+      name: start
+      in: query
+      required: true
+      description: Inclusive start date in YYYY-MM-DD or Unix epoch seconds. Must be within a 45-day window with end.
+      schema:
+        type: string
+        example: '2015-04-20'
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
+      schema:
+        type: string
+        example: now
   schemas:
     Error:
       type: object
@@ -241,6 +228,19 @@ components:
         revenue:
           type: string
           description: Publisher revenue in USD.
+  responses:
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed parameters or out-of-range date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyQuery:
       type: apiKey

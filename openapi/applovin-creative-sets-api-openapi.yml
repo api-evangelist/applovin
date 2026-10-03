@@ -200,39 +200,49 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Validation or input error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (1,000 requests per 60 seconds).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    CreativeSetsByCampaign:
+    CreativeSetAsset:
       type: object
       properties:
-        campaign_count:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - HOSTED_HTML
+          - VID_LONG_P
+          - VID_SHORT_P
+          - IMG_BANNER
+          - IMG_INTER_P
+        resource_type:
+          type: string
+          enum:
+          - image
+          - html
+          - video
+    CreativeSetRef:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    Error:
+      type: object
+      properties:
+        code:
           type: integer
-        creative_set_count:
-          type: integer
-        campaigns:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/CreativeSet'
+        message:
+          type: string
+      required:
+      - code
     CreativeSet:
       type: object
       properties:
@@ -267,48 +277,38 @@ components:
       - campaign_id
       - type
       - assets
-    Error:
+    CreativeSetsByCampaign:
       type: object
       properties:
-        code:
+        campaign_count:
           type: integer
-        message:
-          type: string
-      required:
-      - code
-    CreativeSetRef:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    CreativeSetAsset:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        url:
-          type: string
-          format: uri
-        type:
-          type: string
-          enum:
-          - HOSTED_HTML
-          - VID_LONG_P
-          - VID_SHORT_P
-          - IMG_BANNER
-          - IMG_INTER_P
-        resource_type:
-          type: string
-          enum:
-          - image
-          - html
-          - video
+        creative_set_count:
+          type: integer
+        campaigns:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/CreativeSet'
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (1,000 requests per 60 seconds).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation or input error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     Page:
       name: page

@@ -125,25 +125,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AdUnitExperiment:
-      type: object
-      properties:
-        id:
-          type: string
-        ad_unit_id:
-          type: string
-        experiment_name:
-          type: string
-        promote:
-          type: boolean
-        deprecate:
-          type: boolean
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
-      required:
-      - experiment_name
     AdNetworkSetting:
       type: object
       properties:
@@ -164,41 +145,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
-    BidFloor:
-      type: object
-      properties:
-        country_group_name:
-          type: string
-        cpm:
-          type: number
-        countries:
-          type: object
-          additionalProperties:
-            type: number
-    Waterfall:
-      type: object
-      properties:
-        ad_unit_id:
-          type: string
-        segment_id:
-          type: string
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
-        bid_floors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BidFloor'
     AdNetworkAdUnit:
       type: object
       properties:
@@ -215,15 +161,69 @@ components:
             type: string
         cpm:
           type: number
+    BidFloor:
+      type: object
+      properties:
+        country_group_name:
+          type: string
+        cpm:
+          type: number
+        countries:
+          type: object
+          additionalProperties:
+            type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+    AdUnitExperiment:
+      type: object
+      properties:
+        id:
+          type: string
+        ad_unit_id:
+          type: string
+        experiment_name:
+          type: string
+        promote:
+          type: boolean
+        deprecate:
+          type: boolean
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+      required:
+      - experiment_name
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
   responses:
-    BadRequest:
-      description: Validation error.
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
+    BadRequest:
+      description: Validation error.
       content:
         application/json:
           schema:

@@ -154,17 +154,15 @@ components:
           type: string
         resource_type:
           type: string
-    AssetUploadDetail:
+    Error:
       type: object
       properties:
-        file_name:
-          type: string
-        status:
-          type: string
-        asset_id:
-          type: string
+        code:
+          type: integer
         message:
           type: string
+      required:
+      - code
     AssetUploadResult:
       type: object
       properties:
@@ -189,28 +187,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AssetUploadDetail'
-    Error:
+    AssetUploadDetail:
       type: object
       properties:
-        code:
-          type: integer
+        file_name:
+          type: string
+        status:
+          type: string
+        asset_id:
+          type: string
         message:
           type: string
-      required:
-      - code
-  responses:
-    BadRequest:
-      description: Validation or input error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Page:
       name: page
@@ -236,6 +223,19 @@ components:
       description: Account identifier issued by AppLovin / Axon.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation or input error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
