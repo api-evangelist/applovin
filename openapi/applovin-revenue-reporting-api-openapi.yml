@@ -88,17 +88,6 @@ components:
         enum:
         - 0
         - 1
-    Format:
-      name: format
-      in: query
-      required: false
-      description: Response format. Defaults to JSON.
-      schema:
-        type: string
-        enum:
-        - json
-        - csv
-        default: json
     Limit:
       name: limit
       in: query
@@ -116,14 +105,6 @@ components:
         type: string
         format: date
         example: '2019-03-25'
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of report columns to return.
-      schema:
-        type: string
-        example: day,application,ad_format,country,impressions,ecpm,revenue
     ApiKey:
       name: api_key
       in: query
@@ -132,6 +113,14 @@ components:
       schema:
         type: string
         example: Hyfi8MkctXXXXXXXXXXXXXXXXXXXXXXX
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of report columns to return.
+      schema:
+        type: string
+        example: day,application,ad_format,country,impressions,ecpm,revenue
     Offset:
       name: offset
       in: query
@@ -140,6 +129,17 @@ components:
       schema:
         type: integer
         minimum: 0
+    Format:
+      name: format
+      in: query
+      required: false
+      description: Response format. Defaults to JSON.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
     End:
       name: end
       in: query
@@ -233,15 +233,6 @@ components:
       - count
       - results
   responses:
-    Unauthorized:
-      description: Missing or invalid api_key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: 401
-            message: Unauthorized
     BadRequest:
       description: Malformed or invalid request parameters.
       content:
@@ -251,6 +242,15 @@ components:
           example:
             code: 400
             message: Invalid date range
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Unauthorized
   securitySchemes:
     apiKeyQuery:
       type: apiKey

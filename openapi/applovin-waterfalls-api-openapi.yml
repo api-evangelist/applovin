@@ -74,6 +74,21 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    AdUnitId:
+      name: ad_unit_id
+      in: path
+      required: true
+      description: Ad unit identifier.
+      schema:
+        type: string
+    SegmentId:
+      name: segment_id
+      in: path
+      required: true
+      description: Segment identifier scoped under the ad unit.
+      schema:
+        type: string
   schemas:
     AdNetworkSetting:
       type: object
@@ -95,6 +110,41 @@ components:
           type: array
           items:
             type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+    BidFloor:
+      type: object
+      properties:
+        country_group_name:
+          type: string
+        cpm:
+          type: number
+        countries:
+          type: object
+          additionalProperties:
+            type: number
+    Waterfall:
+      type: object
+      properties:
+        ad_unit_id:
+          type: string
+        segment_id:
+          type: string
+        ad_network_settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdNetworkSetting'
+        bid_floors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BidFloor'
     AdNetworkAdUnit:
       type: object
       properties:
@@ -111,69 +161,19 @@ components:
             type: string
         cpm:
           type: number
-    BidFloor:
-      type: object
-      properties:
-        country_group_name:
-          type: string
-        cpm:
-          type: number
-        countries:
-          type: object
-          additionalProperties:
-            type: number
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
-    Waterfall:
-      type: object
-      properties:
-        ad_unit_id:
-          type: string
-        segment_id:
-          type: string
-        ad_network_settings:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdNetworkSetting'
-        bid_floors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BidFloor'
   responses:
-    Unauthorized:
-      description: Missing or invalid Api-Key header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Validation error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    AdUnitId:
-      name: ad_unit_id
-      in: path
-      required: true
-      description: Ad unit identifier.
-      schema:
-        type: string
-    SegmentId:
-      name: segment_id
-      in: path
-      required: true
-      description: Segment identifier scoped under the ad unit.
-      schema:
-        type: string
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyHeader:
       type: apiKey

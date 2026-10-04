@@ -135,6 +135,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Tracking:
+      type: object
+      properties:
+        tracking_method:
+          type: string
+          enum:
+          - ADJUST
+          - APPSFLYER
+          - APSALAR
+          - BRANCH
+          - KOCHAVA
+          - TENJIN
+        impression_url:
+          type: string
+          format: uri
+        click_url:
+          type: string
+          format: uri
+      required:
+      - tracking_method
+    Budget:
+      type: object
+      description: Daily budget. Use either `daily_budget_for_all_countries` or `country_code_to_daily_budget`.
+      properties:
+        daily_budget_for_all_countries:
+          type: string
+          description: Daily budget in USD as a numeric string applied to all targeted countries.
+          example: '6000'
+        country_code_to_daily_budget:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            US: '5000'
+            CA: '1000'
     CampaignRef:
       type: object
       properties:
@@ -142,6 +177,22 @@ components:
           type: string
       required:
       - id
+    Targeting:
+      type: object
+      properties:
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+        region_codes:
+          type: array
+          items:
+            type: string
+        metro_names:
+          type: array
+          items:
+            type: string
+      required:
+      - country_code
     Error:
       type: object
       properties:
@@ -151,6 +202,29 @@ components:
           type: string
       required:
       - code
+    Goal:
+      type: object
+      properties:
+        goal_value_for_all_countries:
+          type: string
+        country_code_to_goal_value:
+          type: object
+          additionalProperties:
+            type: string
+        goal_type:
+          type: string
+          enum:
+          - CPI
+          - CPE
+          - CPP
+          - AD_ROAS
+          - CHK_ROAS
+          - BLD_ROAS
+        roas_day_target:
+          type: string
+          description: ROAS day window such as DAY1, DAY7, DAY14.
+      required:
+      - goal_type
     Campaign:
       type: object
       description: 'Axon campaign object. x-schema-source: documentation
@@ -213,99 +287,6 @@ components:
       - goal
       - tracking
       - targeting
-    Tracking:
-      type: object
-      properties:
-        tracking_method:
-          type: string
-          enum:
-          - ADJUST
-          - APPSFLYER
-          - APSALAR
-          - BRANCH
-          - KOCHAVA
-          - TENJIN
-        impression_url:
-          type: string
-          format: uri
-        click_url:
-          type: string
-          format: uri
-      required:
-      - tracking_method
-    Targeting:
-      type: object
-      properties:
-        country_code:
-          type: string
-          description: ISO 3166-1 alpha-2 country code.
-        region_codes:
-          type: array
-          items:
-            type: string
-        metro_names:
-          type: array
-          items:
-            type: string
-      required:
-      - country_code
-    Goal:
-      type: object
-      properties:
-        goal_value_for_all_countries:
-          type: string
-        country_code_to_goal_value:
-          type: object
-          additionalProperties:
-            type: string
-        goal_type:
-          type: string
-          enum:
-          - CPI
-          - CPE
-          - CPP
-          - AD_ROAS
-          - CHK_ROAS
-          - BLD_ROAS
-        roas_day_target:
-          type: string
-          description: ROAS day window such as DAY1, DAY7, DAY14.
-      required:
-      - goal_type
-    Budget:
-      type: object
-      description: Daily budget. Use either `daily_budget_for_all_countries` or `country_code_to_daily_budget`.
-      properties:
-        daily_budget_for_all_countries:
-          type: string
-          description: Daily budget in USD as a numeric string applied to all targeted countries.
-          example: '6000'
-        country_code_to_daily_budget:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            US: '5000'
-            CA: '1000'
-  responses:
-    RateLimited:
-      description: Rate limit exceeded (1,000 requests per 60 seconds).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation or input error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Page:
       name: page
@@ -331,6 +312,25 @@ components:
       description: Account identifier issued by AppLovin / Axon.
       schema:
         type: string
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (1,000 requests per 60 seconds).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation or input error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

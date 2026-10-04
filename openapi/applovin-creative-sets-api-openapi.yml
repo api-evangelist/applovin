@@ -201,6 +201,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreativeSetsByCampaign:
+      type: object
+      properties:
+        campaign_count:
+          type: integer
+        creative_set_count:
+          type: integer
+        campaigns:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/CreativeSet'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
     CreativeSetAsset:
       type: object
       properties:
@@ -227,22 +249,6 @@ components:
           - image
           - html
           - video
-    CreativeSetRef:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
     CreativeSet:
       type: object
       properties:
@@ -277,38 +283,13 @@ components:
       - campaign_id
       - type
       - assets
-    CreativeSetsByCampaign:
+    CreativeSetRef:
       type: object
       properties:
-        campaign_count:
-          type: integer
-        creative_set_count:
-          type: integer
-        campaigns:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/CreativeSet'
-  responses:
-    RateLimited:
-      description: Rate limit exceeded (1,000 requests per 60 seconds).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Authorization header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Validation or input error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        id:
+          type: string
+      required:
+      - id
   parameters:
     Page:
       name: page
@@ -334,6 +315,25 @@ components:
       description: Account identifier issued by AppLovin / Axon.
       schema:
         type: string
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (1,000 requests per 60 seconds).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Validation or input error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid Authorization header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
