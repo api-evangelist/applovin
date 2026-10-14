@@ -1,0 +1,76 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://docs.mparticle.com/integrations/applovin/audience/
+- https://hightouch.com/docs/destinations/applovin
+- https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+marketplace_apps: []
+edges:
+- partner_name: Google Ad Tech Providers
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+  contract_reference:
+    register: Google Ad Tech Providers (Additional Consent)
+    spec_file: null
+    role: google-atp
+    registered_name: AppLovin Corp.
+    register_id: '1301'
+    products:
+    - AppLovin Corp.
+    matched_domain: applovin.com
+    api_families: null
+    api_families_basis: null
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/applovin/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - applovin
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/applovin
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - applovin
+      status: released
+      sync_types:
+      - Suppressions
+      sync_modes:
+      - insert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+source:
+- https://docs.mparticle.com/integrations/applovin/audience/
+- https://hightouch.com/docs/destinations/applovin
