@@ -93,19 +93,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EventBatch:
-      type: object
-      description: 'Wrapper around the events array. x-schema-source: documentation
-
-        '
-      properties:
-        events:
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ServerEvent'
-      required:
-      - events
     ServerEvent:
       type: object
       properties:
@@ -139,6 +126,34 @@ components:
       - event_source_url
       - data
       - user_data
+    EventBatch:
+      type: object
+      description: 'Wrapper around the events array. x-schema-source: documentation
+
+        '
+      properties:
+        events:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ServerEvent'
+      required:
+      - events
+    EventData:
+      type: object
+      description: Required for generate_lead events; null for page_view.
+      properties:
+        currency:
+          type: string
+          description: ISO 4217 three-letter currency code.
+          example: USD
+        value:
+          type: number
+          minimum: 0
+          description: Monetary value of the lead.
+      required:
+      - currency
+      - value
     UserData:
       type: object
       description: 'User identifiers and browser context. At least one of (`aleid`,
@@ -210,21 +225,6 @@ components:
       - client_ip_address
       - client_user_agent
       - esi
-    EventData:
-      type: object
-      description: Required for generate_lead events; null for page_view.
-      properties:
-        currency:
-          type: string
-          description: ISO 4217 three-letter currency code.
-          example: USD
-        value:
-          type: number
-          minimum: 0
-          description: Monetary value of the lead.
-      required:
-      - currency
-      - value
   securitySchemes:
     bearerAuth:
       type: http

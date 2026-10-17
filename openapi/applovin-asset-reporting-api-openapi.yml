@@ -108,23 +108,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    NotZero:
-      name: not_zero
-      in: query
-      required: false
-      description: Set to 1 to exclude all-zero rows.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
     Start:
       name: start
       in: query
@@ -133,21 +116,21 @@ components:
       schema:
         type: string
         format: date
-    ApiKey:
-      name: api_key
+    End:
+      name: end
       in: query
       required: true
-      description: Report Key from the Axon dashboard.
+      description: Inclusive end date YYYY-MM-DD.
       schema:
         type: string
-    Columns:
-      name: columns
+        format: date
+    Limit:
+      name: limit
       in: query
-      required: true
-      description: Comma-separated list of asset report columns.
+      required: false
       schema:
-        type: string
-        example: asset_id,asset_name,impressions,clicks,cost
+        type: integer
+        minimum: 1
     Offset:
       name: offset
       in: query
@@ -155,6 +138,13 @@ components:
       schema:
         type: integer
         minimum: 0
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key from the Axon dashboard.
+      schema:
+        type: string
     Format:
       name: format
       in: query
@@ -166,24 +156,38 @@ components:
         - json
         - csv
         default: json
-    End:
-      name: end
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude all-zero rows.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+    Columns:
+      name: columns
       in: query
       required: true
-      description: Inclusive end date YYYY-MM-DD.
+      description: Comma-separated list of asset report columns.
       schema:
         type: string
-        format: date
+        example: asset_id,asset_name,impressions,clicks,cost
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-      required:
-      - code
     AssetReportRow:
       type: object
       description: 'Creative-level report row. x-schema-source: documentation
@@ -228,19 +232,15 @@ components:
         cost:
           type: number
           description: Advertiser spend in USD.
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - code
   securitySchemes:
     apiKeyQuery:
       type: apiKey

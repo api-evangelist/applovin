@@ -78,24 +78,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    NotZero:
-      name: not_zero
-      in: query
-      required: false
-      description: Set to 1 to exclude rows where all metrics are zero.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum rows to return.
-      schema:
-        type: integer
-        minimum: 1
     Start:
       name: start
       in: query
@@ -104,6 +86,44 @@ components:
       schema:
         type: string
         example: '2015-04-20'
+    Having:
+      name: having
+      in: query
+      required: false
+      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
+      schema:
+        type: string
+    End:
+      name: end
+      in: query
+      required: true
+      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
+      schema:
+        type: string
+        example: now
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum rows to return.
+      schema:
+        type: integer
+        minimum: 1
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Pagination row offset.
+      schema:
+        type: integer
+        minimum: 0
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Report Key, found under Account > Keys in the Axon dashboard.
+      schema:
+        type: string
     ReportType:
       name: report_type
       in: query
@@ -115,45 +135,6 @@ components:
         - publisher
         - advertiser
         default: publisher
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Report Key, found under Account > Keys in the Axon dashboard.
-      schema:
-        type: string
-    Columns:
-      name: columns
-      in: query
-      required: true
-      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
-      schema:
-        type: string
-        example: day,campaign,impressions,clicks,conversions,cost
-    DayColumn:
-      name: day_column
-      in: query
-      required: false
-      description: Set to `day` to compute cohort metrics. Defaults to realtime when absent.
-      schema:
-        type: string
-        enum:
-        - day
-    Having:
-      name: having
-      in: query
-      required: false
-      description: URL-encoded numeric filtering (e.g. `impressions > 0`).
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Pagination row offset.
-      schema:
-        type: integer
-        minimum: 0
     Format:
       name: format
       in: query
@@ -164,14 +145,46 @@ components:
         enum:
         - json
         - csv
-    End:
-      name: end
+    DayColumn:
+      name: day_column
       in: query
-      required: true
-      description: Inclusive end date in YYYY-MM-DD, Unix epoch seconds, or the literal string `now`.
+      required: false
+      description: Set to `day` to compute cohort metrics. Defaults to realtime when absent.
       schema:
         type: string
-        example: now
+        enum:
+        - day
+    NotZero:
+      name: not_zero
+      in: query
+      required: false
+      description: Set to 1 to exclude rows where all metrics are zero.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+    Columns:
+      name: columns
+      in: query
+      required: true
+      description: Comma-separated list of columns to include. Available columns differ between publisher and advertiser report types.
+      schema:
+        type: string
+        example: day,campaign,impressions,clicks,conversions,cost
+  responses:
+    BadRequest:
+      description: Malformed parameters or out-of-range date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid api_key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     GrowthReportRow:
       type: object
@@ -228,19 +241,6 @@ components:
           type: string
       required:
       - code
-  responses:
-    BadRequest:
-      description: Malformed parameters or out-of-range date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid api_key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyQuery:
       type: apiKey
