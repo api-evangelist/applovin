@@ -74,5 +74,5 @@
     - connectors/applications/applovin
     vendor_link: https://www.applovin.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
