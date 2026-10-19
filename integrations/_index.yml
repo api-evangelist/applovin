@@ -76,3 +76,83 @@
     builder: Fivetran
   status: not-a-workflow
   arazzo: null
+- slug: applovin-maven-central
+  label: Maven Central
+  partner: maven-central
+  partner_name: Maven Central
+  category: official SDK (Java/JVM)
+  type: register
+  channel: package-registry
+  evidence: https://central.sonatype.com/artifact/com.applovin/applovin-sdk
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.applovin:applovin-sdk
+      version: 13.6.4
+      released: '2026-08-08'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.applovin/applovin-sdk
+      repo_leg: domain:applovin.com
+      publisher_leg: groupId:applovin.com
+      matched_by: domain
+    - name: com.applovin:applovin-signal-provider-sdk
+      version: 1.0.3
+      released: '2024-05-29'
+      released_field: lastUpdated
+      lapsed: true
+      page: https://central.sonatype.com/artifact/com.applovin/applovin-signal-provider-sdk
+      repo_leg: domain:applovin.com
+      publisher_leg: groupId:applovin.com
+      matched_by: domain
+    - name: com.applovin:axon-sdk
+      version: 1.3.3
+      released: '2026-08-18'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.applovin/axon-sdk
+      repo_leg: domain:applovin.com
+      publisher_leg: groupId:applovin.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: applovin-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/react-native-applovin-max
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: react-native-applovin-max
+      version: 9.6.0
+      released: '2026-06-03'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/react-native-applovin-max
+      repo_leg: github-org:applovin
+      publisher_leg: email:applovin.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null

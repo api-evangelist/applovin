@@ -1,10 +1,17 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
 - https://docs.mparticle.com/integrations/applovin/audience/
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://hightouch.com/docs/destinations/applovin
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 marketplace_apps: []
 edges:
@@ -98,6 +105,84 @@ edges:
     vendor_link: https://www.applovin.com/
     builder: Fivetran
   detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: Maven Central
+  partner: maven-central
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Java/JVM)
+  evidence: https://central.sonatype.com/artifact/com.applovin/applovin-sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.applovin:applovin-sdk
+      version: 13.6.4
+      released: '2026-08-08'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.applovin/applovin-sdk
+      repo_leg: domain:applovin.com
+      publisher_leg: groupId:applovin.com
+      matched_by: domain
+    - name: com.applovin:applovin-signal-provider-sdk
+      version: 1.0.3
+      released: '2024-05-29'
+      released_field: lastUpdated
+      lapsed: true
+      page: https://central.sonatype.com/artifact/com.applovin/applovin-signal-provider-sdk
+      repo_leg: domain:applovin.com
+      publisher_leg: groupId:applovin.com
+      matched_by: domain
+    - name: com.applovin:axon-sdk
+      version: 1.3.3
+      released: '2026-08-18'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.applovin/axon-sdk
+      repo_leg: domain:applovin.com
+      publisher_leg: groupId:applovin.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/react-native-applovin-max
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: react-native-applovin-max
+      version: 9.6.0
+      released: '2026-06-03'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/react-native-applovin-max
+      repo_leg: github-org:applovin
+      publisher_leg: email:applovin.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
 source:
 - https://docs.mparticle.com/integrations/applovin/audience/
